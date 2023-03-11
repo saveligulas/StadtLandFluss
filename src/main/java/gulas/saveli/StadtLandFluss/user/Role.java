@@ -6,7 +6,7 @@ import java.util.List;
 
 @Getter
 public enum Role {
-    USER(new Authority[]{Authority.USER_AUTHORITIES}), ADMIN(new Authority[]{Authority.USER_AUTHORITIES, Authority.EDIT_USERS, Authority.EDIT_LIBRARY});
+    USER(new Authority[]{Authority.USER_AUTHORITIES}), ADMIN(new Authority[]{Authority.USER_AUTHORITIES, Authority.ADMIN_AUTHORITIES});
 
     private final List<Authority> AUTHORITY_LIST;
 
