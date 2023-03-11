@@ -1,10 +1,10 @@
 package gulas.saveli.StadtLandFluss.security.auth;
 
-import gulas.saveli.finalLibrary.library.errorHandler.handler.ApiRequestException;
-import gulas.saveli.finalLibrary.repo.UserRepository;
-import gulas.saveli.finalLibrary.security.jwt.JwtService;
-import gulas.saveli.finalLibrary.user.Role;
-import gulas.saveli.finalLibrary.user.User;
+import gulas.saveli.StadtLandFluss.errorHandler.handler.ApiRequestException;
+import gulas.saveli.StadtLandFluss.repo.UserRepository;
+import gulas.saveli.StadtLandFluss.security.jwt.JwtService;
+import gulas.saveli.StadtLandFluss.user.Role;
+import gulas.saveli.StadtLandFluss.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

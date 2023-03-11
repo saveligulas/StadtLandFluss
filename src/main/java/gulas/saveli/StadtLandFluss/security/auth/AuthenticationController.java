@@ -1,6 +1,6 @@
 package gulas.saveli.StadtLandFluss.security.auth;
 
-import gulas.saveli.finalLibrary.library.controller.builder.ThymeleafModelAndViewBuilder;
+import gulas.saveli.StadtLandFluss.builder.ThymeleafModelAndViewBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -34,11 +34,6 @@ public class AuthenticationController {
     ) {
         return service.register(request);
     }
-
-//    public HttpServletResponse authenticateTest(@RequestBody AuthenticationRequest request) {
-//        Cookie jwtCookie = new Cookie("user-id", service.authenticate(request).getToken());
-//        return new HttpServletResponse().addCookie(jwtCookie);
-//    }
 
     @CrossOrigin
     @PostMapping("/post/authenticate")
