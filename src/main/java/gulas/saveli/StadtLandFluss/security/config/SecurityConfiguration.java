@@ -1,6 +1,6 @@
 package gulas.saveli.StadtLandFluss.security.config;
 
-import gulas.saveli.finalLibrary.security.jwt.JwtAuthenticationFilter;
+import gulas.saveli.StadtLandFluss.security.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -44,10 +44,6 @@ public class SecurityConfiguration {
                 .permitAll()
                 .requestMatchers("/auth/**")
                 .permitAll()
-                .requestMatchers("/api/**")
-                .hasAuthority("USER_AUTHORITIES")
-                .requestMatchers("/admin/**")
-                .hasAuthority("EDIT_LIBRARY")
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
