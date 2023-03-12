@@ -26,7 +26,7 @@ const onSubmit = () => {
         console.log(data.token);
         console.log(token);
 
-        document.cookie = "Authorization=" + token + "; path=/; max-age=300; secure;";
+        document.cookie = `${'Authorization'}=${token}; path=/`;
     })
     .catch(error => console.error(error));
     };
