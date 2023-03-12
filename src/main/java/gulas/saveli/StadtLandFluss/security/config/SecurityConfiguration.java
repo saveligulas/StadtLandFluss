@@ -1,6 +1,7 @@
 package gulas.saveli.StadtLandFluss.security.config;
 
 import gulas.saveli.StadtLandFluss.security.jwt.JwtAuthenticationFilter;
+import gulas.saveli.StadtLandFluss.user.Authority;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -40,10 +41,16 @@ public class SecurityConfiguration {
                 .permitAll()
                 .requestMatchers(HttpMethod.POST, "/validator/**")
                 .permitAll()
+                .requestMatchers(HttpMethod.GET, "/game/lobby/auth/**")
+                .hasAuthority(Authority.USER_AUTHORITIES.name())
                 .requestMatchers("/")
                 .permitAll()
                 .requestMatchers("/auth/**")
                 .permitAll()
+                .requestMatchers("/game/lobby")
+                .permitAll()
+                .requestMatchers("/game/lobby/auth/**")
+                .hasAuthority(Authority.USER_AUTHORITIES.name())
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -56,9 +63,11 @@ public class SecurityConfiguration {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://192.168.1.27:8081"));
+        configuration.setAllowedOrigins(Arrays.asList("http://192.168.1.27:8081/**"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Content-Type", "application/json"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization"));
+        configuration.addExposedHeader("Authorization");
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
