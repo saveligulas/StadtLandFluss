@@ -42,4 +42,20 @@ public class UserLogRepository implements ObjectRepository<User> {
     public User delete(String token) {
         return null;
     }
+
+    public List<User> retrieveUsers() {
+        return List.copyOf(repository.values());
+    }
+
+    public List<String> retrieveTokens() {
+        return List.copyOf(repository.keySet());
+    }
+
+    public void deleteByName(String name) {
+        for(User user:repository.entrySet().toArray(new User[repository.size()])) {
+            if(user.getFullName().equals(name)) {
+                repository.remove(user.getToken());
+            }
+        }
+    }
 }
