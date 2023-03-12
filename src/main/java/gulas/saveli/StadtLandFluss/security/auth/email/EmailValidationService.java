@@ -1,6 +1,6 @@
 package gulas.saveli.StadtLandFluss.security.auth.email;
 
-import gulas.saveli.finalLibrary.library.errorHandler.handler.ApiRequestException;
+import gulas.saveli.StadtLandFluss.errorHandler.handler.ApiRequestException;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.stereotype.Service;
 

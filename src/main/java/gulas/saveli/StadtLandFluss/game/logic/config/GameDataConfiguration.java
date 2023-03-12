@@ -1,12 +1,17 @@
 package gulas.saveli.StadtLandFluss.game.logic.config;
 
 import gulas.saveli.StadtLandFluss.game.logic.GameData;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 @Configuration
 public class GameDataConfiguration {
 
-    @
-    public GameData gameData = new GameData();
+    @Bean
+    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
+    public GameData gameData() {
+        return new GameData();
+    }
 }
