@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <meta charset="ISO-8859-1">
+<head>
+    <link rel="stylesheet" href="../css/registerAndLoginForm.css" th:href="@{/css/registerAndLoginForm.css}" type="text/css" />
+</head>
+<body>
+    <main>
+        <section id="register-page" class="container container-front">
+            <header>
+                <h1>Register</h1>
+            </header>
+            <div>
+                <div class="nameInput">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" min="1" max="50"/>
+                </div>
+                <div class="nameInput">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" min="1" max="50"/>
+                </div>
+                <div class="nameInput">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" min="5" max="50"/>
+                </div>
+                <div class="nameInput">
+                    <label for="password">Password</label>
+                    <span>6-36 Characters</span>
+                    <input type="password" id="password" min="6" max="36"/>
+                </div>
+                <div class="cta">
+                    <button id="cta" type="submit">Submit</button>
+                </div>
+                <label id="messageLabel"></label>
+            </div>
+        </section>
+    </main>
+    <script src="../js/register.js"></script>
+</body>
+
+</html>

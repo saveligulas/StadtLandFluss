@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <meta charset="ISO-8859-1">
+<head>
+    <link href="../css/registerAndLoginForm.css" th:href="@{/css/registerAndLoginForm.css}" type="text/css"  rel="stylesheet"/>
+</head>
+<body>
+    <main>
+        <section id="login-page" class="container container-frontend">
+            <header>
+                <h1>Login</h1>
+            </header>
+            <div>
+                <div class="nameInput">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" min="1" max="50"/>
+                </div>
+                <div class="nameInput">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" min="6" max="36"/>
+                </div>
+                <div class="cta">
+                    <button id="cta" type="submit">Submit</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="../js/authenticate.js"></script>
+</body>
+
+</html>

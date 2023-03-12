@@ -1,0 +1,47 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: max-content;
+
+    -webkit-perspective: 150rem;
+    perspective: 150rem;
+    -moz-perspective: 150rem;
+    position: relative;
+    margin:0 auto;
+}
+
+.container {
+    background-color: royalblue;
+    border-radius: 1rem;
+
+    min-width: 350px;
+    width: 50%;
+    max-width: 600px;
+
+
+    min-height: 800px;
+}
+
+.container header{
+    text-align: center;
+}
+
+.container header h1{
+    font-size: large;
+    font-family:'Times New Roman', Times, serif;
+}
+
+.nameInput{
+    flex-direction: column;
+    margin: 1rem;
+    display: flex;
+}
+
+.cta{
+    flex-direction: column;
+    margin: 1rem;
+    display: flex;
+    align-items: center;
+}
