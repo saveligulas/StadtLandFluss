@@ -83,7 +83,7 @@ const onSubmit = () => {
         } else {
             console.log(response);
             messageField.textContent = "User registered succesfully";
-            window.location.href = "http://192.168.1.27:8081/";
+            window.location.href = "http://192.168.1.27:8081/auth/authenticate";
         }
         
     })
