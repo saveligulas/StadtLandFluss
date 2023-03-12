@@ -1,13 +1,9 @@
 package gulas.saveli.StadtLandFluss.game.controller;
 
 import gulas.saveli.StadtLandFluss.builder.ThymeleafModelAndViewBuilder;
-import gulas.saveli.StadtLandFluss.game.service.LobbyService;
+import gulas.saveli.StadtLandFluss.security.logger.UserLoggerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -18,17 +14,25 @@ import java.util.List;
 public class LobbyController {
 
     private final ThymeleafModelAndViewBuilder thymeleafModelAndViewBuilder;
-    private final LobbyService lobbyService;
+    private final UserLoggerService loggerService;
 
     @GetMapping
     public ModelAndView viewLobby() {
         return thymeleafModelAndViewBuilder.build("lobby");
     }
 
-    @GetMapping("/auth")
+    @GetMapping("/auth/users")
     @ResponseBody
+    @CrossOrigin
     public List<String> getConnectedUsers() {
-        return lobbyService.getConnectedUsers();
+        System.out.println(loggerService.getConnectedUsersNames());
+        return loggerService.getConnectedUsersNames();
+    }
+
+    @DeleteMapping("/auth/users/{username}")
+    @ResponseBody
+    public void removeConnectedUser(@PathVariable String username) {
+        loggerService.delete(username);
     }
 
 
