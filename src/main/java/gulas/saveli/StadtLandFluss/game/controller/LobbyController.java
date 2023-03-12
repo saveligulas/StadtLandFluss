@@ -28,7 +28,7 @@ public class LobbyController {
     @GetMapping("/auth")
     @ResponseBody
     public List<String> getConnectedUsers() {
-        lobbyService.getConnectedUsers();
+        return lobbyService.getConnectedUsers();
     }
 
 
