@@ -1,6 +1,6 @@
 package gulas.saveli.StadtLandFluss.errorHandler.handler;
 
-import gulas.saveli.finalLibrary.library.errorHandler.exception.ApiException;
+import gulas.saveli.StadtLandFluss.errorHandler.exception.ApiException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
