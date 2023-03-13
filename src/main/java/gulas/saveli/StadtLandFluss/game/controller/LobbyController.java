@@ -32,7 +32,8 @@ public class LobbyController {
     @PostMapping("/disconnect")
     @ResponseBody
     @CrossOrigin
-    public void disconnectUser(@RequestBody String token) {
+    public void disconnectUser(@RequestHeader("Authorization") String token) {
+        token = token.replace("Bearer ", "");
         loggerService.disconnect(token);
     }
 
