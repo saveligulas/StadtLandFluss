@@ -1,0 +1,24 @@
+/* Set styles for the table */
+#my-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  /* Set styles for the table header */
+  #my-table th {
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  /* Set styles for the table cells */
+  #my-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  /* Set alternate background colors for the table rows */
+  #my-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
