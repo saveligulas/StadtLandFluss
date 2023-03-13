@@ -28,7 +28,6 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
-    private String token;
 
     public User(String firstName, String lastName, String email, String password, Role role) {
         this.firstName = firstName;
@@ -36,7 +35,6 @@ public class User implements UserDetails {
         this.email = email;
         this.password = password;
         this.role = role;
-        this.token = null;
     }
 
     @Override
