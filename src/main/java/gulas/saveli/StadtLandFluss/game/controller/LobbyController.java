@@ -29,10 +29,10 @@ public class LobbyController {
         return loggerService.getConnectedUsersNames();
     }
 
-    @GetMapping("/auth/disconnect")
+    @PostMapping("/disconnect")
     @ResponseBody
     @CrossOrigin
-    public void connectUser(@RequestBody String token) {
+    public void disconnectUser(@RequestBody String token) {
         loggerService.disconnect(token);
     }
 
