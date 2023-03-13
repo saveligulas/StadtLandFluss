@@ -41,24 +41,17 @@ const disconnect = () => {
   let tokenWithoutPrefix = jwtToken;
   tokenWithoutPrefix = tokenWithoutPrefix.replace("Bearer ", "");
 
-  const tokenData = {
-    token: tokenWithoutPrefix
-  }
-
-
-
   fetch('http://192.168.1.27:8081/game/lobby/disconnect', {
       method: 'POST',
       headers: {
           'Authorization': jwtToken,
           'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(tokenData)
+      }
   })
   .then(response => response.json)
   .then(data => {
     console.log(data);
-    console.log(tokenData);
+    fetchData();
   })
   .catch(error => console.error(error));
 };
