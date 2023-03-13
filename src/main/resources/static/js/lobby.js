@@ -1,5 +1,7 @@
 import { getCookie } from './cookies.js';
 console.log("loaded");
+const disconnectButton = document.querySelector('#disconnect');
+
 function fetchData() {
     const token = getCookie('Authorization');
     console.log(token);
@@ -35,6 +37,23 @@ function updateTable(data) {
         tableBody.appendChild(row);
       });
 }
+
+const disconnect = () => {
+
+  fetch('http://192.168.1.27:8081/game/lobby/auth/disconnect', {
+
+  })
+  .then(response => {
+
+  })
+  .catch(error => {
+
+  });
+};
+
+const addEventListener = () => {
+  disconnectButton.addEventListener('click', disconnect);
+};
   
   // Call the fetchData() function immediately when the page loads
 fetchData();
