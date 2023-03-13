@@ -43,6 +43,8 @@ public class SecurityConfiguration {
                 .permitAll()
                 .requestMatchers(HttpMethod.GET, "/game/lobby/auth/**")
                 .hasAuthority(Authority.USER_AUTHORITIES.name())
+                .requestMatchers(HttpMethod.POST, "/game/lobby/disconnect")
+                .hasAuthority(Authority.USER_AUTHORITIES.name())
                 .requestMatchers("/")
                 .permitAll()
                 .requestMatchers("/auth/**")
