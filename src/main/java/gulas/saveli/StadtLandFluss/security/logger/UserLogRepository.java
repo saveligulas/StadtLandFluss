@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class UserLogRepository implements ObjectRepository<User> {
-    private Map<String, User> repository;
+public class UserLogRepository implements ObjectRepository<String> {
+    private final Map<String, String> repository;
 
     public UserLogRepository() {
         this.repository = new HashMap<>();
@@ -19,43 +19,36 @@ public class UserLogRepository implements ObjectRepository<User> {
 
 
     @Override
-    public void store(String token, User user) {
-        this.repository.put(token, user);
+    public void store(String token, String email) {
+        this.repository.put(token, email);
     }
 
     @Override
-    public User retrieve(String token) {
+    public String retrieve(String token) {
         return repository.get(token);
     }
 
     @Override
-    public User search(String name) {
-        for(User user:repository.entrySet().toArray(new User[repository.size()])) {
-            if(user.getFirstName().equals(name) || user.getLastName().equals(name)) {
-                return user;
+    public boolean search(String requestEmail) {
+        for(String email:repository.entrySet().toArray(new String[repository.size()])) {
+            if(email.equals(requestEmail)) {
+                return true;
             }
         }
-        return null;
+        return false;
     }
 
     @Override
-    public User delete(String token) {
+    public String delete(String token) {
+        repository.remove(token);
         return null;
     }
 
-    public List<User> retrieveUsers() {
+    public List<String> retrieveUsers() {
         return List.copyOf(repository.values());
     }
 
     public List<String> retrieveTokens() {
         return List.copyOf(repository.keySet());
-    }
-
-    public void deleteByName(String name) {
-        for(User user:repository.entrySet().toArray(new User[repository.size()])) {
-            if(user.getFullName().equals(name)) {
-                repository.remove(user.getToken());
-            }
-        }
     }
 }
