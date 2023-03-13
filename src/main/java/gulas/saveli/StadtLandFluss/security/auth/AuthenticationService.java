@@ -4,7 +4,6 @@ import gulas.saveli.StadtLandFluss.errorHandler.handler.ApiRequestException;
 import gulas.saveli.StadtLandFluss.repo.UserRepository;
 import gulas.saveli.StadtLandFluss.security.jwt.JwtService;
 import gulas.saveli.StadtLandFluss.security.logger.UserLoggerService;
-import gulas.saveli.StadtLandFluss.security.logger.UserService;
 import gulas.saveli.StadtLandFluss.user.Role;
 import gulas.saveli.StadtLandFluss.user.User;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +20,6 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-    private final UserService userService;
     private final UserLoggerService userLoggerService;
 
 
@@ -66,8 +64,7 @@ public class AuthenticationService {
         var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new ApiRequestException("user with email " + request.getEmail() + " does not exist"));
         var jwtToken = jwtService.generateToken(user);
-        userService.setToken(user.getId(), jwtToken);
-        userLoggerService.save(jwtToken, user);
+        userLoggerService.connect(jwtToken, user.getEmail());
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
