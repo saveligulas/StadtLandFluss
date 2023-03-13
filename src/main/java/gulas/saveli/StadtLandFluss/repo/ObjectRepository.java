@@ -6,7 +6,7 @@ public interface ObjectRepository<T> {
 
     public T retrieve(String token);
 
-    public T search(String name);
+    public boolean search(String name);
 
     public T delete(String token);
 }
