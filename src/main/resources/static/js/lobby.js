@@ -1,15 +1,13 @@
 import { getCookie } from './cookies.js';
 console.log("loaded");
 const disconnectButton = document.querySelector('#disconnect');
+const jwtToken = getCookie('Authorization');
 
 function fetchData() {
-    const token = getCookie('Authorization');
-    console.log(token);
-
     fetch('http://192.168.1.27:8081/game/lobby/auth/users', {
         method: 'GET',
         headers: {
-            'Authorization': token,
+            'Authorization': jwtToken,
             'Content-Type': 'application/json'
         }
     })
@@ -40,20 +38,36 @@ function updateTable(data) {
 
 const disconnect = () => {
 
-  fetch('http://192.168.1.27:8081/game/lobby/auth/disconnect', {
+  let tokenWithoutPrefix = jwtToken;
+  tokenWithoutPrefix = tokenWithoutPrefix.replace("Bearer ", "");
 
+  const tokenData = {
+    token: tokenWithoutPrefix
+  }
+
+
+
+  fetch('http://192.168.1.27:8081/game/lobby/disconnect', {
+      method: 'POST',
+      headers: {
+          'Authorization': jwtToken,
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(tokenData)
   })
-  .then(response => {
-
+  .then(response => response.json)
+  .then(data => {
+    console.log(data);
+    console.log(tokenData);
   })
-  .catch(error => {
-
-  });
+  .catch(error => console.error(error));
 };
 
 const addEventListener = () => {
   disconnectButton.addEventListener('click', disconnect);
 };
+
+addEventListener();
   
   // Call the fetchData() function immediately when the page loads
 fetchData();
