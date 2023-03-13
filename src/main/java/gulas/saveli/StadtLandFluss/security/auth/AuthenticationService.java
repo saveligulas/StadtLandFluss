@@ -65,6 +65,7 @@ public class AuthenticationService {
                 .orElseThrow(() -> new ApiRequestException("user with email " + request.getEmail() + " does not exist"));
         var jwtToken = jwtService.generateToken(user);
         userLoggerService.connect(jwtToken, user.getEmail());
+        System.out.println("Jwt token from service: " + jwtToken);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
