@@ -29,10 +29,17 @@ public class LobbyController {
         return loggerService.getConnectedUsersNames();
     }
 
+    @GetMapping("/auth/disconnect")
+    @ResponseBody
+    @CrossOrigin
+    public void connectUser(@RequestBody String token) {
+        loggerService.disconnect(token);
+    }
+
     @DeleteMapping("/auth/users/{username}")
     @ResponseBody
     public void removeConnectedUser(@PathVariable String username) {
-        loggerService.delete(username);
+        loggerService.disconnect(username);
     }
 
 
