@@ -52,6 +52,9 @@ const disconnect = () => {
   .then(data => {
     console.log(data);
     fetchData();
+    setTimeout(function() {
+      window.location.href = "http://192.168.1.27:8081/auth/authenticate";
+  }, 2000);
   })
   .catch(error => console.error(error));
 };
