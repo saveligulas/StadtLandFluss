@@ -10,8 +10,9 @@ import java.util.List;
 public class GameData {
 
     private List<User> players;
-    private int rounds;
-    private int currentRound;
+    private Integer rounds;
+    private Integer currentRound;
     private List<Category> categories;
+    private List<Character> characters;
 
 }
