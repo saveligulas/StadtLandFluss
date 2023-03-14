@@ -2,6 +2,7 @@ const emailHolder = document.querySelector('#email');
 const passwordHolder = document.querySelector('#password');
 
 const submitButton = document.querySelector('#cta');
+const messageField = document.getElementById("messageLabel");
 
 const prepareParams = params => ({
     email: params.email,
@@ -21,14 +22,17 @@ const onSubmit = () => {
     })
     .then(response => response.json())
     .then(data => {
-    
         const token = "Bearer "+data.token;
-        console.log(data.token);
-        console.log(token);
-
         document.cookie = `${'Authorization'}=${token}; path=/`;
+        submitButton.disabled = true;
+        messageField.textContent = "Login successful";
+        setTimeout(function() {
+            window.location.href = "http://192.168.1.27:8081/game/lobby";
+        }, 3500);
     })
-    .catch(error => console.error(error));
+    .catch(error => {
+        messageField.textContent = "Username or Password incorrect.";
+    });
     };
 
 const addSubmitEventListener = () => {
