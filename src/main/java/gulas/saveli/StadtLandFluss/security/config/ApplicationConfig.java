@@ -1,8 +1,10 @@
 package gulas.saveli.StadtLandFluss.security.config;
 
+import gulas.saveli.StadtLandFluss.repo.InvalidTokenRepository;
 import gulas.saveli.StadtLandFluss.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,6 +22,15 @@ public class ApplicationConfig {
 
     @Autowired
     private final UserRepository userRepository;
+    @Autowired
+    private final InvalidTokenRepository invalidTokenRepository;
+
+    @Bean
+    public CommandLineRunner commandLineRunner() {
+        return args -> {
+            invalidTokenRepository.deleteAllData();
+        };
+    }
 
     @Bean
     public UserDetailsService userDetailsService() {
