@@ -1,5 +1,6 @@
 package gulas.saveli.StadtLandFluss.user;
 
+import gulas.saveli.StadtLandFluss.game.logic.saves.SaveGame;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -7,10 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Getter
 @Setter
@@ -30,6 +28,8 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+    @ManyToMany(mappedBy = "users")
+    private Set<SaveGame> saveGames;
 
     public User(String firstName, String lastName, String email, String password, Role role) {
         this.firstName = firstName;
