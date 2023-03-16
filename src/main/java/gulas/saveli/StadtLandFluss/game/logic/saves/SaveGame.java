@@ -16,6 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 public class SaveGame {
+
     @Id
     @GeneratedValue
     private Long id;
@@ -26,15 +27,18 @@ public class SaveGame {
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private Set<User> users;
-    @ElementCollection
-    @CollectionTable(name = "user_answers", joinColumns = @JoinColumn(name = "save_game_id"))
-    @MapKeyJoinColumn(name = "user_id")
-    private Map<User, List<Answer>> userAnswers;
-    @ElementCollection
-    @CollectionTable(name = "save_game_scores", joinColumns = @JoinColumn(name = "save_game_id"))
-    @MapKeyJoinColumn(name = "user_id")
-    @Column(name = "value")
-    private Map<User, Integer> scores;
-    @Embedded
-    private GameData gameData;
+//
+//    @ElementCollection
+//    @CollectionTable(name = "user_answers", joinColumns = @JoinColumn(name = "save_game_id"))
+//    @MapKeyJoinColumn(name = "user_id")
+//    private Map<User, List<Answer>> userAnswers;
+//
+//    @ElementCollection
+//    @CollectionTable(name = "save_game_scores", joinColumns = @JoinColumn(name = "save_game_id"))
+//    @MapKeyJoinColumn(name = "user_id")
+//    @Column(name = "value")
+//    private Map<User, Integer> scores;
+//
+//    @Embedded
+//    private GameData gameData;
 }
