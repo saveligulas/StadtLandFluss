@@ -22,4 +22,10 @@ public class ApiExceptionHandler {
         );
         return new ResponseEntity<>(exception,badRequest);
     }
+
+    @ExceptionHandler(value={InvalidTokenException.class})
+    public ResponseEntity<Object> handleInvalidTokenException(InvalidTokenException e) {
+        //TODO
+        return null;
+    }
 }
