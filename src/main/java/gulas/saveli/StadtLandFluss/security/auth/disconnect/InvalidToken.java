@@ -1,6 +1,7 @@
 package gulas.saveli.StadtLandFluss.security.auth.disconnect;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.*;
@@ -18,6 +19,7 @@ import java.util.Objects;
 @Table(name = "DISCONNECTED_TOKENS")
 public class InvalidToken {
     @Id
+    @GeneratedValue
     private Long id;
     private String token;
 
