@@ -7,6 +7,7 @@ import gulas.saveli.StadtLandFluss.security.logger.UserLoggerService;
 import gulas.saveli.StadtLandFluss.user.Role;
 import gulas.saveli.StadtLandFluss.user.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,10 +17,15 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthenticationService {
 
+    @Autowired
     private final UserRepository userRepository;
+    @Autowired
     private final PasswordEncoder passwordEncoder;
+    @Autowired
     private final JwtService jwtService;
+    @Autowired
     private final AuthenticationManager authenticationManager;
+    @Autowired
     private final UserLoggerService userLoggerService;
 
 
