@@ -3,6 +3,7 @@ package gulas.saveli.StadtLandFluss.security.config;
 import gulas.saveli.StadtLandFluss.security.jwt.JwtAuthenticationFilter;
 import gulas.saveli.StadtLandFluss.user.Authority;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +25,9 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public class SecurityConfiguration {
 
+    @Autowired
     private final JwtAuthenticationFilter jwtAuthFilter;
+    @Autowired
     private final AuthenticationProvider authenticationProvider;
 
     @Bean
