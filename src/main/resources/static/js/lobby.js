@@ -2,6 +2,8 @@ import { getCookie } from './cookies.js';
 console.log("loaded");
 const disconnectButton = document.querySelector('#disconnect');
 const jwtToken = getCookie('Authorization');
+const startButton = document.querySelector('#start');
+startButton.disabled = true;
 
 function fetchData() {
     fetch('http://192.168.1.27:8081/game/lobby/auth/users', {
