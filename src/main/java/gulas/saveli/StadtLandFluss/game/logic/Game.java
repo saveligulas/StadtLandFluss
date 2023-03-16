@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 @RequiredArgsConstructor
 public class Game {
 
+    @Autowired
     private final GameDataService gameDataService;
     @Autowired
     private final GameData gameData;
