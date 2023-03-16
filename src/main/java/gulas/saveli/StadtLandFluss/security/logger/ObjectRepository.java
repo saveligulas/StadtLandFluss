@@ -1,4 +1,4 @@
-package gulas.saveli.StadtLandFluss.repo;
+package gulas.saveli.StadtLandFluss.security.logger;
 
 public interface ObjectRepository<T> {
 
