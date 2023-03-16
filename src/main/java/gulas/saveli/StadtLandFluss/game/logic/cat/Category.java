@@ -1,5 +1,6 @@
 package gulas.saveli.StadtLandFluss.game.logic.cat;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -12,7 +13,6 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
 public class Category {
     @Id
     @GeneratedValue
@@ -20,16 +20,18 @@ public class Category {
     private String name;
     private Boolean hasOfficialChecker;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Category category = (Category) o;
-        return getId() != null && Objects.equals(getId(), category.getId());
+    public Category() {
+
     }
 
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
+    public Category(String name, Boolean hasOfficialChecker) {
+        this.name = name;
+        this.hasOfficialChecker = hasOfficialChecker;
+    }
+
+    public Category(Long id, String name, Boolean hasOfficialChecker) {
+        this.id = id;
+        this.name = name;
+        this.hasOfficialChecker = hasOfficialChecker;
     }
 }
