@@ -10,6 +10,6 @@ import java.util.Map;
 @Embeddable
 public class Round {
     private Character character;
-    private Map<String, List<Answer>> userAnswers;
+    private Map<String, List<Answer>> usernamesAnswers;
     private Map<Answer, Boolean> answerVerified;
 }
