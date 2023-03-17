@@ -26,8 +26,12 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
-    @ManyToMany(mappedBy = "users")
-    private Set<SaveGame> saveGames;
+//    @ManyToMany
+//    @JoinTable(
+//            name = "user_savegame",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "savegame_id"))
+//    private Set<SaveGame> saveGames;
 
     public User(String firstName, String lastName, String email, String password, Role role) {
         this.firstName = firstName;
