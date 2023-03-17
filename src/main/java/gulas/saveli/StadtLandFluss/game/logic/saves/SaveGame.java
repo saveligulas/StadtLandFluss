@@ -6,9 +6,7 @@ import gulas.saveli.StadtLandFluss.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
@@ -20,25 +18,23 @@ public class SaveGame {
     @Id
     @GeneratedValue
     private Long id;
-    @ManyToMany
-    @JoinTable(
-            name = "user_save_games",
-            joinColumns = @JoinColumn(name = "save_game_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private Set<User> users;
+
+//    @ManyToMany(mappedBy = "saveGames")
+//    private Set<User> users;
+
+//    @ElementCollection
+//    @CollectionTable(name = "savegame_user_list",
+//            joinColumns = @JoinColumn(name = "savegame_id"))
+//    @MapKeyJoinColumn(name = "user_id")
+//    private Map<User, List<Answer>> userAnswerMap = new HashMap<>();
 //
 //    @ElementCollection
-//    @CollectionTable(name = "user_answers", joinColumns = @JoinColumn(name = "save_game_id"))
+//    @CollectionTable(name = "savegame_user_score",
+//            joinColumns = @JoinColumn(name = "savegame_id"))
 //    @MapKeyJoinColumn(name = "user_id")
-//    private Map<User, List<Answer>> userAnswers;
-//
-//    @ElementCollection
-//    @CollectionTable(name = "save_game_scores", joinColumns = @JoinColumn(name = "save_game_id"))
-//    @MapKeyJoinColumn(name = "user_id")
-//    @Column(name = "value")
-//    private Map<User, Integer> scores;
-//
+//    @Column(name = "user_integer")
+//    private Map<User, Integer> userScoreMap = new HashMap<>();
+
 //    @Embedded
 //    private GameData gameData;
 }
