@@ -1,6 +1,8 @@
 package gulas.saveli.StadtLandFluss.game.controller;
 
 import gulas.saveli.StadtLandFluss.builder.ThymeleafModelAndViewBuilder;
+import gulas.saveli.StadtLandFluss.game.logic.GameDataService;
+import gulas.saveli.StadtLandFluss.game.logic.model.response.GameDataResponse;
 import gulas.saveli.StadtLandFluss.security.logger.UserLoggerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -9,39 +11,36 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @RestController
-@RequestMapping("/game/lobby")
+@RequestMapping("/lobby")
 @RequiredArgsConstructor
 public class LobbyController {
 
     private final ThymeleafModelAndViewBuilder thymeleafModelAndViewBuilder;
-    private final UserLoggerService loggerService;
+    private final GameDataService gameDataService;
 
     @GetMapping
     public ModelAndView viewLobby() {
         return thymeleafModelAndViewBuilder.build("lobby");
     }
 
-    @GetMapping("/auth/users")
+    @GetMapping("/games")
     @ResponseBody
     @CrossOrigin
-    public List<String> getConnectedUsers() {
-        System.out.println(loggerService.getConnectedUsersNames());
-        return loggerService.getConnectedUsersNames();
+    public List<GameDataResponse> getGames() {
+        return gameDataService.getHostedGames();
     }
 
-    @PostMapping("/disconnect")
+    @GetMapping("/{gameId}/users")
+    @ResponseBody
+    @CrossOrigin
+    public List<String> getConnectedUsers(@PathVariable("gameId") Long gameId) {
+        return gameDataService.getConnectedUsernames(gameId);
+    }
+
+    @DeleteMapping("/{gameId}/disconnect/{username")
     @ResponseBody
     @CrossOrigin
     public void disconnectUser(@RequestHeader("Authorization") String token) {
         token = token.replace("Bearer ", "");
-        loggerService.disconnect(token);
     }
-
-    @DeleteMapping("/auth/users/{username}")
-    @ResponseBody
-    public void removeConnectedUser(@PathVariable String username) {
-        loggerService.disconnect(username);
-    }
-
-
 }
