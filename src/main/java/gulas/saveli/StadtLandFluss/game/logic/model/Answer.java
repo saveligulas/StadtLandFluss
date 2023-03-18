@@ -1,18 +1,15 @@
 package gulas.saveli.StadtLandFluss.game.logic.model;
 
-import gulas.saveli.StadtLandFluss.game.logic.cat.Category;
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Transient;
-import lombok.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Embeddable
 public class Answer {
 
-    private String categoryName;
-    private String answer;
-
+    private Long id;
+    private Long text;
+    private Integer round;
 }
