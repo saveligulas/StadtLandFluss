@@ -3,8 +3,10 @@ package gulas.saveli.StadtLandFluss.game.logic;
 import gulas.saveli.StadtLandFluss.errorHandler.handler.ApiRequestException;
 import gulas.saveli.StadtLandFluss.game.logic.cat.Category;
 import gulas.saveli.StadtLandFluss.game.logic.model.GameData;
+import gulas.saveli.StadtLandFluss.game.logic.model.response.GameDataResponse;
 import gulas.saveli.StadtLandFluss.repo.CategoryRepository;
 import gulas.saveli.StadtLandFluss.repo.GameDataRepository;
+import gulas.saveli.StadtLandFluss.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.firewall.RequestRejectedException;
@@ -13,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,6 +25,14 @@ public class GameDataService {
 
     @Autowired
     private final GameDataRepository gameDataRepository;
+    @Autowired
+    private final CategoryRepository categoryRepository;
+    @Autowired
+    private final UserRepository userRepository;
+
+    public void connectUser(String username) {
+
+    }
 
     public void setCharactersAndRounds(Long gameDataId, List<Character> characters) {
         GameData gameData = gameDataRepository.findById(gameDataId)
@@ -68,5 +79,33 @@ public class GameDataService {
             categoryNames.add(category.getName());
         }
         return categoryNames;
+    }
+
+    public List<Category> setCategories(Long gameDataId, List<String> categorieStringList) {
+        GameData gameData = gameDataRepository.findById(gameDataId)
+                .orElseThrow(() -> new ApiRequestException("could not find game with id " + gameDataId));
+        List<Category> categories = new ArrayList<>();
+        for(String categoryString : categorieStringList) {
+            Optional<Category> categoryOptional = categoryRepository.findByName(categoryString);
+            if(categoryOptional.isPresent()) {
+                Category category = categoryOptional
+                        .orElseThrow(() -> new ApiRequestException("repository error"));
+                categories.add(category);
+            } else {
+                Category category = new Category(categoryString, false);
+                categoryRepository.save(category);
+                categories.add(category);
+            }
+        }
+        gameData.setCategories(categories);
+        return categories;
+    }
+
+    public List<String> getConnectedUsernames(Long gameId) {
+        return null;
+    }
+
+    public List<GameDataResponse> getHostedGames() {
+        return null;
     }
 }
