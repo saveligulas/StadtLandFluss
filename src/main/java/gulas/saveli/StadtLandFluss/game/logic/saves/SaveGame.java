@@ -13,14 +13,19 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "save_games")
 public class SaveGame {
 
     @Id
     @GeneratedValue
     private Long id;
 
-//    @ManyToMany(mappedBy = "saveGames")
-//    private Set<User> users;
+    @ManyToMany
+    @JoinTable(
+            name = "save_game_users",
+            joinColumns = @JoinColumn(name = "save_game_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<User> users;
 
 //    @ElementCollection
 //    @CollectionTable(name = "savegame_user_list",
