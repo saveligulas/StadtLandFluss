@@ -1,7 +1,5 @@
 package gulas.saveli.StadtLandFluss.user;
 
-import gulas.saveli.StadtLandFluss.game.logic.model.GameData;
-import gulas.saveli.StadtLandFluss.game.logic.saves.SaveGame;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -27,10 +25,6 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
-// TODO fix   @ManyToMany(mappedBy = "users")
-//    private Set<SaveGame> saveGames;
-    @OneToMany
-    private GameData game;
 
     public User(String firstName, String lastName, String email, String password, Role role) {
         this.firstName = firstName;
