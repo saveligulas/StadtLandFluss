@@ -1,5 +1,6 @@
 package gulas.saveli.StadtLandFluss.user;
 
+import gulas.saveli.StadtLandFluss.game.logic.model.GameData;
 import gulas.saveli.StadtLandFluss.game.logic.saves.SaveGame;
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,12 +27,10 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
-//    @ManyToMany
-//    @JoinTable(
-//            name = "user_savegame",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "savegame_id"))
-//    private Set<SaveGame> saveGames;
+    @ManyToMany(mappedBy = "users")
+    private Set<SaveGame> saveGames;
+    @OneToMany
+    private GameData game;
 
     public User(String firstName, String lastName, String email, String password, Role role) {
         this.firstName = firstName;
