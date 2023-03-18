@@ -1,8 +1,5 @@
 package gulas.saveli.StadtLandFluss.security.logger;
 
-import gulas.saveli.StadtLandFluss.repo.ObjectRepository;
-import gulas.saveli.StadtLandFluss.repo.UserRepository;
-import gulas.saveli.StadtLandFluss.user.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

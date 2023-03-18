@@ -27,8 +27,8 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
-    @ManyToMany(mappedBy = "users")
-    private Set<SaveGame> saveGames;
+// TODO fix   @ManyToMany(mappedBy = "users")
+//    private Set<SaveGame> saveGames;
     @OneToMany
     private GameData game;
 

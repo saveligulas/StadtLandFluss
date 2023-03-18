@@ -11,8 +11,8 @@ public class Game {
 
     @Autowired
     private final GameDataService gameDataService;
-    @Autowired
-    private final GameData gameData;
 
+    public void run() {
 
+    }
 }

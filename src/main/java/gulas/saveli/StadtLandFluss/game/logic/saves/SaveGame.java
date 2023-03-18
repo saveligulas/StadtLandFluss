@@ -20,12 +20,12 @@ public class SaveGame {
     @GeneratedValue
     private Long id;
 
-    @ManyToMany
-    @JoinTable(
-            name = "save_game_users",
-            joinColumns = @JoinColumn(name = "save_game_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Set<User> users;
+//TODO implement    @ManyToMany
+//    @JoinTable(
+//            name = "save_game_users",
+//            joinColumns = @JoinColumn(name = "save_game_id"),
+//            inverseJoinColumns = @JoinColumn(name = "user_id"))
+//    private Set<User> users;
 
 //    @ElementCollection
 //    @CollectionTable(name = "savegame_user_list",
