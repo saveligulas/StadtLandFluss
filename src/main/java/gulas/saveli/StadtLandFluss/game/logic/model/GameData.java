@@ -2,10 +2,8 @@ package gulas.saveli.StadtLandFluss.game.logic.model;
 
 import gulas.saveli.StadtLandFluss.game.logic.cat.Category;
 import gulas.saveli.StadtLandFluss.game.logic.model.Round;
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import gulas.saveli.StadtLandFluss.user.User;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
@@ -20,15 +18,17 @@ public class GameData {
     @Id
     @GeneratedValue
     private Long id;
-    private List<String> usernames;
+    @ManyToOne
+    private List<User> users;
     private Integer rounds;
     private Integer currentRound;
     private List<Category> categories;
     private List<Character> characters;
+    @Embedded
     private List<Round> roundsData;
 
-    public GameData(List<String> usernames, Integer rounds, Integer currentRound, List<Category> categories, List<Character> characters, List<Round> roundsData) {
-        this.usernames = usernames;
+    public GameData(List<User> users, Integer rounds, Integer currentRound, List<Category> categories, List<Character> characters, List<Round> roundsData) {
+        this.users = users;
         this.rounds = rounds;
         this.currentRound = currentRound;
         this.categories = categories;
