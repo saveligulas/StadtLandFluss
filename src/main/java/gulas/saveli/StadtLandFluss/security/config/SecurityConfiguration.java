@@ -40,6 +40,10 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
                 .permitAll()
+                .requestMatchers(HttpMethod.POST, "/home/host")
+                .hasAuthority(Authority.USER_AUTHORITIES.name())
+                .requestMatchers(HttpMethod.GET, "/home/list")
+                .hasAuthority(Authority.USER_AUTHORITIES.name())
                 .requestMatchers(HttpMethod.POST, "/auth/post/**")
                 .permitAll()
                 .requestMatchers(HttpMethod.POST, "/validator/**")
@@ -49,6 +53,8 @@ public class SecurityConfiguration {
                 .requestMatchers(HttpMethod.POST, "/game/lobby/disconnect")
                 .hasAuthority(Authority.USER_AUTHORITIES.name())
                 .requestMatchers("/")
+                .permitAll()
+                .requestMatchers("/home")
                 .permitAll()
                 .requestMatchers("/auth/**")
                 .permitAll()
@@ -71,7 +77,7 @@ public class SecurityConfiguration {
         configuration.setAllowedOrigins(Arrays.asList("http://192.168.1.27:8081/**"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Content-Type", "application/json"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Host", "Username"));
         configuration.addExposedHeader("Authorization");
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
