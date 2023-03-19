@@ -22,12 +22,15 @@ const onSubmit = () => {
     })
     .then(response => response.json())
     .then(data => {
+        var expireDate = new Date();
+        expireDate.setDate(expireDate.getDate() + 1);
         const token = "Bearer "+data.token;
-        document.cookie = `${'Authorization'}=${token}; path=/`;
+        document.cookie = `Username=${email}; path=/; expires=${expireDate.toUTCString()}`
+        document.cookie = `${'Authorization'}=${token}; path=/; expires=${expireDate.toUTCString()}`;
         submitButton.disabled = true;
         messageField.textContent = "Login successful";
         setTimeout(function() {
-            window.location.href = "http://192.168.1.27:8081/game/lobby";
+            window.location.href = "http://192.168.1.27:8081/home";
         }, 3500);
     })
     .catch(error => {
