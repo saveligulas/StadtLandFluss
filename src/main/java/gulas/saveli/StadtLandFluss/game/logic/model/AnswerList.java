@@ -20,5 +20,8 @@ public class AnswerList {
     private Long id;
     @ElementCollection
     @OrderColumn
+    private List<Category> categories;
+    @ElementCollection
+    @OrderColumn
     private List<Answer> list;
 }

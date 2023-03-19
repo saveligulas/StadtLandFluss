@@ -33,6 +33,7 @@ public class Game {
     @ElementCollection
     private Map<String, AnswerList> usernameAnswerMap = new HashMap<>();
     private Boolean hasStarted = false;
+    private Boolean hasExpired = false;
 
     public Game(String hostUsername, Integer rounds, List<Character> characters, List<Category> categories) {
         this.hostUsername = hostUsername;
