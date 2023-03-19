@@ -30,8 +30,6 @@ import javax.sql.DataSource;
 public class ApplicationConfig {
 
     @Autowired
-    private final UserRepository userRepository;
-    @Autowired
     private final InvalidTokenRepository invalidTokenRepository;
 
     @Bean
