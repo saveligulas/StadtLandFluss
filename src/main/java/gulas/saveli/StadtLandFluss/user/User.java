@@ -25,6 +25,7 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+    private Boolean isInGame;
 
     public User(String firstName, String lastName, String email, String password, Role role) {
         this.firstName = firstName;
@@ -75,6 +76,13 @@ public class User implements UserDetails {
 
     public String getFullName() {
         return firstName + " " + lastName;
+    }
+
+    public Boolean isPlaying() {
+        if(isInGame == null) {
+            return false;
+        }
+        return isInGame;
     }
 
 }
