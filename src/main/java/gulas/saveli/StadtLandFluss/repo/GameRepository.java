@@ -11,5 +11,5 @@ import java.util.Optional;
 @Repository
 public interface GameRepository extends JpaRepository<Game, Long> {
     @Query("SELECT g FROM Game g WHERE g.hostUsername = ?1")
-    Optional<User> findByUsername(String username);
+    Optional<Game> findByHostUsername(String username);
 }
