@@ -32,11 +32,16 @@ public class Game {
     private List<Category> categories = new ArrayList<>();
     @ElementCollection
     private Map<String, AnswerList> usernameAnswerMap = new HashMap<>();
+    private Boolean hasStarted = false;
 
     public Game(String hostUsername, Integer rounds, List<Character> characters, List<Category> categories) {
         this.hostUsername = hostUsername;
         this.rounds = rounds;
         this.characters = characters;
         this.categories = categories;
+    }
+
+    public int getPlayerCount() {
+        return this.players.size();
     }
 }
