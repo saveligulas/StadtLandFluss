@@ -1,6 +1,7 @@
 package gulas.saveli.StadtLandFluss.game.service;
 
 import gulas.saveli.StadtLandFluss.errorHandler.handler.ApiRequestException;
+import gulas.saveli.StadtLandFluss.game.logic.model.AnswerList;
 import gulas.saveli.StadtLandFluss.game.logic.model.Category;
 import gulas.saveli.StadtLandFluss.game.logic.model.Game;
 import gulas.saveli.StadtLandFluss.game.logic.model.resp.GameResponse;
@@ -13,10 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +28,8 @@ public class GameService {
     private final UserRepository userRepository;
     @Autowired
     private final RandomUtils randomUtils;
+    @Autowired
+    private final AnswerListService answerListService;
 
     public Game hostGame(String username) {
         List<Category> categoryList = new ArrayList<>();
@@ -98,6 +98,22 @@ public class GameService {
         Game game = new Game(username, rounds, characters, categoryList);
         game.setPlayers(new ArrayList<>(Arrays.asList(optionalUser.get())));
         gameRepository.save(game);
+    }
+
+    @Transactional
+    public void setupGame(Long gameId) {
+        Game game = gameRepository.findById(gameId)
+                .orElseThrow(() -> new ApiRequestException("game with id " + gameId + " does not exist"));
+        List<String> playerUsernames = new ArrayList<>();
+        for(User user : game.getPlayers()) {
+            playerUsernames.add(user.getEmail());
+        }
+        List<AnswerList> answerLists = answerListService.setupEmptyAnswerLists(playerUsernames.size(), game.getCategories());
+        HashMap<String, AnswerList> usernameAnswerListMap = new HashMap<>();
+        for(int i = 0; i < answerLists.size(); i++) {
+            usernameAnswerListMap.put(playerUsernames.get(i), answerLists.get(i));
+        }
+        game.setUsernameAnswerMap(usernameAnswerListMap);
     }
 
     public List<GameResponse> getGamesResponseList() {
