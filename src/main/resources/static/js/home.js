@@ -11,7 +11,8 @@ function refreshGameList() {
     method: 'GET',
     headers: { 
       'Authorization': jwtToken,
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'HostUsername': username
     }
     })
     .then(response => response.json())
