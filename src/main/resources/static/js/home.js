@@ -64,8 +64,18 @@ fetchButton.addEventListener('click', () => {
       if (response.ok) {
         alert('Game created successfully!');
         refreshGameList();
+        return response.text(); // return the promise here
       } else {
-        alert('Failed to create game');
+        throw new Error('Failed to create game');
       }
+    })
+    .then(async text => { // use async/await to wait for the promise to resolve
+      const gameId = parseInt(text);
+      console.log(gameId);
+      console.log(text);
+    })
+    .catch(error => {
+      console.error(error);
+      alert('Failed to create game');
     });
 });
