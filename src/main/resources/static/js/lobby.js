@@ -6,7 +6,7 @@ const startButton = document.querySelector('#start');
 startButton.disabled = true;
 
 function fetchData() {
-    fetch('http://192.168.1.27:8081/game/lobby/auth/users', {
+    fetch('http://192.168.1.27:8081', {
         method: 'GET',
         headers: {
             'Authorization': jwtToken,
