@@ -72,7 +72,7 @@ public class GameService {
         Game game = new Game(username, rounds, characters, categoryList);
         game.setPlayers(new ArrayList<>(Arrays.asList(optionalUser.get())));
         gameRepository.save(game);
-        return game;
+        return gameRepository.findByHostUsername(username).get();
     }
 
     @Transactional
