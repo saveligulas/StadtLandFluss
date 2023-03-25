@@ -3,10 +3,7 @@ package gulas.saveli.StadtLandFluss.security.config;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import gulas.saveli.StadtLandFluss.game.logic.model.Game;
-import gulas.saveli.StadtLandFluss.repo.CategoryRepository;
-import gulas.saveli.StadtLandFluss.repo.GameRepository;
-import gulas.saveli.StadtLandFluss.repo.InvalidTokenRepository;
-import gulas.saveli.StadtLandFluss.repo.UserRepository;
+import gulas.saveli.StadtLandFluss.repo.*;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,14 +33,16 @@ public class ApplicationConfig {
     private final InvalidTokenRepository invalidTokenRepository;
     @Autowired
     private final GameRepository gameRepository;
+    @Autowired
+    private final AnswerListRepository answerListRepository;
 
     @Bean
     public CommandLineRunner commandLineRunner() {
         return args -> {
             invalidTokenRepository.deleteAllData();
-            List<Game> entities = gameRepository.findAll();
-            entities.forEach(entity -> entity.setHasExpired(true));
-            gameRepository.saveAll(entities);
+//            List<Game> entities = gameRepository.findAll();
+//            entities.forEach(entity -> entity.setHasExpired(true));
+//            gameRepository.saveAll(entities);
         };
     }
 
