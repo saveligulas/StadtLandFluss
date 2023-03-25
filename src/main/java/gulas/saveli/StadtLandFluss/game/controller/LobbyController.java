@@ -42,8 +42,8 @@ public class LobbyController {
     @PostMapping("/{gameId}/host/settings")
     @ResponseBody
     @CrossOrigin
-    public GameSettingResponse changeGameSettings(@RequestBody GameSettingRequest settingRequest) {
-        return gameService.changeGameSettings(settingRequest);
+    public GameSettingResponse changeGameSettings(@PathVariable("gameId") String gameId, @RequestBody GameSettingRequest settingRequest) {
+        return gameService.changeGameSettings(Long.parseLong(gameId), settingRequest);
     }
 
     @GetMapping("/{gameId}/host/check")
