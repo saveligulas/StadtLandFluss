@@ -4,7 +4,9 @@ import gulas.saveli.StadtLandFluss.errorHandler.handler.ApiRequestException;
 import gulas.saveli.StadtLandFluss.game.logic.model.AnswerList;
 import gulas.saveli.StadtLandFluss.game.logic.model.Category;
 import gulas.saveli.StadtLandFluss.game.logic.model.Game;
+import gulas.saveli.StadtLandFluss.game.logic.model.req.GameSettingRequest;
 import gulas.saveli.StadtLandFluss.game.logic.model.resp.GameResponse;
+import gulas.saveli.StadtLandFluss.game.logic.model.resp.GameSettingResponse;
 import gulas.saveli.StadtLandFluss.repo.CategoryRepository;
 import gulas.saveli.StadtLandFluss.repo.GameRepository;
 import gulas.saveli.StadtLandFluss.repo.UserRepository;
@@ -132,4 +134,14 @@ public class GameService {
         return gameResponses;
     }
 
+    public Boolean isGameHost(Long gameId, String host) {
+        Game game = gameRepository.findById(gameId)
+                .orElseThrow(() -> new ApiRequestException("game with id " + gameId + " does not exist"));
+        return game.getHostUsername().equals(host);
+    }
+
+    public GameSettingResponse changeGameSettings(GameSettingRequest settingRequest) {
+
+
+    }
 }
