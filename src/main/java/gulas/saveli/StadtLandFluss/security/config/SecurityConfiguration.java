@@ -56,6 +56,8 @@ public class SecurityConfiguration {
                 .permitAll()
                 .requestMatchers("/home")
                 .permitAll()
+                .requestMatchers("/lobby/**")
+                .permitAll()
                 .requestMatchers("/auth/**")
                 .permitAll()
                 .requestMatchers("/game/lobby")
