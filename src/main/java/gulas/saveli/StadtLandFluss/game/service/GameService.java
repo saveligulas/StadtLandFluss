@@ -5,6 +5,7 @@ import gulas.saveli.StadtLandFluss.game.logic.model.AnswerList;
 import gulas.saveli.StadtLandFluss.game.logic.model.Category;
 import gulas.saveli.StadtLandFluss.game.logic.model.Game;
 import gulas.saveli.StadtLandFluss.game.logic.model.req.GameSettingRequest;
+import gulas.saveli.StadtLandFluss.game.logic.model.resp.GameInfoResponse;
 import gulas.saveli.StadtLandFluss.game.logic.model.resp.GameResponse;
 import gulas.saveli.StadtLandFluss.game.logic.model.resp.GameSettingResponse;
 import gulas.saveli.StadtLandFluss.repo.CategoryRepository;
@@ -32,6 +33,8 @@ public class GameService {
     private final RandomUtils randomUtils;
     @Autowired
     private final AnswerListService answerListService;
+    @Autowired
+    private final CategoryService categoryService;
 
     public Game hostGame(String username) {
         List<Category> categoryList = new ArrayList<>();
@@ -140,8 +143,56 @@ public class GameService {
         return game.getHostUsername().equals(host);
     }
 
-    public GameSettingResponse changeGameSettings(GameSettingRequest settingRequest) {
+    @Transactional
+    public GameSettingResponse changeGameSettings(Long gameId, GameSettingRequest settingRequest) {
+        Game game = gameRepository.findById(gameId)
+                .orElseThrow(() -> new ApiRequestException("game with id " + gameId + " does not exist"));
 
+        GameSettingResponse gameSettingResponse = new GameSettingResponse();
+        List<String> categoryNameList = settingRequest.getCategoryNames();
+        if(!categoryNameList.isEmpty() && categoryNameList.size() >= 3) {
+            List<Category> categories = new ArrayList<>();
+            for (String categoryName : categoryNameList) {
+                if (categoryName.isEmpty()) {
+                    throw new ApiRequestException("Invalid category name: " + categoryName);
+                }
+                categories.add(categoryService.convertCategoryString(categoryName));
+            }
+            game.setCategories(categories);
+            gameSettingResponse.setCategoryMessage("Categories successfully changed");
+        }
 
+        Integer rounds = settingRequest.getRounds();
+        if(rounds != null && rounds > 0 && !rounds.equals(game.getRounds())) {
+            game.setRounds(rounds);
+            gameSettingResponse.setRoundsMessage("Rounds successfully changed");
+        }
+
+        List<Character> characters = settingRequest.getCharacters();
+        if(characters != null && characters.size() > 0 && !characters.equals(game.getCharacters())) {
+            game.setCharacters(characters);
+            gameSettingResponse.setCharacterMessage("Characters successfully set");
+        }
+
+        return gameSettingResponse;
+    }
+
+    public GameInfoResponse buildGameInfo(Long gameId) {
+        Game game = gameRepository.findById(gameId)
+                .orElseThrow(() -> new ApiRequestException("game with id " + gameId + " does not exist"));
+
+        List<String> playerNames = new ArrayList<>();
+        for(User user : game.getPlayers()) {
+            playerNames.add(user.getEmail());
+        }
+        List<String> categoryNames = new ArrayList<>();
+        for(Category category : game.getCategories()) {
+            categoryNames.add(category.getName());
+        }
+        return GameInfoResponse.builder()
+                .players(playerNames)
+                .categoryNames(categoryNames)
+                .rounds(game.getRounds())
+                .build();
     }
 }
