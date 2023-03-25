@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/home")
 @RequiredArgsConstructor
-public class AuthHomeController {
+public class HomeListController {
 
     private final ThymeleafModelAndViewBuilder thymeleafModelAndViewBuilder;
     @Autowired
@@ -35,8 +35,8 @@ public class AuthHomeController {
     @PostMapping("/host")
     @ResponseBody
     @CrossOrigin
-    public Game hostGame(@RequestHeader("HostUsername") String host) {
-        return gameService.hostGame(host);
+    public Long hostGame(@RequestHeader("HostUsername") String host) {
+        return gameService.hostGame(host).getId();
     }
 
 }
