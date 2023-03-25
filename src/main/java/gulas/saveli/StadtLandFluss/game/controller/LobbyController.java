@@ -36,7 +36,7 @@ public class LobbyController {
     @ResponseBody
     @CrossOrigin
     public GameInfoResponse viewGameInfo(@PathVariable("gameId") String gameId) {
-        return null;
+        return gameService.buildGameInfo(Long.parseLong(gameId));
     }
 
     @PostMapping("/{gameId}/host/settings")
