@@ -1,44 +1,27 @@
-/* Set styles for the table */
-#my-table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  /* Set styles for the table header */
-  #my-table th {
-    background-color: #f2f2f2;
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
-  
-  /* Set styles for the table cells */
-  #my-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  /* Set alternate background colors for the table rows */
-  #my-table tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    height: max-content;
-
-    -webkit-perspective: 150rem;
-    perspective: 150rem;
-    -moz-perspective: 150rem;
-    position: relative;
-    margin:0 auto;
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-.button{
-  flex-direction: column;
-  margin: 1rem;
+.container {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.table {
+  border-collapse: collapse;
+  margin-right: 20px;
+}
+
+.table th, .table td {
+  border: 1px solid black;
+  padding: 5px;
+  text-align: center;
+}
+
+.table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
 }
