@@ -1,31 +1,59 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-    <meta charset="ISO-8859-1">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" href="../css/lobby.css" th:href="@{/css/lobby.css}" type="text/css" />
+  <meta charset="UTF-8">
+  <title>Game Scores</title>
+  <link rel="stylesheet" type="text/css" href="game-scores.css">
+  <script type="text/javascript" src="script.js"></script>
 </head>
 <body>
-    <table id="my-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-          </tr>
-        </thead>
-        <tbody id="table-body">
-          <!-- Data will be inserted here -->
-        </tbody>
-      </table>
-      <main>
-        <div>
-          <div class = "button">
-            <button id="disconnect" type="button">Disconnect</button>
-          </div>
-          <div class = "button">
-            <button id = "start" type="button">Start Game</button>
-          </div>
-        </div>
-      </main>
-    <script type="module" src="../js/lobby.js"></script>
+  <h1 id="gameId">Game ID: 123456</h1>
+  <h2 id="rounds">Number of Rounds: 10</h2>
+  <div class="container">
+    <table id="playersTable" class="table">
+      <thead>
+        <tr>
+          <th>Player</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Player 1</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>Player 2</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>Player 3</td>
+          <td>0</td>
+        </tr>
+      </tbody>
+    </table>
+    <table id="categoriesTable" class="table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Weight</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Category 1</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>Category 2</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>Category 3</td>
+          <td>3</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </body>
 </html>
