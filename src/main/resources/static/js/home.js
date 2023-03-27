@@ -72,6 +72,7 @@ fetchButton.addEventListener('click', () => {
     .then(async text => { // use async/await to wait for the promise to resolve
       const gameId = parseInt(text);
       console.log(gameId);
+      document.cookie = `GameID=${gameId}; path=/; expires=${expireDate.toUTCString()}`
       console.log(text);
     })
     .catch(error => {
