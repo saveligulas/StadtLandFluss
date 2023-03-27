@@ -25,11 +25,17 @@ public class LobbyController {
         return thymeleafModelAndViewBuilder.build("lobby");
     }
 
-    @DeleteMapping("/{gameId}/disconnect/{username}")
+    @PostMapping("/{gameId}/connect")
+    @CrossOrigin
+    public Boolean joinGame(@RequestHeader("Authorization") String token, @RequestHeader("Username") String username) {
+
+    }
+
+    @DeleteMapping("/{gameId}/disconnect")
     @ResponseBody
     @CrossOrigin
-    public void disconnectUser(@RequestHeader("Authorization") String token) {
-        token = token.replace("Bearer ", "");
+    public void disconnectUser(@RequestHeader("Authorization") String token, @RequestHeader("Username") String username) {
+        //TODO
     }
 
     @GetMapping("/{gameId}")
