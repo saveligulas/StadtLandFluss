@@ -7,7 +7,7 @@ const username = getCookie('Username');
 function refreshGameList() {
   let tokenWithoutPrefix = jwtToken;
   tokenWithoutPrefix = tokenWithoutPrefix.replace("Bearer ", "");
-  fetch('http://192.168.1.27:8081/home/list', {
+  fetch('/home/list', {
     method: 'GET',
     headers: { 
       'Authorization': jwtToken,
@@ -17,22 +17,19 @@ function refreshGameList() {
     })
     .then(response => response.json())
     .then(games => {
+      const table = document.getElementById('game-list');
       // Clear the current table contents
-      while (table.firstChild) {
-        table.removeChild(table.firstChild);
+      while (table.rows.length > 1) {
+        table.deleteRow(1);
       }
 
       // Add the new game list to the table
-      const headerRow = table.insertRow(-1);
-      const idHeader = headerRow.insertCell(0);
-      const hostHeader = headerRow.insertCell(1);
-      const usersHeader = headerRow.insertCell(2);
-      idHeader.innerText = 'ID';
-      hostHeader.innerText = 'Host';
-      usersHeader.innerText = 'Users';
-
       games.forEach(game => {
         const row = table.insertRow(-1);
+        row.style.cursor = 'pointer';
+        row.addEventListener('click', function() {
+          joinGame(game.id);
+        });
         const idCell = row.insertCell(0);
         const hostCell = row.insertCell(1);
         const usersCell = row.insertCell(2);
@@ -42,7 +39,6 @@ function refreshGameList() {
       });
     });
 }
-
 // Call the function initially to populate the table
 refreshGameList();
 
