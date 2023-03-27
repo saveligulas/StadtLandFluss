@@ -1,5 +1,4 @@
 import { getCookie } from './cookies.js';
-const table = document.getElementById('game-list');
 const jwtToken = getCookie('Authorization');
 const username = getCookie('Username');
 
@@ -11,8 +10,7 @@ function refreshGameList() {
     method: 'GET',
     headers: { 
       'Authorization': jwtToken,
-      'Content-Type': 'application/json',
-      'HostUsername': username
+      'Username': username
     }
     })
     .then(response => response.json())
@@ -39,6 +37,18 @@ function refreshGameList() {
       });
     });
 }
+
+function joinGame(gameId) {
+  fetch('/lobby/', {
+    method: 'POST',
+    headers: {
+      'Authorization': jwtToken,
+      'Username': username
+    }
+  })
+  .then()
+}
+
 // Call the function initially to populate the table
 refreshGameList();
 
@@ -53,6 +63,7 @@ fetchButton.addEventListener('click', () => {
     method: 'POST',
     headers: { 
       'Authorization': jwtToken,
+      'Username': username,
       'HostUsername': username
     }
     })
