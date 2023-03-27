@@ -11,6 +11,11 @@
         <th>Host</th>
         <th>Users</th>
       </tr>
+      <tr th:each="game : ${games}" th:attr="data-id=${game.id}">
+        <td th:text="${game.id}"></td>
+        <td th:text="${game.host}"></td>
+        <td th:text="${game.users}"></td>
+      </tr>
     </table>
     <button id="refresh">Refresh</button>
     <button id="host">Host</button>
