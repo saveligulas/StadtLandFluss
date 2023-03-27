@@ -7,8 +7,8 @@
   <script type="text/javascript" src="script.js"></script>
 </head>
 <body>
-  <h1 id="gameId">Game ID: 123456</h1>
-  <h2 id="rounds">Number of Rounds: 10</h2>
+  <h1 id="gameId" th:text="${gameId}">Game ID: 123456</h1>
+  <h2 id="rounds" th:text="${numberOfRounds}">Number of Rounds: 10</h2>
   <div class="container">
     <table id="playersTable" class="table">
       <thead>
@@ -37,20 +37,21 @@
         <tr>
           <th>Category</th>
           <th>Weight</th>
+          <th th:if="${showAddCategory}">Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Category 1</td>
-          <td>1</td>
+        <tr th:each="category : ${categories}">
+          <td th:text="${category.name}">Category 1</td>
+          <td th:text="${category.weight}">1</td>
+          <td th:if="${showAddCategory}">
+            <button type="button" th:data-category-id="${category.id}" class="remove-category-button">Remove</button>
+          </td>
         </tr>
-        <tr>
-          <td>Category 2</td>
-          <td>2</td>
-        </tr>
-        <tr>
-          <td>Category 3</td>
-          <td>3</td>
+        <tr th:if="${showAddCategory}">
+          <td><input type="text" id="newCategoryName" placeholder="Enter category name"></td>
+          <td><input type="number" id="newCategoryWeight" placeholder="Enter category weight"></td>
+          <td><button type="button" id="addCategoryButton">Add</button></td>
         </tr>
       </tbody>
     </table>
