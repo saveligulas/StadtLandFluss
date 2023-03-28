@@ -214,7 +214,14 @@ public class GameService {
     public void disconnectUser(Long gameId, String username) {
         Game game = getGame(gameId);
 
+        if(!game.isPlayerInGame(username) || !game.isPlayerInGame(username)) {
+            throw new ApiRequestException("error processing disconnect");
+        }
 
+        User user = userRepository.findByEmail(username)
+                        .orElseThrow(() -> new ApiRequestException("user does not exist"));
+
+        game.removePlayer(user);
     }
 
     public Game getGame(Long gameId) {
