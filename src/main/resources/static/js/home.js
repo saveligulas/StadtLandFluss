@@ -33,13 +33,13 @@ function refreshGameList() {
         const usersCell = row.insertCell(2);
         idCell.innerText = game.id;
         hostCell.innerText = game.hostUsername;
-        usersCell.innerText = game.playerCount;
+        usersCell.innerText = game.playerCount + "/" + game.maxPlayers;
       });
     });
 }
 
 function joinGame(gameId) {
-  fetch('/lobby/', {
+  fetch(`/lobby/${gameId}/connect`, {
     method: 'POST',
     headers: {
       'Authorization': jwtToken,
