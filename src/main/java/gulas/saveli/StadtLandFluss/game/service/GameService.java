@@ -108,8 +108,8 @@ public class GameService {
 
     @Transactional
     public void setupGame(Long gameId) {
-        Game game = gameRepository.findById(gameId)
-                .orElseThrow(() -> new ApiRequestException("game with id " + gameId + " does not exist"));
+        Game game = getGame(gameId);
+
         List<String> playerUsernames = new ArrayList<>();
         for(User user : game.getPlayers()) {
             playerUsernames.add(user.getEmail());
@@ -140,15 +140,13 @@ public class GameService {
     }
 
     public Boolean isGameHost(Long gameId, String host) {
-        Game game = gameRepository.findById(gameId)
-                .orElseThrow(() -> new ApiRequestException("game with id " + gameId + " does not exist"));
+        Game game = getGame(gameId);
         return game.getHostUsername().equals(host);
     }
 
     @Transactional
     public GameSettingResponse changeGameSettings(Long gameId, GameSettingRequest settingRequest) {
-        Game game = gameRepository.findById(gameId)
-                .orElseThrow(() -> new ApiRequestException("game with id " + gameId + " does not exist"));
+        Game game = getGame(gameId);
 
         GameSettingResponse gameSettingResponse = new GameSettingResponse();
         List<String> categoryNameList = settingRequest.getCategoryNames();
@@ -180,8 +178,7 @@ public class GameService {
     }
 
     public GameInfoResponse buildGameInfo(Long gameId) {
-        Game game = gameRepository.findById(gameId)
-                .orElseThrow(() -> new ApiRequestException("game with id " + gameId + " does not exist"));
+        Game game = getGame(gameId);
 
         List<String> playerNames = new ArrayList<>();
         for(User user : game.getPlayers()) {
@@ -200,8 +197,7 @@ public class GameService {
 
     @Transactional
     public Boolean joinGame(Long gameId, String username) {
-        Game game = gameRepository.findById(gameId)
-                .orElseThrow(() -> new ApiRequestException("game with id " + gameId + " does not exist"));
+        Game game = getGame(gameId);
 
         if(game.isFull() || game.isPlayerInGame(username)) {
             throw new ApiRequestException("error processing join request");
@@ -214,6 +210,15 @@ public class GameService {
         return true;
     }
 
+    @Transactional
     public void disconnectUser(Long gameId, String username) {
+        Game game = getGame(gameId);
+
+
+    }
+
+    public Game getGame(Long gameId) {
+        return gameRepository.findById(gameId)
+                .orElseThrow(() -> new ApiRequestException("game with id " + gameId + " does not exist"));
     }
 }
