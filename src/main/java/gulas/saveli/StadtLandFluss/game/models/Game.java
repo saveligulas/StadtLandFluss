@@ -60,4 +60,8 @@ public class Game {
     public void addPlayer(User user) {
         this.players.add(user);
     }
+
+    public void removePlayer(User user) {
+        this.players.remove(user);
+    }
 }
