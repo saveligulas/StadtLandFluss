@@ -2,9 +2,9 @@ package gulas.saveli.StadtLandFluss.game.controller;
 
 import gulas.saveli.StadtLandFluss.builder.ThymeleafModelAndViewBuilder;
 
-import gulas.saveli.StadtLandFluss.game.logic.model.req.GameSettingRequest;
-import gulas.saveli.StadtLandFluss.game.logic.model.resp.GameInfoResponse;
-import gulas.saveli.StadtLandFluss.game.logic.model.resp.GameSettingResponse;
+import gulas.saveli.StadtLandFluss.game.models.req.GameSettingRequest;
+import gulas.saveli.StadtLandFluss.game.models.resp.GameInfoResponse;
+import gulas.saveli.StadtLandFluss.game.models.resp.GameSettingResponse;
 import gulas.saveli.StadtLandFluss.game.service.GameService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +28,14 @@ public class LobbyController {
     @PostMapping("/{gameId}/connect")
     @CrossOrigin
     public Boolean joinGame(@RequestHeader("Username") String username, @PathVariable("gameId") String gameId) {
-        return gameService.joinGame(gameId, username);
+        return gameService.joinGame(Long.parseLong(gameId), username);
     }
 
     @DeleteMapping("/{gameId}/disconnect")
     @ResponseBody
     @CrossOrigin
     public void disconnectUser(@RequestHeader("Username") String username, @PathVariable("gameId") String gameId) {
-        //TODO
+        gameService.disconnectUser(Long.parseLong(gameId), username);
     }
 
     @GetMapping("/{gameId}")
