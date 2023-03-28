@@ -1,7 +1,7 @@
 package gulas.saveli.StadtLandFluss.game.service;
 
-import gulas.saveli.StadtLandFluss.game.logic.model.AnswerList;
-import gulas.saveli.StadtLandFluss.game.logic.model.Category;
+import gulas.saveli.StadtLandFluss.game.models.AnswerList;
+import gulas.saveli.StadtLandFluss.game.models.Category;
 import gulas.saveli.StadtLandFluss.repo.AnswerListRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
