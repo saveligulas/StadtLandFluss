@@ -1,8 +1,7 @@
 package gulas.saveli.StadtLandFluss.game.controller;
 
 import gulas.saveli.StadtLandFluss.builder.ThymeleafModelAndViewBuilder;
-import gulas.saveli.StadtLandFluss.game.logic.model.Game;
-import gulas.saveli.StadtLandFluss.game.logic.model.resp.GameResponse;
+import gulas.saveli.StadtLandFluss.game.models.resp.GameListResponse;
 import gulas.saveli.StadtLandFluss.game.service.GameService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ public class HomeListController {
     @GetMapping("/list")
     @ResponseBody
     @CrossOrigin
-    public List<GameResponse> getGamesResponseList() {
+    public List<GameListResponse> getGamesResponseList() {
         return gameService.getGamesResponseList();
     }
 
