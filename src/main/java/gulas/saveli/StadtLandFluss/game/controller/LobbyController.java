@@ -27,14 +27,14 @@ public class LobbyController {
 
     @PostMapping("/{gameId}/connect")
     @CrossOrigin
-    public Boolean joinGame(@RequestHeader("Authorization") String token, @RequestHeader("Username") String username) {
-
+    public Boolean joinGame(@RequestHeader("Username") String username, @PathVariable("gameId") String gameId) {
+        return gameService.joinGame(gameId, username);
     }
 
     @DeleteMapping("/{gameId}/disconnect")
     @ResponseBody
     @CrossOrigin
-    public void disconnectUser(@RequestHeader("Authorization") String token, @RequestHeader("Username") String username) {
+    public void disconnectUser(@RequestHeader("Username") String username, @PathVariable("gameId") String gameId) {
         //TODO
     }
 
