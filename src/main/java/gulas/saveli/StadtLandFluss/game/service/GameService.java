@@ -1,13 +1,13 @@
 package gulas.saveli.StadtLandFluss.game.service;
 
 import gulas.saveli.StadtLandFluss.errorHandler.handler.ApiRequestException;
-import gulas.saveli.StadtLandFluss.game.logic.model.AnswerList;
-import gulas.saveli.StadtLandFluss.game.logic.model.Category;
-import gulas.saveli.StadtLandFluss.game.logic.model.Game;
-import gulas.saveli.StadtLandFluss.game.logic.model.req.GameSettingRequest;
-import gulas.saveli.StadtLandFluss.game.logic.model.resp.GameInfoResponse;
-import gulas.saveli.StadtLandFluss.game.logic.model.resp.GameResponse;
-import gulas.saveli.StadtLandFluss.game.logic.model.resp.GameSettingResponse;
+import gulas.saveli.StadtLandFluss.game.models.AnswerList;
+import gulas.saveli.StadtLandFluss.game.models.Category;
+import gulas.saveli.StadtLandFluss.game.models.Game;
+import gulas.saveli.StadtLandFluss.game.models.req.GameSettingRequest;
+import gulas.saveli.StadtLandFluss.game.models.resp.GameInfoResponse;
+import gulas.saveli.StadtLandFluss.game.models.resp.GameListResponse;
+import gulas.saveli.StadtLandFluss.game.models.resp.GameSettingResponse;
 import gulas.saveli.StadtLandFluss.repo.CategoryRepository;
 import gulas.saveli.StadtLandFluss.repo.GameRepository;
 import gulas.saveli.StadtLandFluss.repo.UserRepository;
@@ -71,6 +71,7 @@ public class GameService {
         List<Character> characters = randomUtils.getRandomCharacters(3);
         Game game = new Game(username, rounds, characters, categoryList);
         game.setPlayers(new ArrayList<>(Arrays.asList(optionalUser.get())));
+        game.setMaxPlayers(10);
         gameRepository.save(game);
         return gameRepository.findByHostUsername(username).get();
     }
@@ -121,17 +122,18 @@ public class GameService {
         game.setUsernameAnswerMap(usernameAnswerListMap);
     }
 
-    public List<GameResponse> getGamesResponseList() {
+    public List<GameListResponse> getGamesResponseList() {
         List<Game> games = gameRepository.findAll();
         if(games.size() == 0) {
             return null;
         }
-        List<GameResponse> gameResponses = new ArrayList<>();
-        GameResponse response = new GameResponse();
+        List<GameListResponse> gameResponses = new ArrayList<>();
+        GameListResponse response = new GameListResponse();
         for(Game game : games) {
             response.setId(game.getId());
             response.setHostUsername(game.getHostUsername());
             response.setPlayerCount(game.getPlayerCount());
+            response.setMaxPlayers(game.getMaxPlayers());
             gameResponses.add(response);
         }
         return gameResponses;
@@ -194,5 +196,24 @@ public class GameService {
                 .categoryNames(categoryNames)
                 .rounds(game.getRounds())
                 .build();
+    }
+
+    @Transactional
+    public Boolean joinGame(Long gameId, String username) {
+        Game game = gameRepository.findById(gameId)
+                .orElseThrow(() -> new ApiRequestException("game with id " + gameId + " does not exist"));
+
+        if(game.isFull() || game.isPlayerInGame(username)) {
+            throw new ApiRequestException("error processing join request");
+        }
+
+        User user = userRepository.findByEmail(username)
+                .orElseThrow(() -> new ApiRequestException("user does not exist"));
+
+        game.addPlayer(user);
+        return true;
+    }
+
+    public void disconnectUser(Long gameId, String username) {
     }
 }
