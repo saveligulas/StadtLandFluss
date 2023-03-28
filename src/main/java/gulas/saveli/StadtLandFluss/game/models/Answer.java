@@ -1,4 +1,4 @@
-package gulas.saveli.StadtLandFluss.game.logic.model;
+package gulas.saveli.StadtLandFluss.game.models;
 
 import jakarta.persistence.*;
 import lombok.Data;

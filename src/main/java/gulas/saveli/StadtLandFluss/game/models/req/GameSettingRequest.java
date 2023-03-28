@@ -1,8 +1,5 @@
-package gulas.saveli.StadtLandFluss.game.logic.model.req;
+package gulas.saveli.StadtLandFluss.game.models.req;
 
-import gulas.saveli.StadtLandFluss.game.logic.model.Category;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.OrderColumn;
 import lombok.Data;
 
 import java.util.ArrayList;

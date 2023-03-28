@@ -1,11 +1,8 @@
-package gulas.saveli.StadtLandFluss.game.logic.model;
+package gulas.saveli.StadtLandFluss.game.models;
 
 import gulas.saveli.StadtLandFluss.user.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +14,7 @@ import java.util.Map;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Game {
     @Id
     @GeneratedValue
@@ -34,6 +32,7 @@ public class Game {
     private Map<String, AnswerList> usernameAnswerMap = new HashMap<>();
     private Boolean hasStarted = false;
     private Boolean hasExpired = false;
+    private Integer maxPlayers;
 
     public Game(String hostUsername, Integer rounds, List<Character> characters, List<Category> categories) {
         this.hostUsername = hostUsername;
@@ -44,5 +43,21 @@ public class Game {
 
     public int getPlayerCount() {
         return this.players.size();
+    }
+
+    public boolean isFull() {
+        return this.players.size() >= maxPlayers;
+    }
+
+    public boolean isPlayerInGame(String username) {
+        List<String> usernames = new ArrayList<>();
+        for(User player: this.players) {
+            usernames.add(player.getEmail());
+        }
+        return usernames.contains(username);
+    }
+
+    public void addPlayer(User user) {
+        this.players.add(user);
     }
 }

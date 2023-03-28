@@ -1,4 +1,4 @@
-package gulas.saveli.StadtLandFluss.game.logic.model.resp;
+package gulas.saveli.StadtLandFluss.game.models.resp;
 
 import lombok.Data;
 
