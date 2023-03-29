@@ -46,7 +46,23 @@ function joinGame(gameId) {
       'Username': username
     }
   })
-  .then()
+  .then(response => {
+    if(response.ok) {
+      return response.json();
+    } else {
+      throw new Error('Error joining game');
+    }
+  })
+  .then(data => {
+    console.log(data);
+    setTimeout(function() {
+      window.location.href = `http://192.168.1.27:8081/lobby/${gameId}`;
+  }, 1000);
+  })
+  .catch(error => {
+    console.error(error);
+    alert('Failed to join game');
+  })
 }
 
 // Call the function initially to populate the table
