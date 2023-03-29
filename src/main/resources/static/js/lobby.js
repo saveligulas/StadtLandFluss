@@ -5,7 +5,9 @@ const jwtToken = getCookie('Authorization');
 const username = getCookie('Username');
 const gameId = getCookie('GameID');
 
-window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('DOMContentLoaded', initializePage);
+
+function initializePage() {
   fetch('/api/show-add-category')
     .then(function(response) {
       return response.json();
@@ -32,7 +34,9 @@ window.addEventListener('DOMContentLoaded', function() {
         });
       }
     });
-});
+}
+
+window.addEventListener('DOMContentLoaded', initializePage);
 
 function updateTables() {
   fetch('/api/get-players')
