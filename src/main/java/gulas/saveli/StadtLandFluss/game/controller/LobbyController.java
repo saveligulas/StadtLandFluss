@@ -20,8 +20,8 @@ public class LobbyController {
     @Autowired
     private final GameService gameService;
 
-    @GetMapping
-    public ModelAndView viewLobby() {
+    @GetMapping("/{gameId}")
+    public ModelAndView viewLobby(@PathVariable("gameId") String gameId) {
         return thymeleafModelAndViewBuilder.build("lobby");
     }
 
