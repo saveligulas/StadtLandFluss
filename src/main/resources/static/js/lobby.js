@@ -8,32 +8,79 @@ const gameId = getCookie('GameID');
 window.addEventListener('DOMContentLoaded', initializePage);
 
 function initializePage() {
-  fetch('/api/show-add-category')
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(data) {
-      if (data === true) {
-        document.querySelector('#categoriesTable th:last-child').style.display = 'table-cell';
-        document.querySelectorAll('.remove-category-button').forEach(function(button) {
-          button.style.display = 'inline-block';
+    // Fetch the flag that determines if the category input field and remove buttons should be displayed
+  fetch('/categories/showAddCategory')
+  .then(response => response.json())
+  .then(data => {
+    const showAddCategory = data;
+
+    // Create a new container element for the input field and the "Add" button
+    const addCategoryContainer = document.createElement('div');
+
+    // Check if the category input field and remove buttons should be displayed
+    if (showAddCategory) {
+      // Create the input field and the "Add" button
+      const newCategoryNameInput = document.createElement('input');
+      newCategoryNameInput.type = 'text';
+      newCategoryNameInput.id = 'newCategoryName';
+      newCategoryNameInput.placeholder = 'Enter category name';
+      const addCategoryButton = document.createElement('button');
+      addCategoryButton.type = 'button';
+      addCategoryButton.id = 'addCategoryButton';
+      addCategoryButton.textContent = 'Add';
+
+      // Add the input field and the "Add" button to the container
+      addCategoryContainer.appendChild(newCategoryNameInput);
+      addCategoryContainer.appendChild(addCategoryButton);
+
+      // Insert the container before the table
+      const categoriesTable = document.getElementById('categoriesTable');
+      categoriesTable.parentNode.insertBefore(addCategoryContainer, categoriesTable);
+    }
+
+    // Add event listener to the "Add" button
+    const addCategoryButton = document.getElementById('addCategoryButton');
+    if (addCategoryButton) {
+      addCategoryButton.addEventListener('click', () => {
+        const newCategoryName = document.getElementById('newCategoryName').value;
+        fetch('/categories/add', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ name: newCategoryName })
+        })
+        .then(() => {
+          // Reload the page after adding the category
+          location.reload();
+        })
+        .catch(error => {
+          console.error('Error adding category:', error);
         });
-        document.querySelector('#categoriesTable tr:last-child').style.display = 'table-row';
-        document.querySelector('#addCategoryButton').addEventListener('click', function() {
-          var name = document.querySelector('#newCategoryName').value;
-          var weight = document.querySelector('#newCategoryWeight').value;
-          if (name && weight) {
-            // TODO: Implement add category functionality
-          }
+      });
+    }
+
+    // Add event listener to the "Remove" buttons
+    const removeCategoryButtons = document.querySelectorAll('.remove-category-button');
+    removeCategoryButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const categoryId = button.dataset.categoryId;
+        fetch(`/categories/remove/${categoryId}`, {
+          method: 'POST'
+        })
+        .then(() => {
+          // Reload the page after removing the category
+          location.reload();
+        })
+        .catch(error => {
+          console.error('Error removing category:', error);
         });
-        document.querySelectorAll('.remove-category-button').forEach(function(button) {
-          button.addEventListener('click', function() {
-            var categoryId = button.getAttribute('data-category-id');
-            // TODO: Implement remove category functionality
-          });
-        });
-      }
+      });
     });
+  })
+  .catch(error => {
+    console.error('Error fetching showAddCategory flag:', error);
+  });
 }
 
 window.addEventListener('DOMContentLoaded', initializePage);
