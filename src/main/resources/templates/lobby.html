@@ -36,21 +36,18 @@
       <thead>
         <tr>
           <th>Category</th>
-          <th>Weight</th>
           <th th:if="${showAddCategory}">Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr th:each="category : ${categories}">
           <td th:text="${category.name}">Category 1</td>
-          <td th:text="${category.weight}">1</td>
           <td th:if="${showAddCategory}">
             <button type="button" th:data-category-id="${category.id}" class="remove-category-button">Remove</button>
           </td>
         </tr>
         <tr th:if="${showAddCategory}">
           <td><input type="text" id="newCategoryName" placeholder="Enter category name"></td>
-          <td><input type="number" id="newCategoryWeight" placeholder="Enter category weight"></td>
           <td><button type="button" id="addCategoryButton">Add</button></td>
         </tr>
       </tbody>
