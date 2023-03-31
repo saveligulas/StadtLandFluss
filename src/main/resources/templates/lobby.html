@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Game Scores</title>
-  <link rel="stylesheet" type="text/css" href="game-scores.css">
-  <script type="text/javascript" src="script.js"></script>
+  <link rel="stylesheet" href="../css/lobby.css" th:href="@{/css/lobby.css}" type="text/css" />
 </head>
 <body>
   <h1 id="gameId" th:text="${gameId}">Game ID: 123456</h1>
@@ -14,21 +13,11 @@
       <thead>
         <tr>
           <th>Player</th>
-          <th>Score</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Player 1</td>
-          <td>0</td>
-        </tr>
-        <tr>
-          <td>Player 2</td>
-          <td>0</td>
-        </tr>
-        <tr>
-          <td>Player 3</td>
-          <td>0</td>
+        <tr th:each="player : ${players}">
+          <td th:text="${player.name}">Player 1</td>
         </tr>
       </tbody>
     </table>
@@ -53,5 +42,6 @@
       </tbody>
     </table>
   </div>
+  <script type="module" src="../js/lobby.js"></script>
 </body>
 </html>
