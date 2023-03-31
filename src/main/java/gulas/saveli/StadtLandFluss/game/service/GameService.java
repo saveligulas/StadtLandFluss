@@ -36,7 +36,7 @@ public class GameService {
     @Autowired
     private final CategoryService categoryService;
 
-    public Game hostGame(String username) {
+    public Long hostGame(String username) {
         List<Category> categoryList = new ArrayList<>();
         List<String> categoryNames = new ArrayList<>() {{
             add("Stadt");
@@ -73,7 +73,9 @@ public class GameService {
         game.setPlayers(new ArrayList<>(Arrays.asList(optionalUser.get())));
         game.setMaxPlayers(10);
         gameRepository.save(game);
-        return gameRepository.findByHostUsername(username).get();
+        Game createdGame = gameRepository.findByHostUsername(username)
+                .orElseThrow(() -> new ApiRequestException("Error creating and loading game"));
+        return createdGame.getId();
     }
 
     @Transactional
@@ -192,6 +194,7 @@ public class GameService {
                 .players(playerNames)
                 .categoryNames(categoryNames)
                 .rounds(game.getRounds())
+                .id(game.getId())
                 .build();
     }
 
