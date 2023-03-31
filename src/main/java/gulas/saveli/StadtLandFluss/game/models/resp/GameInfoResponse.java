@@ -12,6 +12,7 @@ import java.util.List;
 @Builder
 public class GameInfoResponse {
 
+    private Long id;
     private List<String> players = new ArrayList<>();
     private Integer rounds;
     private List<String> categoryNames = new ArrayList<>();
