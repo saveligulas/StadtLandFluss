@@ -1,14 +1,15 @@
+import { info } from 'console';
 import { getCookie } from './cookies.js';
 console.log("loaded");
 const disconnectButton = document.querySelector('#disconnect');
 const jwtToken = getCookie('Authorization');
 const username = getCookie('Username');
-const gameId = getCookie('GameID');
 
 window.addEventListener('DOMContentLoaded', initializePage);
 
 function initializePage() {
-    // Fetch the flag that determines if the category input field and remove buttons should be displayed
+  loadInfo();
+
   const checkHostAddress = `${window.location.href}/host/check`;
   fetch(checkHostAddress , {
     method: 'GET',
@@ -96,73 +97,69 @@ function initializePage() {
 
 window.addEventListener('DOMContentLoaded', initializePage);
 
-function updateTables() {
-  fetch('/api/get-players')
-    .then(function(response) {
-      return response.json();
+function loadInfo() {
+  const infoAddress = `${window.location.href}/info`;
+  fetch(infoAddress, {
+    method: 'GET',
+    headers: {
+      'Authorization': jwtToken,
+      'Username': username,
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(response => response.json())
+    .then(info => {
+      const players = info.players;
+      const rounds = info.rounds;
+      const categoryNames = info.categoryNames;
+      const id = info.id;
+
+      const gameIdElement = document.querySelector('#gameId');
+      gameIdElement.textContent = `Game ID: ${id}`;
+
+      const roundsElement = document.querySelector('#rounds');
+      roundsElement.textContent = `Number of Rounds: ${rounds}`;
+
+      fillPlayersTable(players);
+      fillCategoriesTable(categoryNames);
     })
-    .then(function(data) {
-      var table = document.querySelector('#playersTable');
-      table.innerHTML = '';
-      var headerRow = document.createElement('tr');
-      var nameHeader = document.createElement('th');
-      nameHeader.textContent = 'Name';
-      headerRow.appendChild(nameHeader);
-      var scoreHeader = document.createElement('th');
-      scoreHeader.textContent = 'Score';
-      headerRow.appendChild(scoreHeader);
-      table.appendChild(headerRow);
-      data.forEach(function(player) {
-        var row = document.createElement('tr');
-        var nameCell = document.createElement('td');
-        nameCell.textContent = player;
-        row.appendChild(nameCell);
-        var scoreCell = document.createElement('td');
-        scoreCell.textContent = '0';
-        row.appendChild(scoreCell);
-        table.appendChild(row);
-      });
-    });
-  fetch('/api/get-categories')
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(data) {
-      var table = document.querySelector('#categoriesTable');
-      table.innerHTML = '';
-      var headerRow = document.createElement('tr');
-      var nameHeader = document.createElement('th');
-      nameHeader.textContent = 'Name';
-      headerRow.appendChild(nameHeader);
-      var weightHeader = document.createElement('th');
-      weightHeader.textContent = 'Weight';
-      headerRow.appendChild(weightHeader);
-      var removeHeader = document.createElement('th');
-      removeHeader.textContent = 'Remove';
-      removeHeader.style.display = 'none';
-      headerRow.appendChild(removeHeader);
-      table.appendChild(headerRow);
-      data.forEach(function(category) {
-        var row = document.createElement('tr');
-        var nameCell = document.createElement('td');
-        nameCell.textContent = category;
-        row.appendChild(nameCell);
-        var weightCell = document.createElement('td');
-        weightCell.textContent = '1';
-        row.appendChild(weightCell);
-        var removeCell = document.createElement('td');
-        var removeButton = document.createElement('button');
-        removeButton.setAttribute('type', 'button');
-        removeButton.classList.add('remove-category-button');
-        removeButton.setAttribute('data-category-id', category);
-        removeButton.textContent = 'Remove';
-        removeButton.style.display = 'none';
-        removeCell.appendChild(removeButton);
-        row.appendChild(removeCell);
-        table.appendChild(row);
-      });
+    .catch(error => {
+      console.error('Error loading players:', error);
     });
 }
+
+function fillPlayersTable(players) {
+  const tableBody = document.querySelector('#playersTable tbody');
+  tableBody.innerHTML = ''; // clear the table before filling it with new data
+
+  for (let i = 0; i < players.length; i++) {
+    const player = players[i];
+
+    const row = document.createElement('tr');
+    const playerName = document.createElement('td');
+    playerName.textContent = player;
+
+    row.appendChild(playerName);
+    tableBody.appendChild(row);
+  }
+}
+
+function fillCategoriesTable(categories) {
+  const tableBody = document.querySelector('#categoriesTable tbody');
+
+  tableBody.innerHTML = '';
+
+  categories.forEach((category) => {
+    const tr = document.createElement('tr');
+    const tdName = document.createElement('td');
+    tdName.innerText = category.name;
+
+    tr.appendChild(tdName);
+    tableBody.appendChild(tr);
+  });
+}
+
+
 
 const disconnect = () => {
 
