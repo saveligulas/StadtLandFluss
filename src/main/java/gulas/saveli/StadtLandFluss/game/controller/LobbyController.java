@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequiredArgsConstructor
 public class LobbyController {
 
+    @Autowired
     private final ThymeleafModelAndViewBuilder thymeleafModelAndViewBuilder;
     @Autowired
     private final GameService gameService;
@@ -38,7 +39,7 @@ public class LobbyController {
         gameService.disconnectUser(Long.parseLong(gameId), username);
     }
 
-    @GetMapping("/{gameId}")
+    @GetMapping("/{gameId}/info")
     @ResponseBody
     @CrossOrigin
     public GameInfoResponse viewGameInfo(@PathVariable("gameId") String gameId) {
