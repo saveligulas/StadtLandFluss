@@ -35,7 +35,7 @@ public class HomeListController {
     @ResponseBody
     @CrossOrigin
     public Long hostGame(@RequestHeader("HostUsername") String host) {
-        return gameService.hostGame(host).getId();
+        return gameService.hostGame(host);
     }
 
 }
