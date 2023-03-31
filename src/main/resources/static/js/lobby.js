@@ -9,7 +9,15 @@ window.addEventListener('DOMContentLoaded', initializePage);
 
 function initializePage() {
     // Fetch the flag that determines if the category input field and remove buttons should be displayed
-  fetch('/categories/showAddCategory')
+  const checkHostAddress = `${window.location.href}/host/check`;
+  fetch(checkHostAddress , {
+    method: 'GET',
+      headers: {
+        'Authorization': jwtToken,
+        'Username': username,
+        'HostUsername': username
+      }
+  })
   .then(response => response.json())
   .then(data => {
     const showAddCategory = data;
@@ -43,9 +51,12 @@ function initializePage() {
     if (addCategoryButton) {
       addCategoryButton.addEventListener('click', () => {
         const newCategoryName = document.getElementById('newCategoryName').value;
-        fetch('/categories/add', {
+        const address = `${window.location.href}/host/settings`;
+        fetch(address, {
           method: 'POST',
           headers: {
+            'Authorization': jwtToken,
+            'Username': username,
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({ name: newCategoryName })
