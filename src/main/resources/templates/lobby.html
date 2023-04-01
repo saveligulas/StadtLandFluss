@@ -25,23 +25,15 @@
       <thead>
         <tr>
           <th>Category</th>
-          <th th:if="${showAddCategory}">Actions</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr th:each="category : ${categories}">
-          <td th:text="${category.name}">Category 1</td>
-          <td th:if="${showAddCategory}">
-            <button type="button" th:data-category-id="${category.id}" class="remove-category-button">Remove</button>
-          </td>
-        </tr>
-        <tr th:if="${showAddCategory}">
-          <td><input type="text" id="newCategoryName" placeholder="Enter category name"></td>
-          <td><button type="button" id="addCategoryButton">Add</button></td>
-        </tr>
+        <!-- Categories will be dynamically added here using JavaScript -->
       </tbody>
     </table>
   </div>
+  <button id="disconnect">Disconnect</button>
   <script type="module" src="../js/lobby.js"></script>
 </body>
 </html>
