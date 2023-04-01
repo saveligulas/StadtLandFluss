@@ -1,4 +1,3 @@
-import { info } from 'console';
 import { getCookie } from './cookies.js';
 console.log("loaded");
 const disconnectButton = document.querySelector('#disconnect');
@@ -8,9 +7,8 @@ const username = getCookie('Username');
 window.addEventListener('DOMContentLoaded', initializePage);
 
 function initializePage() {
-  loadInfo();
-
   const checkHostAddress = `${window.location.href}/host/check`;
+  console.log(checkHostAddress);
   fetch(checkHostAddress , {
     method: 'GET',
       headers: {
@@ -22,30 +20,35 @@ function initializePage() {
   .then(response => response.json())
   .then(data => {
     const showAddCategory = data;
-
-    // Create a new container element for the input field and the "Add" button
-    const addCategoryContainer = document.createElement('div');
-
+    console.log(showAddCategory);
     // Check if the category input field and remove buttons should be displayed
     if (showAddCategory) {
-      // Create the input field and the "Add" button
-      const newCategoryNameInput = document.createElement('input');
-      newCategoryNameInput.type = 'text';
-      newCategoryNameInput.id = 'newCategoryName';
-      newCategoryNameInput.placeholder = 'Enter category name';
-      const addCategoryButton = document.createElement('button');
-      addCategoryButton.type = 'button';
-      addCategoryButton.id = 'addCategoryButton';
-      addCategoryButton.textContent = 'Add';
-
-      // Add the input field and the "Add" button to the container
-      addCategoryContainer.appendChild(newCategoryNameInput);
-      addCategoryContainer.appendChild(addCategoryButton);
-
-      // Insert the container before the table
-      const categoriesTable = document.getElementById('categoriesTable');
-      categoriesTable.parentNode.insertBefore(addCategoryContainer, categoriesTable);
+      // Check if the container already exists
+      const containerExists = document.getElementById('addCategoryContainer');
+      if (!containerExists) {
+        // Create the input field and the "Add" button
+        const newCategoryNameInput = document.createElement('input');
+        newCategoryNameInput.type = 'text';
+        newCategoryNameInput.id = 'newCategoryName';
+        newCategoryNameInput.placeholder = 'Enter category name';
+        const addCategoryButton = document.createElement('button');
+        addCategoryButton.type = 'button';
+        addCategoryButton.id = 'addCategoryButton';
+        addCategoryButton.textContent = 'Add';
+    
+        // Create the container and add the input field and the "Add" button to it
+        const addCategoryContainer = document.createElement('div');
+        addCategoryContainer.id = 'addCategoryContainer';
+        addCategoryContainer.appendChild(newCategoryNameInput);
+        addCategoryContainer.appendChild(addCategoryButton);
+    
+        // Insert the container before the table
+        const categoriesTable = document.getElementById('categoriesTable');
+        categoriesTable.parentNode.insertBefore(addCategoryContainer, categoriesTable);
+      }
     }
+
+    loadInfo(showAddCategory);
 
     // Add event listener to the "Add" button
     const addCategoryButton = document.getElementById('addCategoryButton');
@@ -97,7 +100,7 @@ function initializePage() {
 
 window.addEventListener('DOMContentLoaded', initializePage);
 
-function loadInfo() {
+function loadInfo(showRemoveButtons) {
   const infoAddress = `${window.location.href}/info`;
   fetch(infoAddress, {
     method: 'GET',
@@ -109,6 +112,7 @@ function loadInfo() {
   })
     .then(response => response.json())
     .then(info => {
+      console.log(info);
       const players = info.players;
       const rounds = info.rounds;
       const categoryNames = info.categoryNames;
@@ -121,7 +125,7 @@ function loadInfo() {
       roundsElement.textContent = `Number of Rounds: ${rounds}`;
 
       fillPlayersTable(players);
-      fillCategoriesTable(categoryNames);
+      fillCategoriesTable(categoryNames, showRemoveButtons);
     })
     .catch(error => {
       console.error('Error loading players:', error);
@@ -144,28 +148,34 @@ function fillPlayersTable(players) {
   }
 }
 
-function fillCategoriesTable(categories) {
-  const tableBody = document.querySelector('#categoriesTable tbody');
+function fillCategoriesTable(categoryStrings, showRemoveButton) {
+  const categoriesTableBody = document.querySelector('#categoriesTable tbody');
+  categoriesTableBody.innerHTML = '';
 
-  tableBody.innerHTML = '';
+  categoryStrings.forEach((categoryString) => {
+    const row = document.createElement('tr');
+    const categoryCell = document.createElement('td');
+    categoryCell.textContent = categoryString;
+    row.appendChild(categoryCell);
 
-  categories.forEach((category) => {
-    const tr = document.createElement('tr');
-    const tdName = document.createElement('td');
-    tdName.innerText = category.name;
+    if (showRemoveButton) {
+      const actionsCell = document.createElement('td');
+      const removeButton = document.createElement('button');
+      removeButton.type = 'button';
+      removeButton.classList.add('remove-category-button');
+      removeButton.dataset.categoryName = categoryString;
+      removeButton.textContent = 'Remove';
+      actionsCell.appendChild(removeButton);
+      row.appendChild(actionsCell);
+    }
 
-    tr.appendChild(tdName);
-    tableBody.appendChild(tr);
+    categoriesTableBody.appendChild(row);
   });
 }
 
 
 
 const disconnect = () => {
-
-  let tokenWithoutPrefix = jwtToken;
-  tokenWithoutPrefix = tokenWithoutPrefix.replace("Bearer ", "");
-
   fetch('http://192.168.1.27:8081/game/lobby/disconnect', {
       method: 'POST',
       headers: {
@@ -177,7 +187,6 @@ const disconnect = () => {
   .then(response => response.json)
   .then(data => {
     console.log(data);
-    fetchData();
     setTimeout(function() {
       window.location.href = "http://192.168.1.27:8081/home";
   }, 2000);
@@ -188,11 +197,7 @@ const disconnect = () => {
 const addEventListener = () => {
   disconnectButton.addEventListener('click', disconnect);
 };
-
+  
 addEventListener();
-  
-  // Call the fetchData() function immediately when the page loads
-fetchData();
-  
   // Call the fetchData() function every 10 seconds
-setInterval(fetchData, 10000); 
+setInterval(initializePage, 10000); 
