@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Arrays;
+
 @RestController
 @RequestMapping("/lobby")
 @RequiredArgsConstructor
@@ -49,8 +51,12 @@ public class LobbyController {
     @PostMapping("/{gameId}/host/settings")
     @ResponseBody
     @CrossOrigin
-    public GameSettingResponse changeGameSettings(@PathVariable("gameId") String gameId, @RequestBody GameSettingRequest settingRequest) {
-        return gameService.changeGameSettings(Long.parseLong(gameId), settingRequest);
+    public GameSettingResponse changeGameSettings(@PathVariable("gameId") String gameId,
+                                                  @RequestParam(name = "categories", required = false) String categoryNames) {
+        GameSettingRequest gameSettingRequest = GameSettingRequest.builder()
+                .categoryNames(Arrays.asList(categoryNames.split(",")))
+                .build();
+        return gameService.changeGameSettings(Long.parseLong(gameId), gameSettingRequest);
     }
 
     @GetMapping("/{gameId}/host/check")
