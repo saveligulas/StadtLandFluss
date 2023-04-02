@@ -59,6 +59,7 @@ public class LobbyController {
         GameSettingRequest gameSettingRequest = GameSettingRequest.builder()
                 .categoryNames(Arrays.asList(categoryNames.split(",")))
                 .characters(Arrays.stream(characterString.split(",")).map(s -> s.charAt(0)).collect(Collectors.toList()))
+                .rounds(Integer.parseInt(rounds))
                 .build();
         return gameService.changeGameSettings(Long.parseLong(gameId), gameSettingRequest);
     }
