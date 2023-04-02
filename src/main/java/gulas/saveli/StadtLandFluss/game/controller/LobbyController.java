@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/lobby")
@@ -52,9 +53,12 @@ public class LobbyController {
     @ResponseBody
     @CrossOrigin
     public GameSettingResponse changeGameSettings(@PathVariable("gameId") String gameId,
-                                                  @RequestParam(name = "categories", required = false) String categoryNames) {
+                                                  @RequestParam(name = "categories", required = false) String categoryNames,
+                                                  @RequestParam(name = "characters", required = false) String characterString,
+                                                  @RequestParam(name = "rounds", required = false) String rounds) {
         GameSettingRequest gameSettingRequest = GameSettingRequest.builder()
                 .categoryNames(Arrays.asList(categoryNames.split(",")))
+                .characters(Arrays.stream(characterString.split(",")).map(s -> s.charAt(0)).collect(Collectors.toList()))
                 .build();
         return gameService.changeGameSettings(Long.parseLong(gameId), gameSettingRequest);
     }
