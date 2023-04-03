@@ -152,7 +152,7 @@ public class GameService {
 
         GameSettingResponse gameSettingResponse = new GameSettingResponse();
         List<String> categoryNameList = settingRequest.getCategoryNames();
-        if(!categoryNameList.isEmpty() && categoryNameList.size() >= 3) {
+        if(!categoryNameList.isEmpty()) {
             List<Category> categories = new ArrayList<>();
             for (String categoryName : categoryNameList) {
                 if (categoryName.isEmpty()) {
@@ -160,7 +160,14 @@ public class GameService {
                 }
                 categories.add(categoryService.convertCategoryString(categoryName));
             }
-            game.setCategories(categories);
+            for(Category category : categories) {
+                for(Category category1 : game.getCategories()) {
+                    if(category1.equals(category)) {
+                        throw new ApiRequestException("Category already exists");
+                    }
+                }
+                game.addCategory(category);
+            }
             gameSettingResponse.setCategoryMessage("Categories successfully changed");
         }
 
@@ -175,6 +182,8 @@ public class GameService {
             game.setCharacters(characters);
             gameSettingResponse.setCharacterMessage("Characters successfully set");
         }
+
+
 
         return gameSettingResponse;
     }
