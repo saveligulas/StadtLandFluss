@@ -64,4 +64,8 @@ public class Game {
     public void removePlayer(User user) {
         this.players.remove(user);
     }
+
+    public void addCategory(Category category) {
+        this.categories.add(category);
+    }
 }
