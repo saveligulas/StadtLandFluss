@@ -3,6 +3,9 @@ console.log("loaded");
 const disconnectButton = document.querySelector('#disconnect');
 const jwtToken = getCookie('Authorization');
 const username = getCookie('Username');
+const startButton = document.querySelector('#startGame');
+
+startButton.disabled = true;
 
 window.addEventListener('DOMContentLoaded', initializePage);
 
