@@ -55,15 +55,13 @@ function initializePage() {
     if (addCategoryButton) {
       addCategoryButton.addEventListener('click', () => {
         const newCategoryName = document.getElementById('newCategoryName').value;
-        const address = `${window.location.href}/host/settings`;
+        const address = `${window.location.href}/host/settings?categoryNames=${newCategoryName}`;
         fetch(address, {
           method: 'POST',
           headers: {
             'Authorization': jwtToken,
             'Username': username,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ name: newCategoryName })
+          }
         })
         .then(() => {
           // Reload the page after adding the category
@@ -79,7 +77,8 @@ function initializePage() {
     const removeCategoryButtons = document.querySelectorAll('.remove-category-button');
     removeCategoryButtons.forEach(button => {
       button.addEventListener('click', () => {
-        const categoryId = button.dataset.categoryId;
+        const categoryId = button.dataset.categoryCell;
+        console.log("categoryId:" + categoryId);
         fetch(`/categories/remove/${categoryId}`, {
           method: 'POST'
         })
