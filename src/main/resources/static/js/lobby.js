@@ -121,19 +121,14 @@ function fillCategoriesTable(categoryStrings, showRemoveButton) {
       removeButton.classList.add('remove-category-button');
       removeButton.dataset.categoryName = categoryString;
       removeButton.textContent = 'Remove';
-      removeButton.addEventListener('click', () => {
-        const categoryId = button.dataset.categoryCell;
-        console.log("categoryId:" + categoryId);
-        fetch(`/categories/remove/${categoryId}`, {
-          method: 'POST'
-        })
-        .then(() => {
-          // Reload the page after removing the category
-          location.reload();
-        })
-        .catch(error => {
-          console.error('Error removing category:', error);
-        });
+      button.addEventListener('click', function(event) {
+        const row = event.target.parentNode.parentNode;
+    
+        const categoryCell = row.querySelector('td:first-child');
+
+        const category = categoryCell.textContent.trim();
+
+        console.log(`Category: ${category}`);
       });
       actionsCell.appendChild(removeButton);
       row.appendChild(actionsCell);
