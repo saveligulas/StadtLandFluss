@@ -50,54 +50,8 @@ function initializePage() {
         categoriesTable.parentNode.insertBefore(addCategoryContainer, categoriesTable);
       }
     }
-
     loadInfo(showAddCategory);
-
-    // Add event listener to the "Add" button
-    const addCategoryButton = document.getElementById('addCategoryButton');
-    if (addCategoryButton) {
-      addCategoryButton.addEventListener('click', () => {
-        const newCategoryName = document.getElementById('newCategoryName').value;
-        const address = `${window.location.href}/host/settings?categoryNames=${newCategoryName}`;
-        fetch(address, {
-          method: 'POST',
-          headers: {
-            'Authorization': jwtToken,
-            'Username': username,
-          }
-        })
-        .then(() => {
-          // Reload the page after adding the category
-          location.reload();
-        })
-        .catch(error => {
-          console.error('Error adding category:', error);
-        });
-      });
-    }
-
-    // Add event listener to the "Remove" buttons
-    const removeCategoryButtons = document.querySelectorAll('.remove-category-button');
-    removeCategoryButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const categoryId = button.dataset.categoryCell;
-        console.log("categoryId:" + categoryId);
-        fetch(`/categories/remove/${categoryId}`, {
-          method: 'POST'
-        })
-        .then(() => {
-          // Reload the page after removing the category
-          location.reload();
-        })
-        .catch(error => {
-          console.error('Error removing category:', error);
-        });
-      });
-    });
   })
-  .catch(error => {
-    console.error('Error fetching showAddCategory flag:', error);
-  });
 }
 
 window.addEventListener('DOMContentLoaded', initializePage);
@@ -167,6 +121,20 @@ function fillCategoriesTable(categoryStrings, showRemoveButton) {
       removeButton.classList.add('remove-category-button');
       removeButton.dataset.categoryName = categoryString;
       removeButton.textContent = 'Remove';
+      removeButton.addEventListener('click', () => {
+        const categoryId = button.dataset.categoryCell;
+        console.log("categoryId:" + categoryId);
+        fetch(`/categories/remove/${categoryId}`, {
+          method: 'POST'
+        })
+        .then(() => {
+          // Reload the page after removing the category
+          location.reload();
+        })
+        .catch(error => {
+          console.error('Error removing category:', error);
+        });
+      });
       actionsCell.appendChild(removeButton);
       row.appendChild(actionsCell);
     }
