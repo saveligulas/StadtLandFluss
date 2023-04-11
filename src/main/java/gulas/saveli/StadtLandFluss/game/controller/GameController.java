@@ -23,6 +23,7 @@ public class GameController {
     @GetMapping("/{gameId}")
     public ModelAndView getGameById(@PathVariable("gameId") String gameId) {
         GameViewResponse response = inGameService.getGameViewResponse(Long.parseLong(gameId));
+        return null;
     }
 
 }
