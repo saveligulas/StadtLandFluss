@@ -9,6 +9,6 @@ public class WebSocketSecurityConfig
 
     protected void configureInbound(MessageSecurityMetadataSourceRegistry messages) {
         messages
-                .simpDestMatchers("/user/**").permitAll();
+                .simpDestMatchers("/timer/**").permitAll();
     }
 }
