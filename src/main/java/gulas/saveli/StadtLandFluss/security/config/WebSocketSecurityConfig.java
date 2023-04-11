@@ -7,14 +7,11 @@ import org.springframework.security.authorization.AuthorizationManager;
 import org.springframework.security.config.annotation.web.socket.EnableWebSocketSecurity;
 
 @Configuration
-@EnableWebSocketSecurity
-public class WebSocketSecurityConfig {
+public class WebSocketSecurityConfig
+        extends AbstractSecurityWebSocketMessageBrokerConfigurer {
 
-    @Bean
-    AuthorizationManager<Message<?>> messageAuthorizationManager(MessageMatcherDelegatingAuthorizationManager.Builder messages) {
+    protected void configureInbound(MessageSecurityMetadataSourceRegistry messages) {
         messages
                 .simpDestMatchers("/user/**").authenticated()
-
-        return messages.build();
     }
 }
