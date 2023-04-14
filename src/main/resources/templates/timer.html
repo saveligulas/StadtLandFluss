@@ -10,14 +10,24 @@
 
   <script>
     const gameId = '452';
-    const ws = new WebSocket('ws://localhost:8080/timer/' + gameId);
+    const ws = new WebSocket('ws://192.168.1.27:8081/timer/' + gameId);
 
     ws.onmessage = function(event) {
+      console.log('Received message:', event.data);
       document.getElementById('timer').innerHTML = event.data;
     };
 
     ws.onopen = function(event) {
+      console.log('WebSocket connection opened');
       ws.send('join');
+    };
+
+    ws.onerror = function(event) {
+      console.error('WebSocket error:', event);
+    };
+
+    ws.onclose = function(event) {
+      console.log('WebSocket connection closed');
     };
   </script>
 </body>
