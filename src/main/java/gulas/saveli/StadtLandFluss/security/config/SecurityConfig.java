@@ -68,7 +68,7 @@ public class SecurityConfig {
                 .permitAll()
                 .requestMatchers("/auth/**")
                 .permitAll()
-                .requestMatchers("/time/**")
+                .requestMatchers("/timer/**")
                 .permitAll()
                 .requestMatchers("/test/**")
                 .permitAll()
@@ -85,6 +85,7 @@ public class SecurityConfig {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("http://192.168.1.27:8081/**"));
+        configuration.setAllowedOrigins(Arrays.asList("ws://192.168.1.27:8081/**"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Content-Type", "application/json"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Host", "Username", "HostUsername"));
