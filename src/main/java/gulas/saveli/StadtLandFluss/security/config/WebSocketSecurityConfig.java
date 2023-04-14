@@ -14,7 +14,9 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 public class WebSocketSecurityConfig  implements WebSocketConfigurer {
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler((WebSocketHandler) timerEndpoint(), "/timer/{gameId}");
+        registry.addHandler((WebSocketHandler) timerEndpoint(), "/timer/{gameId}")
+                .setAllowedOrigins("*")
+                .withSockJS();
     }
 
     @Bean
