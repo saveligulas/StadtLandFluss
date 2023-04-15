@@ -77,10 +77,14 @@ public class TimerEndpoint {
         }
     }
 
-    private void sendTimerUpdate(String gameId, String timerValue) throws IOException {
+    private void sendTimerUpdate(String gameId, String timerValue) {
         List<WebSocketSession> gameSessions = sessionsMap.get(gameId);
         for (WebSocketSession session : gameSessions) {
-            session.sendMessage(new TextMessage(timerValue));
+            try {
+                session.sendMessage(new TextMessage(timerValue));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
