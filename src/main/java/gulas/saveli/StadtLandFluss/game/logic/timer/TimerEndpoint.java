@@ -18,11 +18,11 @@ public class TimerEndpoint {
     private static final Map<String, Timer> timersMap = new HashMap<>();
 
     @OnOpen
-    public void onOpen(Session session, @PathParam("gameId") String gameId) {
-        List<Session> gameSessions = sessionsMap.getOrDefault(gameId, new ArrayList<>());
+    public void onOpen(WebSocketSession session, @PathParam("gameId") String gameId) throws IOException {
+        List<WebSocketSession> gameSessions = sessionsMap.getOrDefault(gameId, new ArrayList<>());
         gameSessions.add(session);
         sessionsMap.put(gameId, gameSessions);
-        session.getUserProperties().put("gameId", gameId);
+        session.getAttributes().put("gameId", gameId);
     }
 
     @OnClose
