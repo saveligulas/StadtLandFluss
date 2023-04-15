@@ -6,6 +6,7 @@ import jakarta.websocket.OnOpen;
 import jakarta.websocket.Session;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
+import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
@@ -76,14 +77,10 @@ public class TimerEndpoint {
         }
     }
 
-    private void sendTimerUpdate(String gameId, String timerValue) {
-        List<Session> gameSessions = sessionsMap.get(gameId);
-        for (Session session : gameSessions) {
-            try {
-                session.getBasicRemote().sendText(timerValue);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    private void sendTimerUpdate(String gameId, String timerValue) throws IOException {
+        List<WebSocketSession> gameSessions = sessionsMap.get(gameId);
+        for (WebSocketSession session : gameSessions) {
+            session.sendMessage(new TextMessage(timerValue));
         }
     }
 }
