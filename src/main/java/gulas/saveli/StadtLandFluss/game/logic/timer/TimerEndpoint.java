@@ -26,11 +26,11 @@ public class TimerEndpoint {
     }
 
     @OnClose
-    public void onClose(Session session) {
-        String gameId = (String) session.getUserProperties().get("gameId");
-        List<Session> gameSessions = sessionsMap.get(gameId);
+    public void onClose(WebSocketSession session) throws IOException {
+        String gameId = (String) session.getAttributes().get("gameId");
+        List<WebSocketSession> gameSessions = sessionsMap.get(gameId);
         gameSessions.remove(session);
-        session.getUserProperties().remove("gameId");
+        session.getAttributes().remove("gameId");
 
         if (gameSessions.isEmpty()) {
             Timer timer = timersMap.get(gameId);
