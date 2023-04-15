@@ -43,12 +43,12 @@ public class TimerEndpoint {
     }
 
     @OnMessage
-    public void onMessage(String message, Session session) {
+    public void onMessage(String message, WebSocketSession session) throws IOException {
         if (message.equals("join")) {
-            String gameId = (String) session.getUserProperties().get("gameId");
-            List<Session> gameSessions = sessionsMap.get(gameId);
+            String gameId = (String) session.getAttributes().get("gameId");
+            List<WebSocketSession> gameSessions = sessionsMap.get(gameId);
             gameSessions.add(session);
-            session.getUserProperties().put("playerIndex", gameSessions.size() - 1);
+            session.getAttributes().put("playerIndex", gameSessions.size() - 1);
 
             if (gameSessions.size() == 1) {
                 Timer timer = new Timer();
