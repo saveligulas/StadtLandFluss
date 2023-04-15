@@ -6,6 +6,7 @@ import jakarta.websocket.OnOpen;
 import jakarta.websocket.Session;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
+import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
 import java.util.*;
@@ -13,7 +14,7 @@ import java.util.*;
 @ServerEndpoint("/timer/{gameId}")
 public class TimerEndpoint {
 
-    private static final Map<String, List<Session>> sessionsMap = new HashMap<>();
+    private static final Map<String, List<WebSocketSession>> sessionsMap = new HashMap<>();
     private static final Map<String, Timer> timersMap = new HashMap<>();
 
     @OnOpen
