@@ -25,6 +25,14 @@ public class TimerEndpoint extends TextWebSocketHandler implements SchedulingCon
     private final Map<String, List<WebSocketSession>> sessionsMap = new ConcurrentHashMap<>();
     private final Map<String, ScheduledFuture<?>> timerFuturesMap = new ConcurrentHashMap<>();
 
+    @Override
+    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+        String gameId = getGameId(session);
+        sessionsMap.computeIfAbsent(gameId, key -> new CopyOnWriteArrayList<>()).add(session);
+        session.getAttributes().put("gameId", gameId);
+    }
+
+
 
 
 }
