@@ -11,7 +11,9 @@ import org.springframework.web.socket.WebSocketSession;
 import java.io.IOException;
 import java.util.*;
 
-@ServerEndpoint("/timer/{gameId}")
+@Component
+@RequestMapping("/timer/{gameId}")
+@SimultaneousHandling
 public class TimerEndpoint {
 
     private static final Map<String, List<WebSocketSession>> sessionsMap = new HashMap<>();
