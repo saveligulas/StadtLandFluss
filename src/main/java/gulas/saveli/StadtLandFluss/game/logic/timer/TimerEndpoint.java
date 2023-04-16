@@ -5,16 +5,20 @@ import jakarta.websocket.OnMessage;
 import jakarta.websocket.OnOpen;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
+import org.springframework.scheduling.annotation.SchedulingConfigurer;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
 import java.util.*;
 
 @Component
 @RequestMapping("/timer/{gameId}")
-@SimultaneousHandling
-public class TimerEndpoint {
+public class TimerEndpoint extends TextWebSocketHandler implements SchedulingConfigurer {
 
     private static final Map<String, List<WebSocketSession>> sessionsMap = new HashMap<>();
     private static final Map<String, Timer> timersMap = new HashMap<>();
