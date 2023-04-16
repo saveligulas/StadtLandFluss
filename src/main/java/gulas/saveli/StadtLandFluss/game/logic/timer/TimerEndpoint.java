@@ -16,39 +16,57 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ScheduledFuture;
 
 @Component
-@RequestMapping("/timer/{gameId}")
 public class TimerEndpoint extends TextWebSocketHandler{
 
-    private final Map<String, List<WebSocketSession>> sessionsMap = new ConcurrentHashMap<>();
-    private final Map<String, ScheduledFuture<?>> timerFuturesMap = new ConcurrentHashMap<>();
+    private static final Map<String, List<WebSocketSession>> sessionsMap = new HashMap<>();
+    private static final Map<String, Timer> timersMap = new HashMap<>();
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         String gameId = getGameId(session);
-        sessionsMap.computeIfAbsent(gameId, key -> new CopyOnWriteArrayList<>()).add(session);
+        List<WebSocketSession> gameSessions = sessionsMap.getOrDefault(gameId, new ArrayList<>());
+        gameSessions.add(session);
+        sessionsMap.put(gameId, gameSessions);
         session.getAttributes().put("gameId", gameId);
     }
 
     @Override
-    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        String gameId = getGameId(session);
-        List<WebSocketSession> gameSessions = sessionsMap.get(gameId);
-        if (gameSessions != null) {
-            gameSessions.remove(session);
-            if (gameSessions.isEmpty()) {
-                ScheduledFuture<?> timerFuture = timerFuturesMap.get(gameId);
-                if (timerFuture != null) {
-                    timerFuture.cancel(true);
-                    timerFuturesMap.remove(gameId);
-                }
+    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+        if (message.getPayload().equals("join")) {
+            String gameId = getGameId(session);
+            List<WebSocketSession> gameSessions = sessionsMap.get(gameId);
+            gameSessions.add(session);
+            session.getAttributes().put("playerIndex", gameSessions.size() - 1);
+
+            if (gameSessions.size() == 1) {
+                Timer timer = new Timer();
+                TimerTask task = new TimerTask() {
+                    int timeLeft = 10 * 60; // 10 minutes
+
+                    @Override
+                    public void run() {
+                        timeLeft--;
+                        if (timeLeft == 0) {
+                            timer.cancel();
+                            timer.purge();
+                            sendTimerUpdate(gameId, "00:00");
+                        } else {
+                            int minutes = timeLeft / 60;
+                            int seconds = timeLeft % 60;
+                            String timerValue = String.format("%02d:%02d", minutes, seconds);
+                            sendTimerUpdate(gameId, timerValue);
+                        }
+                    }
+                };
+                timer.scheduleAtFixedRate(task, 0, 1000);
+                timersMap.put(gameId, timer);
             }
         }
     }
-
-
 
     private String getGameId(WebSocketSession session) {
         String path = session.getUri().getPath();
