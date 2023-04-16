@@ -20,7 +20,7 @@ import java.util.concurrent.ScheduledFuture;
 
 @Component
 @RequestMapping("/timer/{gameId}")
-public class TimerEndpoint extends TextWebSocketHandler implements SchedulingConfigurer {
+public class TimerEndpoint extends TextWebSocketHandler{
 
     private final Map<String, List<WebSocketSession>> sessionsMap = new ConcurrentHashMap<>();
     private final Map<String, ScheduledFuture<?>> timerFuturesMap = new ConcurrentHashMap<>();
@@ -32,7 +32,39 @@ public class TimerEndpoint extends TextWebSocketHandler implements SchedulingCon
         session.getAttributes().put("gameId", gameId);
     }
 
+    @Override
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+        String gameId = getGameId(session);
+        List<WebSocketSession> gameSessions = sessionsMap.get(gameId);
+        if (gameSessions != null) {
+            gameSessions.remove(session);
+            if (gameSessions.isEmpty()) {
+                ScheduledFuture<?> timerFuture = timerFuturesMap.get(gameId);
+                if (timerFuture != null) {
+                    timerFuture.cancel(true);
+                    timerFuturesMap.remove(gameId);
+                }
+            }
+        }
+    }
 
+
+
+    private String getGameId(WebSocketSession session) {
+        String path = session.getUri().getPath();
+        return path.substring(path.lastIndexOf("/") + 1);
+    }
+
+    private void sendTimerUpdate(String gameId, String timerValue) {
+        List<WebSocketSession> gameSessions = sessionsMap.get(gameId);
+        for (WebSocketSession session : gameSessions) {
+            try {
+                session.sendMessage(new TextMessage(timerValue));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 
 }
