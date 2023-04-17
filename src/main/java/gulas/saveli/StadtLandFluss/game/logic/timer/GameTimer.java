@@ -2,11 +2,9 @@ package gulas.saveli.StadtLandFluss.game.logic.timer;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.*;
-import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 @Component
 public class GameTimer implements WebSocketHandler {
