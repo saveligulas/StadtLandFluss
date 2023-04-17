@@ -11,80 +11,67 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 @Component
 public class GameTimer implements WebSocketHandler {
 
-    private final Map<String, ConcurrentLinkedQueue<WebSocketSession>> gameSessionsMap = new ConcurrentHashMap<>();
-    private final Map<String, Timer> gameTimersMap = new HashMap<>();
+    private static final int COUNTDOWN_SECONDS = 5 * 60; // 5 minutes
+
+    private WebSocketSession session;
+    private Timer timer;
+    private int countdown;
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        String gameId = getGameIdFromUri(session.getUri().getPath());
-
-        ConcurrentLinkedQueue<WebSocketSession> gameSessions = gameSessionsMap.computeIfAbsent(gameId, k -> new ConcurrentLinkedQueue<>());
-        gameSessions.add(new ConcurrentWebSocketSessionDecorator(session, 60 * 60 * 24 * 365)); // Set maxIdleTimeout to 1 year
-
-        if (gameSessions.size() == 1) {
-            Timer timer = new Timer();
-            TimerTask task = new TimerTask() {
-                int timeLeft = 5 * 60; // 5 minutes
-
-                @Override
-                public void run() {
-                    timeLeft--;
-                    if (timeLeft == 0) {
-                        timer.cancel();
-                        timer.purge();
-                        sendTimerUpdate(gameId, "00:00");
-                    } else {
-                        int minutes = timeLeft / 60;
-                        int seconds = timeLeft % 60;
-                        String timerValue = String.format("%02d:%02d", minutes, seconds);
-                        sendTimerUpdate(gameId, timerValue);
-                    }
-                }
-            };
-            timer.scheduleAtFixedRate(task, 0, 1000);
-            gameTimersMap.put(gameId, timer);
-        }
+        this.session = session;
+        this.countdown = COUNTDOWN_SECONDS;
+        startTimer();
     }
 
     @Override
-    public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        // Handle incoming messages
+    public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
+        // Not used in this example
     }
 
     @Override
-    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        String gameId = getGameIdFromUri(session.getUri().getPath());
+    public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
+        stopTimer();
+    }
 
-        ConcurrentLinkedQueue<WebSocketSession> gameSessions = gameSessionsMap.get(gameId);
-        if (gameSessions != null) {
-            gameSessions.remove(session);
+    @Override
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
+        stopTimer();
+    }
 
-            if (gameSessions.isEmpty()) {
-                Timer timer = gameTimersMap.get(gameId);
-                if (timer != null) {
-                    timer.cancel();
-                    timer.purge();
-                    gameTimersMap.remove(gameId);
+    @Override
+    public boolean supportsPartialMessages() {
+        return false;
+    }
+
+    private void startTimer() {
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                countdown--;
+                if (countdown >= 0) {
+                    sendCountdownMessage(countdown);
+                } else {
+                    stopTimer();
                 }
             }
+        }, 0, 1000); // 1 second delay between messages
+    }
+
+    private void stopTimer() {
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
         }
     }
 
-    private void sendTimerUpdate(String gameId, String timerValue) {
-        ConcurrentLinkedQueue<WebSocketSession> gameSessions = gameSessionsMap.get(gameId);
-        if (gameSessions != null) {
-            for (WebSocketSession session : gameSessions) {
-                try {
-                    session.sendMessage(new TextMessage(timerValue));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+    private void sendCountdownMessage(int countdown) {
+        try {
+            session.sendMessage(new TextMessage(Integer.toString(countdown)));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    }
-
-    private String getGameIdFromUri(String uri) {
-        return uri.substring(uri.lastIndexOf("/") + 1);
     }
 
 }
