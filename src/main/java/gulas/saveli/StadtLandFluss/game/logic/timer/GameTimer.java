@@ -9,7 +9,7 @@ import java.util.*;
 @Component
 public class GameTimer implements WebSocketHandler {
 
-    private static final int COUNTDOWN_SECONDS = 5 * 60; // 5 minutes
+    private static final int COUNTDOWN_SECONDS = 5 * 60;
 
     private WebSocketSession session;
     private Timer timer;
@@ -24,7 +24,6 @@ public class GameTimer implements WebSocketHandler {
 
     @Override
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
-        // Not used in this example
     }
 
     @Override
@@ -54,7 +53,7 @@ public class GameTimer implements WebSocketHandler {
                     stopTimer();
                 }
             }
-        }, 0, 1000); // 1 second delay between messages
+        }, 0, 1000);
     }
 
     private void stopTimer() {
