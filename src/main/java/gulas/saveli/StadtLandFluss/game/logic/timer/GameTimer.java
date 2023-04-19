@@ -13,12 +13,11 @@ public class GameTimer implements WebSocketHandler {
 
     private WebSocketSession session;
     private Timer timer;
-    private int countdown;
+    private Map<Long, Timer> gameIdTimerMap = new HashMap<>();
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         this.session = session;
-        this.countdown = COUNTDOWN_SECONDS;
         startTimer();
     }
 
@@ -41,25 +40,26 @@ public class GameTimer implements WebSocketHandler {
         return false;
     }
 
-    private void startTimer() {
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
+    private void startTimer(Long id) {
+        gameIdTimerMap.put(id, new Timer());
+        gameIdTimerMap.get(id).schedule(new TimerTask() {
+            int countdown = COUNTDOWN_SECONDS;
             @Override
             public void run() {
                 countdown--;
                 if (countdown >= 0) {
                     sendCountdownMessage(countdown);
                 } else {
-                    stopTimer();
+                    stopTimer(id);
                 }
             }
         }, 0, 1000);
     }
 
-    private void stopTimer() {
-        if (timer != null) {
+    private void stopTimer(Long id) {
+        if (gameIdTimerMap.get(id) != null) {
             timer.cancel();
-            timer = null;
+            gameIdTimerMap.put(id, null);
         }
     }
 
