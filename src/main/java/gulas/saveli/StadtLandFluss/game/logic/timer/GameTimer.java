@@ -18,7 +18,7 @@ public class GameTimer implements WebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 
-        System.out.println(session.getAttributes().toString());
+        System.out.println(session.getUri());
     }
 
     @Override
@@ -46,7 +46,7 @@ public class GameTimer implements WebSocketHandler {
             public void run() {
                 countdown--;
                 if (countdown >= 0) {
-                    sendCountdownMessage(countdown);
+                    sendCountdownMessage(countdown, id);
                 } else {
                     stopTimer(id);
                 }
