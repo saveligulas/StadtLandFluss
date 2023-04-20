@@ -10,14 +10,14 @@ import java.util.*;
 public class GameTimer implements WebSocketHandler {
 
     private static final int COUNTDOWN_SECONDS = 5 * 60;
-
-    private WebSocketSession session;
     private Timer timer;
-    private Map<Long, Timer> gameIdTimerMap = new HashMap<>();
+    private final Map<Long, Timer> gameIdTimerMap = new HashMap<>();
+    private final Map<Long, WebSocketSession> webSocketSessionMap = new HashMap<>();
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        this.session = session;
+
+
         startTimer();
     }
 
