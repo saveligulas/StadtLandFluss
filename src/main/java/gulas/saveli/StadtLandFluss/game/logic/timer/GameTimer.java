@@ -1,5 +1,6 @@
 package gulas.saveli.StadtLandFluss.game.logic.timer;
 
+import org.springframework.messaging.MessageHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.*;
 
@@ -17,8 +18,7 @@ public class GameTimer implements WebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 
-
-        startTimer();
+        System.out.println(session.getAttributes().toString());
     }
 
     @Override
@@ -27,12 +27,10 @@ public class GameTimer implements WebSocketHandler {
 
     @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
-        stopTimer();
     }
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
-        stopTimer();
     }
 
     @Override
@@ -63,9 +61,9 @@ public class GameTimer implements WebSocketHandler {
         }
     }
 
-    private void sendCountdownMessage(int countdown) {
+    private void sendCountdownMessage(int countdown, Long id) {
         try {
-            session.sendMessage(new TextMessage(Integer.toString(countdown)));
+            webSocketSessionMap.get(id).sendMessage(new TextMessage(Integer.toString(countdown)));
         } catch (IOException e) {
             e.printStackTrace();
         }
