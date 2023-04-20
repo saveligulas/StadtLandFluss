@@ -16,7 +16,7 @@ public class WebSocketSecurityConfig implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(countdownWebSocketHandler, "/timer")
+        registry.addHandler(countdownWebSocketHandler, "/timer/{gameId}")
                 .setAllowedOrigins("*");
     }
 }
