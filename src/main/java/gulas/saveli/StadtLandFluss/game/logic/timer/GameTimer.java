@@ -30,12 +30,12 @@ public class GameTimer implements WebSocketHandler {
 
     @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
-        webSocketSessionMap.remove(getGameIdFromSession(session));
+        removeSessionFromMap(session);
     }
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
-        webSocketSessionMap.remove(getGameIdFromSession(session));
+        removeSessionFromMap(session);
     }
 
     @Override
