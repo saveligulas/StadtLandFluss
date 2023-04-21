@@ -25,6 +25,7 @@ public class GameTimer implements WebSocketHandler {
 
     @Override
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
+
     }
 
     @Override
@@ -77,6 +78,10 @@ public class GameTimer implements WebSocketHandler {
         String url = Objects.requireNonNull(session.getUri()).toString();
         String gameIdStr = url.substring(url.lastIndexOf('/') + 1);
         return Long.parseLong(gameIdStr);
+    }
+
+    private void removeSessionFromMap(WebSocketSession session) {
+        webSocketSessionMap.remove(getGameIdFromSession(session));
     }
 
 }
