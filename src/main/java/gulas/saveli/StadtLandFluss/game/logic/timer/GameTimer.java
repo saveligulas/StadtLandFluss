@@ -25,7 +25,7 @@ public class GameTimer implements WebSocketHandler {
 
     @Override
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
-
+        String payload = message.getPayload().toString();
     }
 
     @Override
