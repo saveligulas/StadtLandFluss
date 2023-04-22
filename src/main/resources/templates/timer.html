@@ -10,7 +10,7 @@
 
   <script>
     const gameId = '452';
-    const ws = new WebSocket('ws://192.168.1.27:8081/timer/3');
+    const ws = new WebSocket('ws://192.168.1.27:8081/timer/'+gameId);
 
     ws.onmessage = function(event) {
       console.log('Received message:', event.data);
