@@ -1,5 +1,6 @@
 package gulas.saveli.StadtLandFluss.game.logic.timer;
 
+import gulas.saveli.StadtLandFluss.errorHandler.handler.ApiRequestException;
 import org.apache.tomcat.websocket.server.UriTemplate;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.stereotype.Component;
@@ -26,6 +27,9 @@ public class GameTimer implements WebSocketHandler {
     @Override
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
         String payload = message.getPayload().toString();
+        if(payload.isEmpty() || payload.startsWith(" ") || payload.length() > 10) {
+            throw new ApiRequestException("Invalid payload");
+        }
     }
 
     @Override
