@@ -30,11 +30,12 @@ public class GameTimer implements WebSocketHandler {
     @Override
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
         String payload = message.getPayload().toString();
+        Long gameId = getGameIdFromSession(session);
         if(payload.isEmpty() || payload.startsWith(" ") || payload.length() > 10) {
             throw new ApiRequestException("Invalid payload");
         }
         if(payload.equals("START")) {
-
+            startTimer(gameId);
         }
     }
 
