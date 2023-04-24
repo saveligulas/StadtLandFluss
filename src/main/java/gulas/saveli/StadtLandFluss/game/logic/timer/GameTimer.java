@@ -15,13 +15,16 @@ public class GameTimer implements WebSocketHandler {
     private static final int COUNTDOWN_SECONDS = 5 * 60;
     private Timer timer;
     private final Map<Long, Timer> gameIdTimerMap = new HashMap<>();
-    private final Map<Long, WebSocketSession> webSocketSessionMap = new HashMap<>();
+    private final Map<Long, List<WebSocketSession>> webSocketSessionMap = new HashMap<>();
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         Long gameId = getGameIdFromSession(session);
-
-        webSocketSessionMap.put(gameId, session);
+        if(!webSocketSessionMap.containsKey(gameId)) {
+            webSocketSessionMap.put(gameId, new ArrayList<>(List.of(session)));
+        } else {
+            webSocketSessionMap.get(gameId).add(session);
+        }
     }
 
     @Override
@@ -29,6 +32,9 @@ public class GameTimer implements WebSocketHandler {
         String payload = message.getPayload().toString();
         if(payload.isEmpty() || payload.startsWith(" ") || payload.length() > 10) {
             throw new ApiRequestException("Invalid payload");
+        }
+        if(payload.equals("START")) {
+
         }
     }
 
