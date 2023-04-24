@@ -13,7 +13,6 @@ import java.util.*;
 public class GameTimer implements WebSocketHandler {
 
     private static final int COUNTDOWN_SECONDS = 5 * 60;
-    private Timer timer;
     private final Map<Long, Timer> gameIdTimerMap = new HashMap<>();
     private final Map<Long, List<WebSocketSession>> webSocketSessionMap = new HashMap<>();
 
@@ -72,7 +71,6 @@ public class GameTimer implements WebSocketHandler {
 
     private void stopTimer(Long id) {
         if (gameIdTimerMap.get(id) != null) {
-            timer.cancel();
             gameIdTimerMap.put(id, null);
         }
     }
