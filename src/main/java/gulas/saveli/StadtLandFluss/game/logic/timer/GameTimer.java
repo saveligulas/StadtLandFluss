@@ -78,7 +78,9 @@ public class GameTimer implements WebSocketHandler {
 
     private void sendCountdownMessage(int countdown, Long id) {
         try {
-            webSocketSessionMap.get(id).sendMessage(new TextMessage(Integer.toString(countdown)));
+            for(WebSocketSession session : webSocketSessionMap.get(id)) {
+                session.sendMessage(new TextMessage(Integer.toString(countdown)));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
