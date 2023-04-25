@@ -19,7 +19,7 @@
 
     ws.onopen = function(event) {
       console.log('WebSocket connection opened');
-      ws.send('join');
+      ws.send('START');
     };
 
     ws.onerror = function(event) {
