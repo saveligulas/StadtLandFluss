@@ -14,7 +14,9 @@
 
     ws.onmessage = function(event) {
       console.log('Received message:', event.data);
-      document.getElementById('timer').innerHTML = event.data;
+      var date = new Date(event.data * 1000); // Multiply by 1000 to convert seconds to milliseconds
+      var formattedTime = date.toISOString().substr(14, 5);
+      document.getElementById('timer').innerHTML = formattedTime;
     };
 
     ws.onopen = function(event) {
