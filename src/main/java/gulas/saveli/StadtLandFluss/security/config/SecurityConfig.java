@@ -40,10 +40,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
                 .permitAll()
-                .requestMatchers(request -> {
-                    String requestPath = request.getRequestURI().toString();
-                    return requestPath.contains("/fonts/");
-                }).permitAll()
+                .requestMatchers(HttpMethod.GET, "fonts/**")
+                .permitAll()
                 .requestMatchers(HttpMethod.POST, "/home/host")
                 .hasAuthority(Authority.USER_AUTHORITIES.name())
                 .requestMatchers(HttpMethod.GET, "/home/list")
