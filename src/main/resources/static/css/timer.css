@@ -1,5 +1,16 @@
 @font-face {
     font-family: 'DS-Digital';
-    src: url('../resources/fonts/ds_digital.ttf') format('truetype');
+    src: url('../resources/fonts/DS-DIGIB.ttf') format('truetype');
   }
 
+  #timer {
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #f2f2f2;
+    color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    font-family: 'DS-Digital', sans-serif;
+  }
