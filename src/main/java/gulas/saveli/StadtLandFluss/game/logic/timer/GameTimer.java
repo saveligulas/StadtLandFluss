@@ -57,20 +57,21 @@ public class GameTimer implements WebSocketHandler {
     }
 
     private void startTimer(Long id) {
-        if(gameIdTimerMap.get(id).)
-        gameIdTimerMap.put(id, new Timer());
-        gameIdTimerMap.get(id).schedule(new TimerTask() {
-            int countdown = COUNTDOWN_SECONDS;
-            @Override
-            public void run() {
-                countdown--;
-                if (countdown >= 0) {
-                    sendCountdownMessage(countdown, id);
-                } else {
-                    stopTimer(id);
+        if(!gameIdTimerIsRunningMap.get(id)) {
+            gameIdTimerMap.put(id, new Timer());
+            gameIdTimerMap.get(id).schedule(new TimerTask() {
+                int countdown = COUNTDOWN_SECONDS;
+                @Override
+                public void run() {
+                    countdown--;
+                    if (countdown >= 0) {
+                        sendCountdownMessage(countdown, id);
+                    } else {
+                        stopTimer(id);
+                    }
                 }
-            }
-        }, 0, 1000);
+            }, 0, 1000);
+        }
     }
 
     private void stopTimer(Long id) {
