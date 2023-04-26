@@ -97,7 +97,13 @@ public class GameTimer implements WebSocketHandler {
     }
 
     private void removeSessionFromMap(WebSocketSession session) {
-        webSocketSessionMap.remove(getGameIdFromSession(session));
+        Long gameId = getGameIdFromSession(session);
+        for(int i = 0; i < webSocketSessionMap.get(gameId).size(); i++) {
+            if(webSocketSessionMap.get(gameId).get(i).getId().equals(session.getId())) {
+                webSocketSessionMap.get(gameId).remove(i);
+            }
+        }
+
     }
 
 }
