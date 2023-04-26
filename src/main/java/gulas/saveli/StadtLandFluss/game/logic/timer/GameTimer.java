@@ -22,6 +22,7 @@ public class GameTimer implements WebSocketHandler {
         Long gameId = getGameIdFromSession(session);
         if(!webSocketSessionMap.containsKey(gameId)) {
             webSocketSessionMap.put(gameId, new ArrayList<>(List.of(session)));
+            gameIdTimerIsRunningMap.put(gameId, false);
         } else {
             webSocketSessionMap.get(gameId).add(session);
         }
@@ -36,6 +37,7 @@ public class GameTimer implements WebSocketHandler {
         }
         if(payload.equals("START")) {
             startTimer(gameId);
+            gameIdTimerIsRunningMap.put(gameId, true);
         }
     }
 
