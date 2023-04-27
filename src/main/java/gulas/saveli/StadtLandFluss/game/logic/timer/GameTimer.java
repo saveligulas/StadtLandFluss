@@ -43,6 +43,10 @@ public class GameTimer implements WebSocketHandler {
             stopTimer(gameId);
             gameIdTimerIsRunningMap.put(gameId, false);
         }
+        if(payload.equals("GAME_OVER")) {
+            gameIdTimerMap.remove(gameId);
+            gameIdTimerIsRunningMap.remove(gameId);
+        }
     }
 
     @Override
