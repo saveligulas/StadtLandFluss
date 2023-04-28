@@ -1,4 +1,4 @@
-package gulas.saveli.StadtLandFluss.game.logic.timer;
+package gulas.saveli.StadtLandFluss.game.websocket;
 
 import gulas.saveli.StadtLandFluss.errorHandler.handler.ApiRequestException;
 import gulas.saveli.StadtLandFluss.game.models.GameTimer;
