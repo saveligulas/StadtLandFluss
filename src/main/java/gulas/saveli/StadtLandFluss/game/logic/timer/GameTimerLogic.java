@@ -1,8 +1,9 @@
 package gulas.saveli.StadtLandFluss.game.logic.timer;
 
 import gulas.saveli.StadtLandFluss.errorHandler.handler.ApiRequestException;
-import org.apache.tomcat.websocket.server.UriTemplate;
-import org.springframework.messaging.MessageHeaders;
+import gulas.saveli.StadtLandFluss.repo.GameRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.*;
 
@@ -10,7 +11,11 @@ import java.io.IOException;
 import java.util.*;
 
 @Component
-public class GameTimer implements WebSocketHandler {
+@RequiredArgsConstructor
+public class GameTimerLogic implements WebSocketHandler {
+
+    @Autowired
+    private final GameRepository gameRepository;
 
     private static final int COUNTDOWN_SECONDS = 5 * 60;
     private final Map<Long, Timer> gameIdTimerMap = new HashMap<>(); //TODO rework map and add custom model to save all information
