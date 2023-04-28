@@ -10,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/game")
@@ -23,7 +25,9 @@ public class GameController {
     @GetMapping("/{gameId}")
     public ModelAndView getGameById(@PathVariable("gameId") String gameId) {
         GameViewResponse response = inGameService.getGameViewResponse(Long.parseLong(gameId));
-        return null;
+        Map<String, Object> objectMap = new HashMap<>();
+
+        return new ModelAndView("game").addAllObjects(objectMap);
     }
 
 }
