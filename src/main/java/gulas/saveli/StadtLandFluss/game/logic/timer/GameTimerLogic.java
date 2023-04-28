@@ -1,6 +1,7 @@
 package gulas.saveli.StadtLandFluss.game.logic.timer;
 
 import gulas.saveli.StadtLandFluss.errorHandler.handler.ApiRequestException;
+import gulas.saveli.StadtLandFluss.game.models.GameTimer;
 import gulas.saveli.StadtLandFluss.repo.GameRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +22,19 @@ public class GameTimerLogic implements WebSocketHandler {
     private final Map<Long, Timer> gameIdTimerMap = new HashMap<>(); //TODO rework map and add custom model to save all information
     private final Map<Long, List<WebSocketSession>> webSocketSessionMap = new HashMap<>();
     private final Map<Long, Boolean> gameIdTimerIsRunningMap = new HashMap<>();
+    private final Map<Long, GameTimer> gameIdGameTimerMap = new HashMap<>();
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         Long gameId = getGameIdFromSession(session);
         if(!webSocketSessionMap.containsKey(gameId)) {
             webSocketSessionMap.put(gameId, new ArrayList<>(List.of(session)));
-            gameIdTimerIsRunningMap.put(gameId, false);
+            gameIdGameTimerMap.put(gameId,
+                    GameTimer.builder()
+                            .gameId(gameId)
+                            .isRunning(false)
+                            .timer(new Timer())
+                            .build());
         } else {
             webSocketSessionMap.get(gameId).add(session);
         }
@@ -42,18 +49,13 @@ public class GameTimerLogic implements WebSocketHandler {
         }
         if(payload.equals("START")) {
             startTimer(gameId);
-            gameIdTimerIsRunningMap.put(gameId, true);
         }
         if(payload.equals("END")) {
             stopTimer(gameId);
-            gameIdTimerIsRunningMap.put(gameId, false);
         }
         if(payload.equals("GAME_OVER")) {
             gameIdTimerMap.remove(gameId);
             gameIdTimerIsRunningMap.remove(gameId);
-        }
-        if(payload.equals("NEXT_ROUND")) {
-
         }
     }
 
@@ -88,6 +90,8 @@ public class GameTimerLogic implements WebSocketHandler {
                 }
             }, 0, 1000);
         }
+
+
     }
 
     private void stopTimer(Long id) {
