@@ -69,7 +69,7 @@ public class GameService {
             throw new ApiRequestException("User is already in a game");
         }
         Integer rounds = 3;
-        List<Character> characters = randomUtils.getRandomCharacters(3);
+        List<Character> characters = Arrays.asList(STANDARD_CHARACTER_SET);
         Game game = new Game(username, rounds, characters, categoryList);
         game.setPlayers(new ArrayList<>(Arrays.asList(optionalUser.get())));
         game.setMaxPlayers(10);
