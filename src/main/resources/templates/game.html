@@ -10,11 +10,9 @@
 
   <form method="post" action="/submit">
     <div th:each="category : ${categories}">
-      <label th:text="${category.name}"></label>
+      <label th:text="${category.getName()}"></label>
       <input type="text" name="category" th:field="*{categoryValues[__${category.id}__]}" />
     </div>
-
-    <button type="submit">Submit</button>
   </form>
 </body>
 </html>
