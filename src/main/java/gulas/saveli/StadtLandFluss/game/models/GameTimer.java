@@ -9,5 +9,6 @@ public class GameTimer {
 
     private Timer timer;
     private Boolean isRunning;
-    private
+    private Long gameId;
+
 }
