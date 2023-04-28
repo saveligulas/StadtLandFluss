@@ -70,4 +70,10 @@ public class LobbyController {
     public Boolean isGameHost(@PathVariable("gameId") String gameId, @RequestHeader("HostUsername") String host) {
         return gameService.isGameHost(Long.parseLong(gameId), host);
     }
+
+    @GetMapping("/{gameId}/host/start")
+    @CrossOrigin
+    public Boolean startGame(@PathVariable("gameId") String gameId, @RequestHeader("HostUsername") String host) {
+        return  gameService.startGame(Long.parseLong(gameId), host);
+    }
 }
