@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.*;
 
 @Component
-@RequiredArgsConstructor
 public class GameTimerLogic implements WebSocketHandler {
 
     private static final int COUNTDOWN_SECONDS = 5 * 60;
