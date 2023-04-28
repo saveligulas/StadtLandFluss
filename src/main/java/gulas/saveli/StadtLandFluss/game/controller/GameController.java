@@ -26,7 +26,9 @@ public class GameController {
     public ModelAndView getGameById(@PathVariable("gameId") String gameId) {
         GameViewResponse response = inGameService.getGameViewResponse(Long.parseLong(gameId));
         Map<String, Object> objectMap = new HashMap<>();
-
+        objectMap.put("roundNumber", response.getRounds());
+        objectMap.put("characterName", response.getCurrentCharacter());
+        objectMap.put("categories", response.getCategories());
         return new ModelAndView("game").addAllObjects(objectMap);
     }
 
