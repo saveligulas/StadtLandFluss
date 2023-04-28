@@ -35,6 +35,7 @@ public class GameService {
     private final AnswerListService answerListService;
     @Autowired
     private final CategoryService categoryService;
+    private final Character[] STANDARD_CHARACTER_SET = {'d', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'v'};
 
     public Long hostGame(String username) {
         List<Category> categoryList = new ArrayList<>();
@@ -239,5 +240,12 @@ public class GameService {
     public Game getGame(Long gameId) {
         return gameRepository.findById(gameId)
                 .orElseThrow(() -> new ApiRequestException("game with id " + gameId + " does not exist"));
+    }
+
+    @Transactional
+    public Boolean startGame(Long parseLong, String host) {
+        Game game = getGame(parseLong);
+        game.setHasStarted(true);
+        return true;
     }
 }
