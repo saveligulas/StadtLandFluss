@@ -1,5 +1,5 @@
 package gulas.saveli.StadtLandFluss.security.config;
-import gulas.saveli.StadtLandFluss.game.logic.timer.GameTimerLogic;
+import gulas.saveli.StadtLandFluss.game.websocket.GameTimerLogic;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
