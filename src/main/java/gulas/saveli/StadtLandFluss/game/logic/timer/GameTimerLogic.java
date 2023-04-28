@@ -19,9 +19,7 @@ public class GameTimerLogic implements WebSocketHandler {
     private final GameRepository gameRepository;
 
     private static final int COUNTDOWN_SECONDS = 5 * 60;
-    private final Map<Long, Timer> gameIdTimerMap = new HashMap<>(); //TODO rework map and add custom model to save all information
     private final Map<Long, List<WebSocketSession>> webSocketSessionMap = new HashMap<>();
-    private final Map<Long, Boolean> gameIdTimerIsRunningMap = new HashMap<>();
     private final Map<Long, GameTimer> gameIdGameTimerMap = new HashMap<>();
 
     @Override
@@ -54,8 +52,7 @@ public class GameTimerLogic implements WebSocketHandler {
             stopTimer(gameId);
         }
         if(payload.equals("GAME_OVER")) {
-            gameIdTimerMap.remove(gameId);
-            gameIdTimerIsRunningMap.remove(gameId);
+            gameIdGameTimerMap.remove(gameId);
         }
     }
 
@@ -77,6 +74,7 @@ public class GameTimerLogic implements WebSocketHandler {
     private void startTimer(Long id) {
         if(!gameIdGameTimerMap.get(id).getIsRunning()) {
             gameIdGameTimerMap.get(id).purgeTimer();
+            gameIdGameTimerMap.get(id).setIsRunning(true);
             gameIdGameTimerMap.get(id).getTimer().schedule(new TimerTask() {
                 int countdown = COUNTDOWN_SECONDS;
                 @Override
@@ -93,8 +91,9 @@ public class GameTimerLogic implements WebSocketHandler {
     }
 
     private void stopTimer(Long id) {
-        if (gameIdTimerMap.get(id) != null) {
-            gameIdTimerMap.put(id, null);
+        if (gameIdGameTimerMap.get(id) != null) {
+            gameIdGameTimerMap.get(id).purgeTimer();
+            gameIdGameTimerMap.get(id).setIsRunning(false);
         }
     }
 
