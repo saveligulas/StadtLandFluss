@@ -15,9 +15,6 @@ import java.util.*;
 @RequiredArgsConstructor
 public class GameTimerLogic implements WebSocketHandler {
 
-    @Autowired
-    private final GameRepository gameRepository;
-
     private static final int COUNTDOWN_SECONDS = 5 * 60;
     private final Map<Long, List<WebSocketSession>> webSocketSessionMap = new HashMap<>();
     private final Map<Long, GameTimer> gameIdGameTimerMap = new HashMap<>();
