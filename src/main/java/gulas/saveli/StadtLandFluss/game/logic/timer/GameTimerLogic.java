@@ -75,9 +75,9 @@ public class GameTimerLogic implements WebSocketHandler {
     }
 
     private void startTimer(Long id) {
-        if(!gameIdTimerIsRunningMap.get(id)) {
-            gameIdTimerMap.put(id, new Timer());
-            gameIdTimerMap.get(id).schedule(new TimerTask() {
+        if(!gameIdGameTimerMap.get(id).getIsRunning()) {
+            gameIdGameTimerMap.get(id).purgeTimer();
+            gameIdGameTimerMap.get(id).getTimer().schedule(new TimerTask() {
                 int countdown = COUNTDOWN_SECONDS;
                 @Override
                 public void run() {
@@ -90,8 +90,6 @@ public class GameTimerLogic implements WebSocketHandler {
                 }
             }, 0, 1000);
         }
-
-
     }
 
     private void stopTimer(Long id) {
