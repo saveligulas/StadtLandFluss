@@ -3,7 +3,6 @@ package gulas.saveli.StadtLandFluss.game.websocket;
 import gulas.saveli.StadtLandFluss.repo.GameRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.convert.ReadingConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.WebSocketHandler;
