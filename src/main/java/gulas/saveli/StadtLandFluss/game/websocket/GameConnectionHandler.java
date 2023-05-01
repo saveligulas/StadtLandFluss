@@ -6,6 +6,7 @@ import gulas.saveli.StadtLandFluss.repo.GameRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.WebSocketMessage;
@@ -25,8 +26,8 @@ public class GameConnectionHandler extends WebSocket implements WebSocketHandler
         Long gameId = getGameIdFromSession(session);
         Game game = gameRepository.findById(gameId)
                 .orElseThrow(() -> new ApiRequestException("game with id " + gameId + " does not exist"));
-        if(game.getHasStarted() || game.getHasExpired()) {
-            throw new ApiRequestException("game has started or expired");
+        if(game.getHasStarted() || game.getHasExpired() || game.isFull()) {
+            throw new ApiRequestException("game has started, expired or is full");
         }
         if(!webSocketSessionsMap.containsKey(gameId)) {
             webSocketSessionsMap.put(gameId, new ArrayList<>(List.of(session)));
@@ -36,8 +37,16 @@ public class GameConnectionHandler extends WebSocket implements WebSocketHandler
     }
 
     @Override
+    @Transactional
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
+        Long gameId = getGameIdFromSession(session);
         String textMessage = message.getPayload().toString();
+        Game game = gameRepository.findById(gameId)
+                .orElseThrow(() -> new ApiRequestException("game with id " + gameId + " does not exist"));
+        if(textMessage.equals("START")) {
+            game.setHasStarted(true);
+            sendMessageToAll("GAME_STARTED", gameId);
+        }
     }
 
     @Override
