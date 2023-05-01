@@ -8,7 +8,7 @@ import org.springframework.web.socket.*;
 import java.util.*;
 
 @Component
-public class GameTimerLogic extends WebSocket implements WebSocketHandler {
+public class GameTimerLogic extends WebSocket implements WebSocketHandler { //TODO merge into GameConnectionHandler
 
     private static final int COUNTDOWN_SECONDS = 5 * 60;
     private final Map<Long, GameTimer> gameIdGameTimerMap = new HashMap<>();
