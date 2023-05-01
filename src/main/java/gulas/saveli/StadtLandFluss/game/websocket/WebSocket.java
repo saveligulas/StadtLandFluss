@@ -44,4 +44,16 @@ public class WebSocket {
             }
         }
     }
+
+    private boolean checkHeaders(WebSocketSession session) {
+        return session.getAttributes().get("Username") != null;
+    }
+
+    public boolean checkUsernameIsValid(WebSocketSession session, List<String> gamePlayers) {
+        if(checkHeaders(session)) {
+            String username = session.getAttributes().get("Username").toString();
+            return gamePlayers.contains(username);
+        }
+        return false;
+    }
 }
