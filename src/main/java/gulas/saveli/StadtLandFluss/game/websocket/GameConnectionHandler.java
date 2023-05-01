@@ -20,6 +20,7 @@ public class GameConnectionHandler extends WebSocket implements WebSocketHandler
 
     @Autowired
     private final GameRepository gameRepository;
+    private final Map<Long, List<String>> gamePlayersMap = new HashMap<>();
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -46,6 +47,12 @@ public class GameConnectionHandler extends WebSocket implements WebSocketHandler
         if(textMessage.equals("START")) {
             game.setHasStarted(true);
             sendMessageToAll("GAME_STARTED", gameId);
+        }
+        if(textMessage.equals("END")) {
+
+        }
+        if(textMessage.equals("NEXT_ROUND")) {
+
         }
     }
 
