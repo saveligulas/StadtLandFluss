@@ -9,10 +9,7 @@ import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 @RequiredArgsConstructor
@@ -23,7 +20,12 @@ public class GameConnectionHandler extends WebSocket implements WebSocketHandler
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-
+        Long gameId = getGameIdFromSession(session);
+        if(!webSocketSessionsMap.containsKey(gameId)) {
+            webSocketSessionsMap.put(gameId, new ArrayList<>(List.of(session)));
+        } else {
+            webSocketSessionsMap.get(gameId).add(session);
+        }
     }
 
     @Override
