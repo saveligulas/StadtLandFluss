@@ -23,7 +23,6 @@ public class GameConnectionHandler implements WebSocketHandler {
 
     private final Map<Long, List<WebSocketSession>> webSocketSessionsMap = new HashMap<>();
 
-
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 
