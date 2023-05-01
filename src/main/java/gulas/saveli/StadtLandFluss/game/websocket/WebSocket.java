@@ -56,4 +56,9 @@ public class WebSocket {
         }
         return false;
     }
+
+    public boolean checkUsernameIsHost(WebSocketSession session, String hostUsername) {
+        String username = session.getAttributes().get("Username").toString();
+        return username.equals(hostUsername);
+    }
 }
