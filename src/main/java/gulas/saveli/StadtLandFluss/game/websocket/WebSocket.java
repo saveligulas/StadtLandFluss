@@ -10,9 +10,9 @@ import java.util.Map;
 import java.util.Objects;
 
 public class WebSocket {
-    private final Map<Long, List<WebSocketSession>> webSocketSessionsMap = new HashMap<>();
+    public final Map<Long, List<WebSocketSession>> webSocketSessionsMap = new HashMap<>();
 
-    private void sendMessage(String message, Long id) {
+    public void sendMessage(String message, Long id) {
         try {
             for(WebSocketSession session : webSocketSessionsMap.get(id)) {
                 session.sendMessage(new TextMessage(message));
@@ -22,9 +22,18 @@ public class WebSocket {
         }
     }
 
-    private Long getGameIdFromSession(WebSocketSession session) {
+    public Long getGameIdFromSession(WebSocketSession session) {
         String url = Objects.requireNonNull(session.getUri()).toString();
         String gameIdStr = url.substring(url.lastIndexOf('/') + 1);
         return Long.parseLong(gameIdStr);
+    }
+
+    public void removeSessionFromMap(WebSocketSession session) {
+        Long gameId = getGameIdFromSession(session);
+        for(int i = 0; i < webSocketSessionsMap.get(gameId).size(); i++) {
+            if(webSocketSessionsMap.get(gameId).get(i).getId().equals(session.getId())) {
+                webSocketSessionsMap.get(gameId).remove(i);
+            }
+        }
     }
 }
