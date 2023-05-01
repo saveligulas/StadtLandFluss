@@ -1,5 +1,7 @@
 package gulas.saveli.StadtLandFluss.game.websocket;
 
+import gulas.saveli.StadtLandFluss.errorHandler.handler.ApiRequestException;
+import gulas.saveli.StadtLandFluss.game.models.Game;
 import gulas.saveli.StadtLandFluss.repo.GameRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,11 @@ public class GameConnectionHandler extends WebSocket implements WebSocketHandler
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         Long gameId = getGameIdFromSession(session);
+        Game game = gameRepository.findById(gameId)
+                .orElseThrow(() -> new ApiRequestException("game with id " + gameId + " does not exist"));
+        if(game.getHasStarted() || game.getHasExpired()) {
+            throw new ApiRequestException("game has started or expired");
+        }
         if(!webSocketSessionsMap.containsKey(gameId)) {
             webSocketSessionsMap.put(gameId, new ArrayList<>(List.of(session)));
         } else {
@@ -30,7 +37,7 @@ public class GameConnectionHandler extends WebSocket implements WebSocketHandler
 
     @Override
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
-
+        String textMessage = message.getPayload().toString();
     }
 
     @Override
