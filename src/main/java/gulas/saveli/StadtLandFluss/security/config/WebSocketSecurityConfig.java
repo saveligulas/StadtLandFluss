@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+import org.springframework.web.socket.server.HandshakeInterceptor;
 
 @Configuration
 @EnableWebSocket
@@ -23,5 +24,8 @@ public class WebSocketSecurityConfig implements WebSocketConfigurer {
                 .setAllowedOrigins("*")
                 .addHandler(gameConnectionWebSocketHandler, "/ws/{gameId}")
                 .setAllowedOrigins("*");
+    }
+
+    private class MyHandshakeInterceptor implements HandshakeInterceptor {
     }
 }
