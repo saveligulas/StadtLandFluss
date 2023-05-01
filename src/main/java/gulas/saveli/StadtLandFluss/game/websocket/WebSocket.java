@@ -22,6 +22,14 @@ public class WebSocket {
         }
     }
 
+    public void sendMessage(String message, WebSocketSession session) {
+        try {
+            session.sendMessage(new TextMessage(message));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Long getGameIdFromSession(WebSocketSession session) {
         String url = Objects.requireNonNull(session.getUri()).toString();
         String gameIdStr = url.substring(url.lastIndexOf('/') + 1);
