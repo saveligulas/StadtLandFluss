@@ -9,11 +9,21 @@ import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 @Component
 @RequiredArgsConstructor
 public class GameConnectionHandler implements WebSocketHandler {
+
     @Autowired
     private final GameRepository gameRepository;
+
+    private final Map<Long, List<WebSocketSession>> webSocketSessionsMap = new HashMap<>();
+
+
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 
