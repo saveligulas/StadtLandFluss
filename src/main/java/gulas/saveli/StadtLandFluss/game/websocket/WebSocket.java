@@ -12,7 +12,7 @@ import java.util.Objects;
 public class WebSocket {
     public final Map<Long, List<WebSocketSession>> webSocketSessionsMap = new HashMap<>();
 
-    public void sendMessage(String message, Long id) {
+    public void sendMessageToAll(String message, Long id) {
         try {
             for(WebSocketSession session : webSocketSessionsMap.get(id)) {
                 session.sendMessage(new TextMessage(message));

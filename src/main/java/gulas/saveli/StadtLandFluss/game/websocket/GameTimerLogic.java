@@ -72,7 +72,7 @@ public class GameTimerLogic extends WebSocket implements WebSocketHandler {
                 public void run() {
                     countdown--;
                     if (countdown >= 0) {
-                        sendMessage(Integer.toString(countdown), id);
+                        sendMessageToAll(Integer.toString(countdown), id);
                     } else {
                         stopTimer(id);
                     }
