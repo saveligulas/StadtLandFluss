@@ -49,10 +49,12 @@ public class GameConnectionHandler extends WebSocket implements WebSocketHandler
             sendMessageToAll("GAME_STARTED", gameId);
         }
         if(textMessage.equals("END")) {
-
+            game.setHasExpired(true);
+            sendMessageToAll("GAME_OVER", gameId);
         }
         if(textMessage.equals("NEXT_ROUND")) {
-
+            game.advanceRound();
+            sendMessageToAll("GAME_ROUND_"+game.getCurrentRound(), gameId);
         }
     }
 
