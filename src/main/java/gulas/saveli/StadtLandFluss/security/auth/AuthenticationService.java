@@ -3,7 +3,6 @@ package gulas.saveli.StadtLandFluss.security.auth;
 import gulas.saveli.StadtLandFluss.errorHandler.handler.ApiRequestException;
 import gulas.saveli.StadtLandFluss.repo.UserRepository;
 import gulas.saveli.StadtLandFluss.security.jwt.JwtService;
-import gulas.saveli.StadtLandFluss.security.logger.UserLoggerService;
 import gulas.saveli.StadtLandFluss.user.Role;
 import gulas.saveli.StadtLandFluss.user.User;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +24,6 @@ public class AuthenticationService {
     private final JwtService jwtService;
     @Autowired
     private final AuthenticationManager authenticationManager;
-    @Autowired
-    private final UserLoggerService userLoggerService;
 
 
     public String register(RegisterRequest request) {
@@ -70,7 +67,6 @@ public class AuthenticationService {
         var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new ApiRequestException("user with email " + request.getEmail() + " does not exist"));
         var jwtToken = jwtService.generateToken(user);
-        userLoggerService.connect(jwtToken, user.getEmail());
         System.out.println("Jwt token from service: " + jwtToken);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
