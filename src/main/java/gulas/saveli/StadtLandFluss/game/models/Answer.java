@@ -9,5 +9,6 @@ public class Answer {
 
     private Long text;
     private Integer round;
+    private Character character;
 
 }
