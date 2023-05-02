@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/game.css" th:href="@{/css/game.css}" type="text/css" />
 </head>
 <body>
-    <h1>Round <span th:text="${roundNumber}"></span> - <span th:text="${characterName}"></span></h1>
+    <h1>Round <span th:text="${currentRound}"></span> / <span th:text="${roundNumber}"></span> - <span th:text="${characterName}"></span></h1>
     <form method="post" action="/submit">
         <div th:each="category : ${categories}">
             <label th:text="${category.getName()}"></label>
