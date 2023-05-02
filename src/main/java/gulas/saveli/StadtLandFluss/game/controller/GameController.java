@@ -24,6 +24,7 @@ public class GameController {
         GameViewResponse response = inGameService.getGameViewResponse(Long.parseLong(gameId));
         Map<String, Object> objectMap = new HashMap<>();
         objectMap.put("roundNumber", response.getRounds());
+        objectMap.put("currentRound", response.getCurrentRound());
         objectMap.put("characterName", response.getCurrentCharacter());
         objectMap.put("categories", response.getCategories());
         ModelAndView result = new ModelAndView();
