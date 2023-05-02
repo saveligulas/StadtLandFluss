@@ -61,4 +61,8 @@ public class WebSocket {
         String username = session.getAttributes().get("Username").toString();
         return username.equals(hostUsername);
     }
+
+    public String getUsername(WebSocketSession session) {
+        return session.getAttributes().get("Username").toString();
+    }
 }
