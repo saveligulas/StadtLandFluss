@@ -33,7 +33,7 @@ public class Game {
     private Boolean hasStarted = false;
     private Boolean hasExpired = false;
     private Integer maxPlayers;
-    private Integer currentRound;
+    private Integer currentRound = 0;
 
     public Game(String hostUsername, Integer rounds, List<Character> characters, List<Category> categories) {
         this.hostUsername = hostUsername;
@@ -72,5 +72,9 @@ public class Game {
 
     public void advanceRound() {
         this.currentRound++;
+    }
+
+    public Character getCurrentCharacter() {
+        return Character.toUpperCase(this.characters.get(this.currentRound));
     }
 }
