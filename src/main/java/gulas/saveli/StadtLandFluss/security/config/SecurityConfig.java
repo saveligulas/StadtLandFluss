@@ -66,6 +66,8 @@ public class SecurityConfig {
                 .hasAuthority(Authority.USER_AUTHORITIES.name())
                 .requestMatchers(HttpMethod.POST, "/game/{gameId}")
                 .hasAuthority(Authority.USER_AUTHORITIES.name())
+                .requestMatchers(HttpMethod.GET, "/game/{gameId}")
+                .permitAll()
                 .requestMatchers("/game/{gameId}")
                 .permitAll()
                 .requestMatchers("/")
