@@ -4,14 +4,14 @@ import gulas.saveli.StadtLandFluss.game.models.resp.GameViewResponse;
 import gulas.saveli.StadtLandFluss.game.service.InGameService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/game")
 @RequiredArgsConstructor
 public class GameController {
@@ -26,7 +26,10 @@ public class GameController {
         objectMap.put("roundNumber", response.getRounds());
         objectMap.put("characterName", response.getCurrentCharacter());
         objectMap.put("categories", response.getCategories());
-        return new ModelAndView("game").addAllObjects(objectMap);
+        ModelAndView result = new ModelAndView();
+        result.setViewName("game");
+        result.addAllObjects(objectMap);
+        return result;
     }
 
 }
