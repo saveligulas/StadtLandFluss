@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-    <meta charset="ISO-8859-1">
 <head>
+    <meta charset="UTF-8">
+    <title>Game</title>
     <link rel="stylesheet" href="../css/game.css" th:href="@{/css/game.css}" type="text/css" />
 </head>
 <body>
-  <h1>Round <span th:text="${roundNumber}"></span> - <span th:text="${characterName}"></span></h1>
-
-  <form method="post" action="/submit">
-    <div th:each="category : ${categories}">
-      <label th:text="${category.getName()}"></label>
-      <input type="text" name="category" th:field="*{categoryValues[__${category.id}__]}" />
-    </div>
-  </form>
+    <h1>Round <span th:text="${roundNumber}"></span> - <span th:text="${characterName}"></span></h1>
+    <form method="post" action="/submit">
+        <div th:each="category : ${categories}">
+            <label th:text="${category.getName()}"></label>
+            <input type="text" name="${category.getId()}" />
+        </div>
+        <button type="submit">Submit</button>
+    </form>
 </body>
 </html>
