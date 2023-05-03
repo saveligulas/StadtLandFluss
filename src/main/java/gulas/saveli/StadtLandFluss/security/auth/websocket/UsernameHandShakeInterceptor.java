@@ -14,7 +14,7 @@ public class UsernameHandShakeInterceptor implements HandshakeInterceptor {
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
         List<String> username = request.getHeaders().get("Username");
-        if(!username.isEmpty()) {
+        if(username != null || !username.isEmpty()) {
             attributes.put("Username", username.get(0));
         }
         return true;
