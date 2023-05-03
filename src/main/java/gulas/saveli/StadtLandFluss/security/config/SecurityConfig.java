@@ -78,7 +78,7 @@ public class SecurityConfig {
                 .permitAll()
                 .requestMatchers("/auth/**")
                 .permitAll()
-                .requestMatchers("/timer/**")
+                .requestMatchers("/ws/**")
                 .permitAll()
                 .requestMatchers("/test/**")
                 .permitAll()
