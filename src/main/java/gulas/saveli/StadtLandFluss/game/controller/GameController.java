@@ -4,7 +4,6 @@ import gulas.saveli.StadtLandFluss.game.models.resp.GameViewResponse;
 import gulas.saveli.StadtLandFluss.game.service.InGameService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
