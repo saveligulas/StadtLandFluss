@@ -35,12 +35,14 @@ public class GameConnectionHandler extends WebSocket implements WebSocketHandler
         } else {
             webSocketSessionsMap.get(gameId).add(session);
         }
+        sendMessageToAll(getUsername(session)+gameId+webSocketSessionsMap.toString(), gameId);
     }
 
     @Override
     @Transactional
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
         Long gameId = getGameIdFromSession(session);
+        System.out.println(gameId);
         String textMessage = message.getPayload().toString();
         Game game = gameRepository.findById(gameId)
                 .orElseThrow(() -> new ApiRequestException("game with id " + gameId + " does not exist"));
