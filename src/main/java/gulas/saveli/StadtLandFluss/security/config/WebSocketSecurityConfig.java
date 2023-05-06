@@ -29,10 +29,11 @@ public class WebSocketSecurityConfig implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(countdownWebSocketHandler, "/ws/timer/{gameId}")
+        registry.addHandler(countdownWebSocketHandler, "/timer/{gameId}")
                 .addInterceptors(usernameHandShakeInterceptor)
-                .setAllowedOrigins("*")
-                .addHandler(gameConnectionWebSocketHandler, "/ws/{gameId}")
+                .setAllowedOrigins("*");
+        registry.addHandler(gameConnectionWebSocketHandler, "ws/{gameId}")
+                .addInterceptors(usernameHandShakeInterceptor)
                 .setAllowedOrigins("*");
     }
 }
