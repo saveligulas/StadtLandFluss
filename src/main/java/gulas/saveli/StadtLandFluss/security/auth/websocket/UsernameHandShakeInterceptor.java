@@ -13,11 +13,19 @@ import java.util.Map;
 public class UsernameHandShakeInterceptor implements HandshakeInterceptor {
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
-        List<String> username = request.getHeaders().get("Username");
-        if(username != null || !username.isEmpty()) {
-            attributes.put("Username", username.get(0));
+        List<String> protocols = request.getHeaders().get("Sec-WebSocket-Protocol");
+        if (protocols != null && !protocols.isEmpty()) {
+            String protocol = protocols.get(0);
+            String username = extractUsernameFromProtocol(protocol);
+            attributes.put("Username", username);
         }
         return true;
+    }
+
+    private String extractUsernameFromProtocol(String protocol) {
+        // Extract the username from the protocol name
+        String[] parts = protocol.split("-");
+        return parts[parts.length - 1];
     }
 
     @Override
