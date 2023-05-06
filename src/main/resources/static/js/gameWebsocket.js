@@ -1,4 +1,4 @@
-const ws = new WebSocket('ws://192.168.1.27:8081/ws/502',);
+const ws = new WebSocket('ws://192.168.1.27:8081/ws/502');
 
 ws.onmessage = function(event) {
     console.log('Received message:', event.data);
