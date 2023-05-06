@@ -78,8 +78,6 @@ public class SecurityConfig {
                 .permitAll()
                 .requestMatchers("/auth/**")
                 .permitAll()
-                .requestMatchers("/ws/**")
-                .permitAll()
                 .requestMatchers("/test/**")
                 .permitAll()
                 .and()
@@ -98,7 +96,7 @@ public class SecurityConfig {
         configuration.setAllowedOrigins(Arrays.asList("ws://192.168.1.27:8081/**"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Content-Type", "application/json"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Host", "Username", "HostUsername"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Host", "Username", "HostUsername", "Sec-WebSocket-Protocol"));
         configuration.addExposedHeader("Authorization");
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
