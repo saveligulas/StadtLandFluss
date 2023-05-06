@@ -12,11 +12,9 @@
   <script>
     const gameId = '452';
 
-    var headers = {
-        'Username': 'your_username'
-      };
+    var username = "test_username";
 
-    const ws = new WebSocket('ws://192.168.1.27:8081/timer/'+gameId, headers);
+    const ws = new WebSocket(`ws://192.168.1.27:8081/ws/timer/${gameId}`, [`custom-protocol-${username}`]);
 
     ws.onmessage = function(event) {
       console.log('Received message:', event.data);
