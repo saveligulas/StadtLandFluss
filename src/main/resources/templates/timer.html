@@ -16,6 +16,18 @@
 
     const testWebSocket = new WebSocket('ws://192.168.1.27:8081/ws');
 
+    testWebSocket.onopen = function(event) {
+      console.log('WebSocket connection opened');
+    };
+
+    testWebSocket.onerror = function(event) {
+      console.error('WebSocket error:', event);
+    };
+
+    testWebSocket.onclose = function(event) {
+      console.log('WebSocket connection closed');
+    };
+
     const ws = new WebSocket(`ws://192.168.1.27:8081/timer/${gameId}`);
 
     ws.onmessage = function(event) {
