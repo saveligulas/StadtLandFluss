@@ -1,6 +1,7 @@
 package gulas.saveli.StadtLandFluss.security.config;
 import gulas.saveli.StadtLandFluss.game.websocket.GameConnectionHandler;
 import gulas.saveli.StadtLandFluss.game.websocket.GameTimerLogic;
+import gulas.saveli.StadtLandFluss.game.websocket.TestSocket;
 import gulas.saveli.StadtLandFluss.security.auth.websocket.UsernameHandShakeInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,8 @@ public class WebSocketSecurityConfig implements WebSocketConfigurer {
     private final GameConnectionHandler gameConnectionWebSocketHandler;
     @Autowired
     private final UsernameHandShakeInterceptor usernameHandShakeInterceptor;
+    @Autowired
+    private final TestSocket testSocket;
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
@@ -35,6 +38,8 @@ public class WebSocketSecurityConfig implements WebSocketConfigurer {
                 .withSockJS();
         registry.addHandler(gameConnectionWebSocketHandler, "ws/{gameId}")
                 .addInterceptors(usernameHandShakeInterceptor)
+                .setAllowedOrigins("*");
+        registry.addHandler(testSocket, "/ws")
                 .setAllowedOrigins("*");
     }
 }
