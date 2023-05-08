@@ -14,6 +14,8 @@
 
     var username = "test_username";
 
+    const testWebSocket = new WebSocket('ws://192.168.1.27:8081/ws');
+
     const ws = new WebSocket(`ws://192.168.1.27:8081/timer/${gameId}`);
 
     ws.onmessage = function(event) {
