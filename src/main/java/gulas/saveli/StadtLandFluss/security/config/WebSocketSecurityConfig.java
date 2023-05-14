@@ -33,6 +33,6 @@ public class WebSocketSecurityConfig implements WebSocketConfigurer {
                 .addInterceptors(usernameHandShakeInterceptor)
                 .setAllowedOrigins("*");*/
         registry.addHandler(testSocket, "/ws")
-                .setAllowedOrigins("ws://192.168.1.27:8081", "http://192.168.1.27:8081/**", "http://192.168.1.27:8081", "*");
+                .setAllowedOrigins("*");
     }
 }
