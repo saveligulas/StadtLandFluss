@@ -28,27 +28,27 @@
       console.log('WebSocket connection closed');
     };
 
-    const ws = new WebSocket(`ws://192.168.1.27:8081/timer/${gameId}`);
+    // const ws = new WebSocket(`ws://192.168.1.27:8081/timer/${gameId}`);
 
-    ws.onmessage = function(event) {
-      console.log('Received message:', event.data);
-      var date = new Date(event.data * 1000); // Multiply by 1000 to convert seconds to milliseconds
-      var formattedTime = date.toISOString().substr(14, 5);
-      document.getElementById('timer').innerHTML = formattedTime;
-    };
+    // ws.onmessage = function(event) {
+    //   console.log('Received message:', event.data);
+    //   var date = new Date(event.data * 1000); // Multiply by 1000 to convert seconds to milliseconds
+    //   var formattedTime = date.toISOString().substr(14, 5);
+    //   document.getElementById('timer').innerHTML = formattedTime;
+    // };
 
-    ws.onopen = function(event) {
-      console.log('WebSocket connection opened');
-      ws.send('START');
-    };
+    // ws.onopen = function(event) {
+    //   console.log('WebSocket connection opened');
+    //   ws.send('START');
+    // };
 
-    ws.onerror = function(event) {
-      console.error('WebSocket error:', event);
-    };
+    // ws.onerror = function(event) {
+    //   console.error('WebSocket error:', event);
+    // };
 
-    ws.onclose = function(event) {
-      console.log('WebSocket connection closed');
-    };
+    // ws.onclose = function(event) {
+    //   console.log('WebSocket connection closed');
+    // };
   </script>
 </body>
 </html>
