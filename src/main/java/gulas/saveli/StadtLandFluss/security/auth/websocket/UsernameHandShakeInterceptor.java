@@ -1,5 +1,6 @@
 package gulas.saveli.StadtLandFluss.security.auth.websocket;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.stereotype.Component;
@@ -17,9 +18,13 @@ import java.util.Map;
 public class UsernameHandShakeInterceptor implements HandshakeInterceptor {
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
-        String token = extractTokenFromPayload(request.getBody());
-        System.out.println(token);
-        attributes.put("Authorization", "Bearer " + token);
+        HttpHeaders headers = request.getHeaders();
+        List<String> protocols = headers.get("Sec-WebSocket-Protocol");
+        if (protocols != null && !protocols.isEmpty()) {
+            String protocol = protocols.get(0);
+            System.out.println(protocol);
+            attributes.put("Username", protocol);
+        }
         return true;
     }
 
@@ -27,7 +32,7 @@ public class UsernameHandShakeInterceptor implements HandshakeInterceptor {
         BufferedReader reader = new BufferedReader(new InputStreamReader(body));
         String line;
         while ((line = reader.readLine()) != null) {
-            if (line.startsWith("Authorization:")) {
+            if (line.startsWith("Username:")) {
                 return line.substring(line.indexOf(":") + 1).trim();
             }
         }
