@@ -24,6 +24,17 @@ public class UsernameHandShakeInterceptor implements HandshakeInterceptor {
         return true;
     }
 
+    private String extractTokenFromPayload(InputStream body) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(body));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            if (line.startsWith("Authorization:")) {
+                return line.substring(line.indexOf(":") + 1).trim();
+            }
+        }
+        return null;
+    }
+
     private String extractUsernameFromProtocol(String protocol) {
         // Extract the username from the protocol name
         String[] parts = protocol.split("-");
