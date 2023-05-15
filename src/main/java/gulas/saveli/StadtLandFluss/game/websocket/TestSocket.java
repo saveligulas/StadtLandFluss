@@ -1,16 +1,14 @@
 package gulas.saveli.StadtLandFluss.game.websocket;
 
 import org.springframework.stereotype.Component;
-import org.springframework.web.socket.CloseStatus;
-import org.springframework.web.socket.WebSocketHandler;
-import org.springframework.web.socket.WebSocketMessage;
-import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.*;
 
 @Component
 public class TestSocket implements WebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         System.out.println("connected");
+        session.sendMessage(new TextMessage(session.getAttributes().get("Username").toString()));
     }
 
     @Override
