@@ -8,7 +8,6 @@ public class TestSocket implements WebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         System.out.println("connected");
-        session.sendMessage(new TextMessage(session.getAttributes().get("Username").toString()));
     }
 
     @Override
