@@ -14,12 +14,15 @@
 
     var username = "test_username";
 
-    var testWebSocket = new WebSocket('ws://192.168.1.27:8081/ws');
+    var testWebSocket = new WebSocket('ws://192.168.1.27:8081/ws', username);
 
     testWebSocket.onopen = function(event) {
-      testWebSocket.send(`Authorization: ${username}`);
       console.log('WebSocket connection opened');
     };
+
+    testWebSocket.onmessage = function(event) {
+      console.log('Received message: ', event.data);
+    }
 
     testWebSocket.onerror = function(event) {
       console.error('WebSocket error:', event);
