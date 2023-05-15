@@ -1,5 +1,6 @@
 package gulas.saveli.StadtLandFluss.security.auth.websocket;
 
+import gulas.saveli.StadtLandFluss.errorHandler.handler.ApiRequestException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
@@ -24,25 +25,10 @@ public class UsernameHandShakeInterceptor implements HandshakeInterceptor {
             String protocol = protocols.get(0);
             System.out.println(protocol);
             attributes.put("Username", protocol);
+        } else {
+            throw new ApiRequestException("Invalid protocol used");
         }
         return true;
-    }
-
-    private String extractTokenFromPayload(InputStream body) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(body));
-        String line;
-        while ((line = reader.readLine()) != null) {
-            if (line.startsWith("Username:")) {
-                return line.substring(line.indexOf(":") + 1).trim();
-            }
-        }
-        return null;
-    }
-
-    private String extractUsernameFromProtocol(String protocol) {
-        // Extract the username from the protocol name
-        String[] parts = protocol.split("-");
-        return parts[parts.length - 1];
     }
 
     @Override
