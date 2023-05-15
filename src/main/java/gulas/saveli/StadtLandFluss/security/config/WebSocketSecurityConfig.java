@@ -33,6 +33,7 @@ public class WebSocketSecurityConfig implements WebSocketConfigurer {
                 .addInterceptors(usernameHandShakeInterceptor)
                 .setAllowedOrigins("*");
         registry.addHandler(testSocket, "/ws")
+                .addInterceptors(usernameHandShakeInterceptor)
                 .setAllowedOrigins("*");
     }
 }
