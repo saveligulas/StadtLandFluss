@@ -17,14 +17,9 @@ import java.util.Map;
 public class UsernameHandShakeInterceptor implements HandshakeInterceptor {
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
-        List<String> protocols = request.getHeaders().get("Sec-WebSocket-Protocol");
-        System.out.println(request.getHeaders().toString());
-        if (protocols != null && !protocols.isEmpty()) {
-            String protocol = protocols.get(0);
-            String username = extractUsernameFromProtocol(protocol);
-            System.out.println(username);
-            attributes.put("Username", username);
-        }
+        String token = extractTokenFromPayload(request.getBody());
+        System.out.println(token);
+        attributes.put("Authorization", "Bearer " + token);
         return true;
     }
 
