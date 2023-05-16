@@ -32,6 +32,7 @@ public class GameConnectionHandler extends WebSocket implements WebSocketHandler
             throw new ApiRequestException("game has started, expired or is full");
         }
         sendMessageToAll(getUsername(session)+gameId+webSocketSessionsMap.toString(), gameId);
+        sendMessageToAll(String.valueOf(webSocketSessionsMap.get(gameId).size()) + ": Session count", gameId);
     }
 
     @Override
