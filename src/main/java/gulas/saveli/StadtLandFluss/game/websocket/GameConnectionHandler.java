@@ -27,13 +27,9 @@ public class GameConnectionHandler extends WebSocket implements WebSocketHandler
         Long gameId = getGameIdFromSession(session);
         Game game = gameRepository.findById(gameId)
                 .orElseThrow(() -> new ApiRequestException("game with id " + gameId + " does not exist"));
+        addSessionToMap(session, gameId);
         if(game.getHasStarted() || game.getHasExpired() || game.isFull()) {
             throw new ApiRequestException("game has started, expired or is full");
-        }
-        if(!webSocketSessionsMap.containsKey(gameId)) {
-            webSocketSessionsMap.put(gameId, new ArrayList<>(List.of(session)));
-        } else {
-            webSocketSessionsMap.get(gameId).add(session);
         }
         sendMessageToAll(getUsername(session)+gameId+webSocketSessionsMap.toString(), gameId);
     }
