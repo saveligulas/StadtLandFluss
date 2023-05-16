@@ -4,10 +4,7 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class WebSocket {
     public final Map<Long, List<WebSocketSession>> webSocketSessionsMap = new HashMap<>();
@@ -34,6 +31,14 @@ public class WebSocket {
         String url = Objects.requireNonNull(session.getUri()).toString();
         String gameIdStr = url.substring(url.lastIndexOf('/') + 1, url.indexOf('?'));
         return Long.parseLong(gameIdStr);
+    }
+
+    public void addSessionToMap(WebSocketSession session, Long gameId) {
+        if(webSocketSessionsMap.containsKey(gameId)) {
+            webSocketSessionsMap.get(gameId).add(session);
+        } else {
+            webSocketSessionsMap.put(gameId, new ArrayList<>(List.of(session)));
+        }
     }
 
     public void removeSessionFromMap(WebSocketSession session) {
