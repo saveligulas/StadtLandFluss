@@ -20,20 +20,6 @@ import java.util.Map;
 
 @Component
 public class UsernameHandShakeInterceptor implements HandshakeInterceptor {
-//    @Override
-//    public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
-//        HttpHeaders headers = request.getHeaders();
-//        List<String> protocols = headers.get("Sec-WebSocket-Protocol");
-//        if (protocols != null && !protocols.isEmpty()) {
-//            String protocol = protocols.get(0);
-//            System.out.println(protocol);
-//            attributes.put("Username", protocol);
-//        } else {
-//            throw new ApiRequestException("Invalid protocol used");
-//        }
-//        return true;
-//    }
-
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
         URI uri = request.getURI();
