@@ -32,7 +32,7 @@ public class WebSocket {
 
     public Long getGameIdFromSession(WebSocketSession session) {
         String url = Objects.requireNonNull(session.getUri()).toString();
-        String gameIdStr = url.substring(url.lastIndexOf('/') + 1);
+        String gameIdStr = url.substring(url.lastIndexOf('/') + 1, url.indexOf('?'));
         return Long.parseLong(gameIdStr);
     }
 
