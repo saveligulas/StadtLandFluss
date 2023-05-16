@@ -19,8 +19,8 @@ public class Game {
     @Id
     @GeneratedValue
     private Long id;
-    @OneToMany(targetEntity = User.class)
-    private List<User> players;
+    @OneToMany(targetEntity = User.class, fetch = FetchType.EAGER)
+    private List<User> players = new ArrayList<>();
     private String hostUsername;
     private Integer rounds;
     @OrderColumn
@@ -47,7 +47,7 @@ public class Game {
     }
 
     public boolean isFull() {
-        if (this.players.size() == 0 || this.maxPlayers == 0) {
+        if (this.players.size() == 0 || this.maxPlayers == 0 || this.maxPlayers == null || this.players == null) {
             return false;
         }
         return this.players.size() >= maxPlayers;
