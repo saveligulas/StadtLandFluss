@@ -47,6 +47,9 @@ public class Game {
     }
 
     public boolean isFull() {
+        if (this.players.size() == 0 || this.maxPlayers == 0) {
+            return false;
+        }
         return this.players.size() >= maxPlayers;
     }
 
