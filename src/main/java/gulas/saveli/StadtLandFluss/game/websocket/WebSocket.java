@@ -51,11 +51,18 @@ public class WebSocket {
         }
     }
 
-    public void removeSessionFromMap(WebSocketSession session) {
+    @SuppressWarnings("SuspiciousListRemoveInLoop")
+    public void removeSessionFromMaps(WebSocketSession session) {
         Long gameId = getGameIdFromSession(session);
+        String username = getUsernameFromSession(session);
         for(int i = 0; i < webSocketSessionsMap.get(gameId).size(); i++) {
             if(webSocketSessionsMap.get(gameId).get(i).getId().equals(session.getId())) {
                 webSocketSessionsMap.get(gameId).remove(i);
+            }
+        }
+        for(int i = 0; i < gameUsernameMap.get(gameId).size(); i++) {
+            if(gameUsernameMap.get(gameId).get(i).equals(username)) {
+                gameUsernameMap.get(gameId).remove(i);
             }
         }
     }
