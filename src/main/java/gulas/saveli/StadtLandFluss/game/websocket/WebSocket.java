@@ -1,5 +1,6 @@
 package gulas.saveli.StadtLandFluss.game.websocket;
 
+import gulas.saveli.StadtLandFluss.errorHandler.handler.ApiRequestException;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -8,6 +9,7 @@ import java.util.*;
 
 public class WebSocket {
     public final Map<Long, List<WebSocketSession>> webSocketSessionsMap = new HashMap<>();
+    private final Map<Long, List<String>> gameUsernameMap = new HashMap<>();
 
     public void sendMessageToAll(String message, Long id) {
         try {
@@ -33,11 +35,19 @@ public class WebSocket {
         return Long.parseLong(gameIdStr);
     }
 
-    public void addSessionToMap(WebSocketSession session, Long gameId) {
+    public void addSessionToMaps(WebSocketSession session, Long gameId, String username) {
         if(webSocketSessionsMap.containsKey(gameId)) {
             webSocketSessionsMap.get(gameId).add(session);
         } else {
             webSocketSessionsMap.put(gameId, new ArrayList<>(List.of(session)));
+        }
+        if(gameUsernameMap.containsKey(gameId)) {
+            if(gameUsernameMap.get(gameId).contains(username)) {
+                throw new ApiRequestException("User with name already in session");
+            }
+            gameUsernameMap.get(gameId).add(username);
+        } else {
+
         }
     }
 
