@@ -25,6 +25,7 @@ public class GameConnectionHandler extends WebSocket implements WebSocketHandler
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         Long gameId = getGameIdFromSession(session);
+        String username = getUsernameFromSession(session);
         Game game = gameRepository.findById(gameId)
                 .orElseThrow(() -> new ApiRequestException("game with id " + gameId + " does not exist"));
         addSessionToMap(session, gameId);
