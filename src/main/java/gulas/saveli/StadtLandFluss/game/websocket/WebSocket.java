@@ -47,7 +47,7 @@ public class WebSocket {
             }
             gameUsernameMap.get(gameId).add(username);
         } else {
-
+            gameUsernameMap.put(gameId, new ArrayList<>(List.of(username)));
         }
     }
 
