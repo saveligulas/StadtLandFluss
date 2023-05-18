@@ -20,7 +20,7 @@ public class GameConnectionHandler extends WebSocket implements WebSocketHandler
 
     @Autowired
     private final GameRepository gameRepository;
-    private final Map<Long, List<String>> gamePlayersMap = new HashMap<>();
+
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
