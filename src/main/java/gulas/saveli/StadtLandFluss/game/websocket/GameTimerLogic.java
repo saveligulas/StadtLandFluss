@@ -49,12 +49,12 @@ public class GameTimerLogic extends WebSocket implements WebSocketHandler { //TO
 
     @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
-        removeSessionFromMap(session);
+        removeSessionFromMaps(session);
     }
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
-        removeSessionFromMap(session);
+        removeSessionFromMaps(session);
     }
 
     @Override
