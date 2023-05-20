@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class WebSocket {
-    public final Map<Long, List<WebSocketSession>> webSocketSessionsMap = new HashMap<>();
+    public final Map<Long, List<WebSocketSession>> webSocketSessionsMap = new HashMap<>(); //TODO implement new models of saves
     private final Map<Long, List<String>> gameUsernameMap = new HashMap<>();
 
     public void sendMessageToAll(String message, Long id) {
