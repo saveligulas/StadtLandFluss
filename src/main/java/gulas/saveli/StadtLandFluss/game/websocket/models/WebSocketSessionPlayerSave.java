@@ -1,4 +1,4 @@
-package gulas.saveli.StadtLandFluss.game.websocket;
+package gulas.saveli.StadtLandFluss.game.websocket.models;
 
 import lombok.Builder;
 import lombok.Data;
