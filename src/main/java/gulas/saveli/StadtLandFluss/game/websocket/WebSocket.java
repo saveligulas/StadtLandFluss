@@ -11,7 +11,6 @@ import java.util.*;
 public class WebSocket {
     public final Map<Long, List<WebSocketSession>> webSocketSessionsMap = new HashMap<>(); //TODO implement new models of saves
     private final Map<Long, List<String>> gameUsernameMap = new HashMap<>();
-    private final List<WebSocketSessionGameSave> webSocketSessionGameSaves = new ArrayList<>();
 
     public void sendMessageToAll(String message, Long id) {
         try {
