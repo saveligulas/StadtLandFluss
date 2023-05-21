@@ -1,6 +1,7 @@
 package gulas.saveli.StadtLandFluss.game.websocket;
 
 import gulas.saveli.StadtLandFluss.errorHandler.handler.ApiRequestException;
+import gulas.saveli.StadtLandFluss.game.websocket.models.WebSocketSessionGameSave;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -10,6 +11,7 @@ import java.util.*;
 public class WebSocket {
     public final Map<Long, List<WebSocketSession>> webSocketSessionsMap = new HashMap<>(); //TODO implement new models of saves
     private final Map<Long, List<String>> gameUsernameMap = new HashMap<>();
+    private final List<WebSocketSessionGameSave> webSocketSessionGameSaves = new ArrayList<>();
 
     public void sendMessageToAll(String message, Long id) {
         try {
