@@ -5,6 +5,6 @@ import gulas.saveli.StadtLandFluss.game.websocket.models.WebSocketSessionGameSav
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameWebSocketModel {
+public class GameWebSocketViewModel {
     private final List<WebSocketSessionGameSave> webSocketSessionGameSaves = new ArrayList<>();
 }
