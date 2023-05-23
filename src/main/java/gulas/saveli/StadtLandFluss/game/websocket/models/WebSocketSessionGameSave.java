@@ -14,7 +14,7 @@ import java.util.Timer;
 public class WebSocketSessionGameSave {
     private Long id;
     private List<WebSocketSessionPlayerSave> playerSaves = new ArrayList<>();
-    private Timer timer;
+    private Timer timer = new Timer();
     private GameState gameState;
 
     public void addPlayerSave(WebSocketSessionPlayerSave playerSave) {
