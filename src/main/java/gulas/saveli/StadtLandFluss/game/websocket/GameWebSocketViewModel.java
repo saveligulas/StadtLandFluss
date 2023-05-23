@@ -6,6 +6,7 @@ import org.springframework.web.socket.WebSocketSession;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class GameWebSocketViewModel {
     private final List<WebSocketSessionGameSave> webSocketSessionGameSaves = new ArrayList<>();
@@ -15,5 +16,12 @@ public class GameWebSocketViewModel {
                 .session(webSocketSession)
                 .username(username)
                 .build();
+        boolean foundGameSave = false;
+        for(int i = 0 ; i<webSocketSessionGameSaves.size() ; i++) {
+            if(Objects.equals(webSocketSessionGameSaves.get(i).getId(), id)) {
+                foundGameSave = true;
+                webSocketSessionGameSaves.get(i).
+            }
+        }
     }
 }
