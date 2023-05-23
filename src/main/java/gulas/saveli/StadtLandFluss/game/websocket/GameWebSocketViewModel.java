@@ -1,8 +1,11 @@
 package gulas.saveli.StadtLandFluss.game.websocket;
 
+import gulas.saveli.StadtLandFluss.errorHandler.handler.ApiRequestException;
 import gulas.saveli.StadtLandFluss.game.websocket.models.GameState;
 import gulas.saveli.StadtLandFluss.game.websocket.models.WebSocketSessionGameSave;
 import gulas.saveli.StadtLandFluss.game.websocket.models.WebSocketSessionPlayerSave;
+import lombok.SneakyThrows;
+import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.util.ArrayList;
@@ -31,5 +34,21 @@ public class GameWebSocketViewModel {
                             .playerSaves(List.of(playerSave))
                     .build());
         }
+    }
+
+    @SneakyThrows
+    public void sendMessageToAllPlayersOfGame(Long id, String message) {
+        for(WebSocketSessionPlayerSave playerSave : getGameSave(id).getPlayerSaves()) {
+            playerSave.getSession().sendMessage(new TextMessage(message));
+        }
+    }
+
+    private WebSocketSessionGameSave getGameSave(Long id) {
+        for(WebSocketSessionGameSave gameSave : webSocketSessionGameSaves) {
+            if(gameSave.getId().equals(id)) {
+                return gameSave;
+            }
+        }
+        throw new ApiRequestException("Invalid game id");
     }
 }
