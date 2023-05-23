@@ -20,7 +20,7 @@ public class GameWebSocketViewModel {
         for(int i = 0 ; i<webSocketSessionGameSaves.size() ; i++) {
             if(Objects.equals(webSocketSessionGameSaves.get(i).getId(), id)) {
                 foundGameSave = true;
-                webSocketSessionGameSaves.get(i).
+                webSocketSessionGameSaves.get(i).addPlayerSave(playerSave);
             }
         }
     }
