@@ -43,6 +43,12 @@ public class GameWebSocketViewModel {
         }
     }
 
+    public void deleteSession(WebSocketSession session, Long id) {
+        for(int i = 0 ; i < ) {
+
+        }
+    }
+
     private WebSocketSessionGameSave getGameSave(Long id) {
         for(WebSocketSessionGameSave gameSave : webSocketSessionGameSaves) {
             if(gameSave.getId().equals(id)) {
