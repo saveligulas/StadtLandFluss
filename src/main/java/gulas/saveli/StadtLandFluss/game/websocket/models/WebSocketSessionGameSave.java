@@ -17,7 +17,7 @@ public class WebSocketSessionGameSave {
     private Timer timer;
     private GameState gameState;
 
-    public void addSession() {
-
+    public void addSession(WebSocketSessionPlayerSave playerSave) {
+        this.playerSaves.add(playerSave);
     }
 }
