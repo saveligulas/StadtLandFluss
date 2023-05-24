@@ -55,10 +55,23 @@ public class GameWebSocketViewModel {
         }
     }
 
+    public List<String> getConnectedUsernames(Long id) {
+
+    }
+
     private WebSocketSessionGameSave getGameSave(Long id) {
         for(WebSocketSessionGameSave gameSave : webSocketSessionGameSaves) {
             if(gameSave.getId().equals(id)) {
                 return gameSave;
+            }
+        }
+        throw new ApiRequestException("Invalid game id");
+    }
+
+    private int getIndexOfGameSave(Long id) {
+        for(int i = 0; i<webSocketSessionGameSaves.size(); i++) {
+            if(webSocketSessionGameSaves.get(i).getId().equals(id)) {
+                return i;
             }
         }
         throw new ApiRequestException("Invalid game id");
