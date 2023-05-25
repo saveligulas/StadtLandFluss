@@ -56,7 +56,11 @@ public class GameWebSocketViewModel {
     }
 
     public List<String> getConnectedUsernames(Long id) {
-
+        List<String> usernames = new ArrayList<>();
+        for(WebSocketSessionPlayerSave playerSave : getGameSave(id).getPlayerSaves()) {
+            usernames.add(playerSave.getUsername());
+        }
+        return  usernames;
     }
 
     private WebSocketSessionGameSave getGameSave(Long id) {
