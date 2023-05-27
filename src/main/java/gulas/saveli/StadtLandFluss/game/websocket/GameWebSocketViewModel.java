@@ -43,6 +43,11 @@ public class GameWebSocketViewModel {
         }
     }
 
+    @SneakyThrows
+    public void sendMessageToAllPlayersOfAllGames(String message) {
+
+    }
+
     public void deleteSession(WebSocketSession session, Long id) {
         for(int i = 0 ; i < webSocketSessionGameSaves.size(); i++) {
             if(webSocketSessionGameSaves.get(i).getId().equals(id)) {
