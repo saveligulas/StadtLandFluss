@@ -45,7 +45,11 @@ public class GameWebSocketViewModel {
 
     @SneakyThrows
     public void sendMessageToAllPlayersOfAllGames(String message) {
-
+        for(WebSocketSessionGameSave gameSave : webSocketSessionGameSaves) {
+            for(WebSocketSessionPlayerSave playerSave : gameSave.getPlayerSaves()) {
+                playerSave.getSession().sendMessage(new TextMessage(message));
+            }
+        }
     }
 
     public void deleteSession(WebSocketSession session, Long id) {
