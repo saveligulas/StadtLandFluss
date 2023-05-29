@@ -2,6 +2,7 @@ package gulas.saveli.StadtLandFluss.game.websocket;
 
 import gulas.saveli.StadtLandFluss.errorHandler.handler.ApiRequestException;
 import gulas.saveli.StadtLandFluss.game.models.Game;
+import gulas.saveli.StadtLandFluss.game.websocket.models.WebSocket;
 import gulas.saveli.StadtLandFluss.repo.GameRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,6 @@ import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
-
-import java.util.*;
 
 @Component
 @RequiredArgsConstructor

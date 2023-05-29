@@ -2,6 +2,7 @@ package gulas.saveli.StadtLandFluss.game.websocket;
 
 import gulas.saveli.StadtLandFluss.errorHandler.handler.ApiRequestException;
 import gulas.saveli.StadtLandFluss.game.models.GameTimer;
+import gulas.saveli.StadtLandFluss.game.websocket.models.WebSocket;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.*;
 
