@@ -1,10 +1,11 @@
 package gulas.saveli.StadtLandFluss.game.websocket;
 
+import gulas.saveli.StadtLandFluss.game.websocket.models.GameWebSocketViewModel;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.*;
 
 @Component
-public class TestSocket implements WebSocketHandler {
+public class TestSocket extends GameWebSocketViewModel implements WebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         System.out.println("connected");
