@@ -7,7 +7,6 @@ import org.springframework.web.socket.WebSocketSession;
 
 @Data
 @Builder
-@RequiredArgsConstructor
 public class WebSocketSessionPlayerSave {
     private WebSocketSession session;
     private String username;
