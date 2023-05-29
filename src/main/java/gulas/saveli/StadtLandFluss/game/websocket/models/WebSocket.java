@@ -1,4 +1,4 @@
-package gulas.saveli.StadtLandFluss.game.websocket;
+package gulas.saveli.StadtLandFluss.game.websocket.models;
 
 import gulas.saveli.StadtLandFluss.errorHandler.handler.ApiRequestException;
 import gulas.saveli.StadtLandFluss.game.websocket.models.WebSocketSessionGameSave;
