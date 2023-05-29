@@ -10,7 +10,6 @@ import java.util.Timer;
 
 @Data
 @Builder
-@RequiredArgsConstructor
 public class WebSocketSessionGameSave {
     private Long id;
     private List<WebSocketSessionPlayerSave> playerSaves = new ArrayList<>();
