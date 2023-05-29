@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class GameWebSocketViewModel {
+public class GameWebSocketViewModel extends WebSocket {
     private final List<WebSocketSessionGameSave> webSocketSessionGameSaves = new ArrayList<>();
 
     public void saveWebSocketSession(Long id, String username, WebSocketSession webSocketSession) {
