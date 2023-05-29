@@ -8,7 +8,10 @@ import org.springframework.web.socket.*;
 public class TestSocket extends GameWebSocketViewModel implements WebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+        System.out.println(getGameIdFromSession(session) + " - " + getUsernameFromSession(session));
         saveWebSocketSession(getGameIdFromSession(session), getUsernameFromSession(session), session);
+        sendMessageToAllPlayersOfAllGames("All Games Check");
+        sendMessageToAllPlayersOfGame(getGameIdFromSession(session), "Specific Game Check");
     }
 
     @Override
@@ -23,7 +26,7 @@ public class TestSocket extends GameWebSocketViewModel implements WebSocketHandl
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
-
+        deleteSession(session, getGameIdFromSession(session));
     }
 
     @Override
