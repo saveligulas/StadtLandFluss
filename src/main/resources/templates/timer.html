@@ -14,7 +14,7 @@
 
     var username = "test_username";
 
-    var testWebSocket = new WebSocket(`ws://192.168.1.27:8081/ws?username=` + encodeURIComponent(username));
+    var testWebSocket = new WebSocket(`ws://192.168.1.27:8081/ws/test/${gameId}?username=` + encodeURIComponent(username));
 
     testWebSocket.onopen = function(event) {
       console.log('WebSocket connection opened');
