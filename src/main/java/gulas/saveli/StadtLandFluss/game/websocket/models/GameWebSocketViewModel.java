@@ -32,7 +32,7 @@ public class GameWebSocketViewModel extends WebSocket {
             webSocketSessionGameSaves.add(WebSocketSessionGameSave.builder()
                             .gameState(GameState.PRE)
                             .id(id)
-                            .playerSaves(List.of(playerSave))
+                            .playerSaves(new ArrayList<>(List.of(playerSave)))
                     .build());
         }
     }
@@ -58,7 +58,7 @@ public class GameWebSocketViewModel extends WebSocket {
             if(webSocketSessionGameSaves.get(i).getId().equals(id)) {
                 for(int j = 0 ; j < webSocketSessionGameSaves.get(i).getPlayerSaves().size(); j++) {
                     if(webSocketSessionGameSaves.get(i).getPlayerSaves().get(j).getSession().getId().equals(session.getId())) {
-                        webSocketSessionGameSaves.get(i).getPlayerSaves().remove(j);
+                        webSocketSessionGameSaves.get(i).removePlayerSave(j);
                     }
                 }
             }
