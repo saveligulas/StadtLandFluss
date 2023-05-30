@@ -1,8 +1,6 @@
 package gulas.saveli.StadtLandFluss.game.websocket.models;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
