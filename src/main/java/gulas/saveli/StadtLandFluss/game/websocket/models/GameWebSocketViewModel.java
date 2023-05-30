@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class GameWebSocketViewModel extends WebSocket {
-    private final List<WebSocketSessionGameSave> webSocketSessionGameSaves = new ArrayList<>();
+    private List<WebSocketSessionGameSave> webSocketSessionGameSaves = new ArrayList<>();
 
     public void saveWebSocketSession(Long id, String username, WebSocketSession webSocketSession) {
         WebSocketSessionPlayerSave playerSave = WebSocketSessionPlayerSave.builder()
@@ -25,6 +25,7 @@ public class GameWebSocketViewModel extends WebSocket {
             if(Objects.equals(webSocketSessionGameSaves.get(i).getId(), id)) {
                 foundGameSave = true;
                 webSocketSessionGameSaves.get(i).addPlayerSave(playerSave);
+                break;
             }
         }
         if(!foundGameSave) {
