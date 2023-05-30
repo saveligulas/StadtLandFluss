@@ -17,4 +17,8 @@ public class WebSocketSessionGameSave {
     public void addPlayerSave(WebSocketSessionPlayerSave playerSave) {
         this.playerSaves.add(playerSave);
     }
+
+    public void removePlayerSave(int index) {
+        this.playerSaves.remove(index);
+    }
 }
