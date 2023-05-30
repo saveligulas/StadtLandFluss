@@ -12,6 +12,7 @@ public class TestSocket extends GameWebSocketViewModel implements WebSocketHandl
         saveWebSocketSession(getGameIdFromSession(session), getUsernameFromSession(session), session);
         sendMessageToAllPlayersOfAllGames("All Games Check");
         sendMessageToAllPlayersOfGame(getGameIdFromSession(session), "Specific Game Check");
+        sendMessageToAllPlayersOfGame(getGameIdFromSession(session), "Player count : " + getPlayerCountOfGame(getGameIdFromSession(session)));
     }
 
     @Override
