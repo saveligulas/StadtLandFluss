@@ -5,3 +5,15 @@ export function getCookie(name) {
       return parts.pop().split(';').shift();
     }
   }
+export function extractGameIdFromUrlAtEnd(url) {
+  const lastSegment = url.split('/').filter(Boolean).pop();
+  const regex = /(\d+)(?:\?|$)/;
+  const match = lastSegment.match(regex);
+  
+  if (match) {
+    const gameId = match[1];
+    return gameId;
+  } else {
+    return null;
+  }
+}
