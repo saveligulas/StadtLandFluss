@@ -44,6 +44,8 @@ public class SecurityConfig {
                 .permitAll()
                 .requestMatchers(HttpMethod.GET, "/test/timer/{gameId}")
                 .permitAll()
+                .requestMatchers(HttpMethod.POST, "/test/timer/{gameId}")
+                .permitAll()
                 .requestMatchers("/fonts/**")
                 .permitAll()
                 .requestMatchers(HttpMethod.POST, "/home/host")
