@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Game</title>
-    <link rel="stylesheet" href="/src/main/resources/static/css/timer.css" type="text/css" />
+    <link rel="stylesheet" href="../css/game.css" th:href="@{/css/game.css}" type="text/css" />
 </head>
 <body>
     <h1>Round <span th:text="${currentRound}"></span> / <span th:text="${roundNumber}"></span> - <span th:text="${characterName}"></span></h1>
@@ -15,6 +15,6 @@
         </div>
         <button type="submit">Submit</button>
     </form>
-    <script type="module" src="/src/main/resources/static/js/time.js"></script>
+    <script type="module" src="../js/gameWebsocket.js"></script>
 </body>
 </html>
