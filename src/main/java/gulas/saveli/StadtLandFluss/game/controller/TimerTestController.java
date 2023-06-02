@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/test")
 public class TimerTestController {
 
-    @GetMapping("/timer")
+    @GetMapping("/timer/{gameId}")
     public ModelAndView timer() {
         return  new ModelAndView("timer");
     }
