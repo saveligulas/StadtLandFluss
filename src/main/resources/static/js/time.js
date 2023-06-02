@@ -1,5 +1,5 @@
 import { getCookie } from './cookies.js';
-import extractGameIdFromUrlAtEnd from './cookies.js';
+import { extractGameIdFromUrlAtEnd } from './cookies.js';
 const username = getCookie('Username');
 const gameId = extractGameIdFromUrlAtEnd(window.location.href);
 console.log(username + " " + gameId);
