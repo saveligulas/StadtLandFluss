@@ -9,7 +9,9 @@ import org.springframework.web.socket.WebSocketSession;
 public class GameWebSocketHandler extends GameWebSocketViewModel implements WebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-
+        Long gameId = getGameIdFromSession(session);
+        String username = getUsernameFromSession(session);
+        saveWebSocketSession(gameId, username, session);
     }
 
     @Override
