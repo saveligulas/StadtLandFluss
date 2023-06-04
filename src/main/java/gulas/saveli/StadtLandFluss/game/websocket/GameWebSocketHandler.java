@@ -26,7 +26,7 @@ public class GameWebSocketHandler extends GameWebSocketViewModel implements WebS
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
-
+        deleteSession(session);
     }
 
     @Override
