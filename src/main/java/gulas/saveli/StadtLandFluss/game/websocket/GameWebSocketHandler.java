@@ -16,6 +16,8 @@ public class GameWebSocketHandler extends GameWebSocketViewModel implements WebS
 
     @Override
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
+        Long gameId = getGameIdFromSession(session);
+        String username = getUsernameFromSession(session);
 
     }
 
