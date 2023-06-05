@@ -169,7 +169,6 @@ const disconnect = () => {
       headers: {
           'Authorization': jwtToken,
           'HostUsername': username,
-          'GameID': gameId
       }
   })
   .then(response => response.json)
