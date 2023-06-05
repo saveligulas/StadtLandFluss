@@ -57,6 +57,10 @@ function initializePage() {
         addCategoryButton.type = 'button';
         addCategoryButton.id = 'addCategoryButton';
         addCategoryButton.textContent = 'Add';
+
+        addCategoryButton.addEventListener('click', function(event) {
+          sendAddCategoryRequest();
+        });
     
         // Create the container and add the input field and the "Add" button to it
         const addCategoryContainer = document.createElement('div');
@@ -157,20 +161,30 @@ function fillCategoriesTable(categoryStrings, showRemoveButton) {
 
     categoriesTableBody.appendChild(row);
   });
-}
+};
 
-const sendCategoryRemoveRequest = () => {
-  fetch('http://192.168.1.27:8081/lobby/' + gameId + '/host/remove/category', {
+const sendAddCategoryRequest = () => {
+  fetch(`http://192.168.1.27:8081/lobby/${gameId}/host/settings`, {
     method: 'POST',
     headers: {
       'Authorization': jwtToken,
       'Username': username
     }
   })
-}
+};
+
+const sendCategoryRemoveRequest = (categoryName) => {
+  fetch(`http://192.168.1.27:8081/lobby/${gameId}/host/remove/category?category_name=${categoryName}`, {
+    method: 'POST',
+    headers: {
+      'Authorization': jwtToken,
+      'Username': username
+    }
+  })
+};
 
 const disconnect = () => {
-  fetch('http://192.168.1.27:8081/lobby/' + gameId + '/disconnect', {
+  fetch(`http://192.168.1.27:8081/lobby/${gameId}/disconnect`, {
       method: 'POST',
       headers: {
           'Authorization': jwtToken,
@@ -189,7 +203,7 @@ const disconnect = () => {
 
 const startGame = () => {
   
-}
+};
 
 const addEventListener = () => {
   disconnectButton.addEventListener('click', disconnect);
