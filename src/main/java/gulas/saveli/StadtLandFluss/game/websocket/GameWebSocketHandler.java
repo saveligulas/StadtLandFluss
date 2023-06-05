@@ -36,7 +36,7 @@ public class GameWebSocketHandler extends GameWebSocketViewModel implements WebS
 
     @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
-
+        deleteSession(session, getGameIdFromSession(session));
     }
 
     @Override
