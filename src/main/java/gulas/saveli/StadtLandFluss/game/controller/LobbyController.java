@@ -64,6 +64,13 @@ public class LobbyController {
         return gameService.changeGameSettings(Long.parseLong(gameId), gameSettingRequest);
     }
 
+    @PostMapping("/{gameId}/host/remove/category")
+    @ResponseBody
+    @CrossOrigin
+    public Boolean removeCategory(@PathVariable("gameId") String gameId) {
+        return gameService.removeCategory(Long.parseLong(gameId));
+    }
+
     @GetMapping("/{gameId}/host/check")
     @ResponseBody
     @CrossOrigin
