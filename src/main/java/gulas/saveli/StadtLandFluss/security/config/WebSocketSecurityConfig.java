@@ -32,9 +32,6 @@ public class WebSocketSecurityConfig implements WebSocketConfigurer {
                 .addInterceptors(usernameHandShakeInterceptor)
                 .setAllowedOrigins("*")
                 .withSockJS();
-        registry.addHandler(gameConnectionWebSocketHandler, "/ws/{gameId}")
-                .addInterceptors(usernameHandShakeInterceptor)
-                .setAllowedOrigins("*");
         registry.addHandler(testSocket, "/ws/test/{gameId}")
                 .addInterceptors(usernameHandShakeInterceptor)
                 .setAllowedOrigins("*");
