@@ -133,7 +133,7 @@ function fillCategoriesTable(categoryStrings, showRemoveButton) {
       removeButton.classList.add('remove-category-button');
       removeButton.dataset.categoryName = categoryString;
       removeButton.textContent = 'Remove';
-      button.addEventListener('click', function(event) {
+      removeButton.addEventListener('click', function(event) {
         const row = event.target.parentNode.parentNode;
     
         const categoryCell = row.querySelector('td:first-child');
@@ -141,6 +141,8 @@ function fillCategoriesTable(categoryStrings, showRemoveButton) {
         const category = categoryCell.textContent.trim();
 
         console.log(`Category: ${category}`);
+
+        sendCategoryRemoveRequest();
       });
       actionsCell.appendChild(removeButton);
       row.appendChild(actionsCell);
@@ -150,7 +152,9 @@ function fillCategoriesTable(categoryStrings, showRemoveButton) {
   });
 }
 
-
+const sendCategoryRemoveRequest = () => {
+  
+}
 
 const disconnect = () => {
   fetch('http://192.168.1.27:8081/game/lobby/disconnect', {
