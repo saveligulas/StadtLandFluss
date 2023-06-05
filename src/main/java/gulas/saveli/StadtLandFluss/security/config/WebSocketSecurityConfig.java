@@ -1,5 +1,4 @@
 package gulas.saveli.StadtLandFluss.security.config;
-import gulas.saveli.StadtLandFluss.game.websocket.GameConnectionHandler;
 import gulas.saveli.StadtLandFluss.game.websocket.GameTimerLogic;
 import gulas.saveli.StadtLandFluss.game.websocket.GameWebSocketHandler;
 import gulas.saveli.StadtLandFluss.game.websocket.TestSocket;
