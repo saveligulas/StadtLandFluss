@@ -13,6 +13,10 @@ ws.onopen = function(event) {
   console.log('WebSocket connection opened');
 };
 
+ws.onerror = function(event) {
+  console.log('Websocket error:', event);
+};
+
 startButton.disabled = true;
 
 window.addEventListener('DOMContentLoaded', initializePage);
