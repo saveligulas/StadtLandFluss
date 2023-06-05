@@ -18,8 +18,6 @@ public class WebSocketSecurityConfig implements WebSocketConfigurer {
     @Autowired
     private final GameTimerLogic countdownWebSocketHandler;
     @Autowired
-    private final GameConnectionHandler gameConnectionWebSocketHandler;
-    @Autowired
     private final UsernameHandShakeInterceptor usernameHandShakeInterceptor;
     @Autowired
     private final GameWebSocketHandler gameWebSocketHandler;
