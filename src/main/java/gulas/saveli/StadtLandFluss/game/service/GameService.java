@@ -248,4 +248,12 @@ public class GameService {
         game.setHasStarted(true);
         return true;
     }
+
+    @Transactional
+    public Boolean removeCategory(Long gameId, String categoryName) {
+        Game game = getGame(gameId);
+        game.removeCategory(categoryRepository.findByName(categoryName)
+                .orElseThrow(() -> new ApiRequestException("invalid category name")));
+        return true;
+    }
 }
