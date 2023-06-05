@@ -67,8 +67,8 @@ public class LobbyController {
     @PostMapping("/{gameId}/host/remove/category")
     @ResponseBody
     @CrossOrigin
-    public Boolean removeCategory(@PathVariable("gameId") String gameId) {
-        return gameService.removeCategory(Long.parseLong(gameId));
+    public Boolean removeCategory(@PathVariable("gameId") String gameId, @RequestParam(name = "category_name", required = true) String categoryName) {
+        return gameService.removeCategory(Long.parseLong(gameId), categoryName);
     }
 
     @GetMapping("/{gameId}/host/check")
