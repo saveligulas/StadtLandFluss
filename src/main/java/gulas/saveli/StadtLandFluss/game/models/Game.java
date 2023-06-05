@@ -61,6 +61,10 @@ public class Game {
         return usernames.contains(username);
     }
 
+    public void removeCategory(Category category) {
+        this.categories.removeIf(category1 -> category1.getId().equals(category.getId()));
+    }
+
     public void addPlayer(User user) {
         this.players.add(user);
     }
