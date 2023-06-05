@@ -29,6 +29,9 @@ public class GameWebSocketHandler extends GameWebSocketViewModel implements WebS
         if(message.getPayload().toString().equals("END")) {
 
         }
+        if(message.getPayload().toString().equals("CHANGES_APPLIED")) {
+
+        }
     }
 
     @Override
