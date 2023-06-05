@@ -160,11 +160,11 @@ function fillCategoriesTable(categoryStrings, showRemoveButton) {
 }
 
 const sendCategoryRemoveRequest = () => {
-
+  fetch('http://192.168.1.27:8081/game/lobby/disconnect')
 }
 
 const disconnect = () => {
-  fetch('http://192.168.1.27:8081/game/lobby/disconnect', {
+  fetch('http://192.168.1.27:8081/lobby/' + gameId + '/disconnect', {
       method: 'POST',
       headers: {
           'Authorization': jwtToken,
