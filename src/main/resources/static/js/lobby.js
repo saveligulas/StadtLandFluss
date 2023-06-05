@@ -1,8 +1,10 @@
 import { getCookie } from './cookies.js';
+import { extractGameIdFromUrlAtEnd } from './cookies.js';
 console.log("loaded");
 const disconnectButton = document.querySelector('#disconnect');
 const jwtToken = getCookie('Authorization');
 const username = getCookie('Username');
+const gameId = extractGameIdFromUrlAtEnd(window.location.href);
 const startButton = document.querySelector('#startGame');
 
 var ws = new WebSocket(`ws://192.168.1.27:8081/ws/${gameId}?username=` + encodeURIComponent(username));
