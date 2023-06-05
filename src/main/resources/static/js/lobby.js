@@ -5,6 +5,12 @@ const jwtToken = getCookie('Authorization');
 const username = getCookie('Username');
 const startButton = document.querySelector('#startGame');
 
+var ws = new WebSocket(`ws://192.168.1.27:8081/ws/${gameId}?username=` + encodeURIComponent(username));
+
+ws.onopen = function(event) {
+  console.log('WebSocket connection opened');
+};
+
 startButton.disabled = true;
 
 window.addEventListener('DOMContentLoaded', initializePage);
