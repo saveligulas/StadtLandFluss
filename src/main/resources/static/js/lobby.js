@@ -13,6 +13,13 @@ ws.onopen = function(event) {
   console.log('WebSocket connection opened');
 };
 
+ws.onmessage = function(event) {
+  console.log('Received message: ', event.data);
+  if(event.data == "RELOAD_PAGE") {
+    initializePage();
+  }
+};
+
 ws.onerror = function(event) {
   console.log('Websocket error:', event);
 };
@@ -153,7 +160,7 @@ function fillCategoriesTable(categoryStrings, showRemoveButton) {
 }
 
 const sendCategoryRemoveRequest = () => {
-  
+
 }
 
 const disconnect = () => {
@@ -185,4 +192,4 @@ const addEventListener = () => {
   
 addEventListener();
   // Call the fetchData() function every 10 seconds
-setInterval(initializePage, 10000); 
+//setInterval(initializePage, 10000); 
