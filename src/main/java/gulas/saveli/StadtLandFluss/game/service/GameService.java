@@ -252,8 +252,15 @@ public class GameService {
     @Transactional
     public Boolean removeCategory(Long gameId, String categoryName) {
         Game game = getGame(gameId);
-        game.removeCategory(categoryRepository.findByName(categoryName)
-                .orElseThrow(() -> new ApiRequestException("invalid category name")));
+        //game.removeCategory(categoryRepository.findByName(categoryName)
+        //        .orElseThrow(() -> new ApiRequestException("invalid category name")).getName());
+        List<Category> categories = game.getCategories();
+        for(int i = 0; i < categories.size(); i++) {
+            if(categories.get(i).getName().equals(categoryName)) {
+                categories.remove(i);
+            }
+        }
+        game.setCategories(categories);
         return true;
     }
 }
