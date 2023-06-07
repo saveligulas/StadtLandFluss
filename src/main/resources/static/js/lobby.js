@@ -154,6 +154,8 @@ function fillCategoriesTable(categoryStrings, showRemoveButton) {
         console.log(`Category: ${category}`);
 
         sendCategoryRemoveRequest(category);
+
+        initializePage();
       });
       actionsCell.appendChild(removeButton);
       row.appendChild(actionsCell);
