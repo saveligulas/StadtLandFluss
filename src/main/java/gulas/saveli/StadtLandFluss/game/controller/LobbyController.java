@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
@@ -56,10 +57,24 @@ public class LobbyController {
                                                   @RequestParam(name = "categories", required = false) String categoryNames,
                                                   @RequestParam(name = "characters", required = false) String characterString,
                                                   @RequestParam(name = "rounds", required = false) String rounds) {
+        List<String> categoriesNames = null;
+        List<Character> characters = null;
+        int numberOfRounds = 0;
+
+        if (categoryNames != null && !categoryNames.isEmpty()) {
+            categoriesNames = Arrays.asList(categoryNames.split(","));
+        }
+        if (characterString != null && !characterString.isEmpty()) {
+            characters = Arrays.stream(characterString.split(",")).map(s -> s.charAt(0)).collect(Collectors.toList());
+        }
+        if (rounds != null && !rounds.isEmpty()) {
+            numberOfRounds = Integer.parseInt(rounds);
+        }
+
         GameSettingRequest gameSettingRequest = GameSettingRequest.builder()
-                .categoryNames(Arrays.asList(categoryNames.split(",")))
-                .characters(Arrays.stream(characterString.split(",")).map(s -> s.charAt(0)).collect(Collectors.toList()))
-                .rounds(Integer.parseInt(rounds))
+                .categoryNames(categoriesNames)
+                .characters(characters)
+                .rounds(numberOfRounds)
                 .build();
         return gameService.changeGameSettings(Long.parseLong(gameId), gameSettingRequest);
     }
