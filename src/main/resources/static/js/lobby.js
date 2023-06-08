@@ -60,8 +60,7 @@ function initializePage() {
 
         addCategoryButton.addEventListener('click', function(event) {
           const categoryName = document.getElementById('newCategoryName').value;
-
-          sendAddCategoryRequest();
+          sendAddCategoryRequest(categoryName);
         });
     
         // Create the container and add the input field and the "Add" button to it
