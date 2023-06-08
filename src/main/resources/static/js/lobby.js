@@ -167,7 +167,7 @@ function fillCategoriesTable(categoryStrings, showRemoveButton) {
 };
 
 const sendAddCategoryRequest = (categoryNames) => {
-  fetch(`http://192.168.1.27:8081/lobby/${gameId}/host/settings?=${categoryNames}`, {
+  fetch(`http://192.168.1.27:8081/lobby/${gameId}/host/settings?categories=${categoryNames}`, {
     method: 'POST',
     headers: {
       'Authorization': jwtToken,
