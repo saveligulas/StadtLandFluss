@@ -59,6 +59,8 @@ function initializePage() {
         addCategoryButton.textContent = 'Add';
 
         addCategoryButton.addEventListener('click', function(event) {
+          const categoryName = document.getElementById('newCategoryName').value;
+
           sendAddCategoryRequest();
         });
     
@@ -165,8 +167,8 @@ function fillCategoriesTable(categoryStrings, showRemoveButton) {
   });
 };
 
-const sendAddCategoryRequest = () => {
-  fetch(`http://192.168.1.27:8081/lobby/${gameId}/host/settings`, {
+const sendAddCategoryRequest = (categoryNames) => {
+  fetch(`http://192.168.1.27:8081/lobby/${gameId}/host/settings?=${categoryNames}`, {
     method: 'POST',
     headers: {
       'Authorization': jwtToken,
