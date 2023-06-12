@@ -21,7 +21,7 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
-public class GameService {
+public class PreGameService {
 
     @Autowired
     private final GameRepository gameRepository;
