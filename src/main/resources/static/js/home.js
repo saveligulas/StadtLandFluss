@@ -65,6 +65,10 @@ function joinGame(gameId) {
   })
 }
 
+function checkIfPlayerIsInGame() {
+  
+}
+
 // Call the function initially to populate the table
 refreshGameList();
 
