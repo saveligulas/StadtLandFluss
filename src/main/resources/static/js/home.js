@@ -66,7 +66,7 @@ function joinGame(gameId) {
 }
 
 function checkIfPlayerIsInGame() {
-  
+  //TODO
 }
 
 // Call the function initially to populate the table
