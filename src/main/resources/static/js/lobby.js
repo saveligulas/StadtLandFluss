@@ -203,9 +203,7 @@ const disconnect = () => {
   .catch(error => console.error(error));
 };
 
-const startGame = () => {
-  
-};
+
 
 const addEventListener = () => {
   disconnectButton.addEventListener('click', disconnect);
