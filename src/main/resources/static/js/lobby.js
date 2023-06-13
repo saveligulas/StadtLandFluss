@@ -206,10 +206,14 @@ const disconnect = () => {
 startButton.addEventListener('click', startGame);
 
 function startGame() {
-  fetch(`http://192.168.1.27:8081/lobby/${gameId}/host/start`) {
-    method
-  }
-}
+  fetch(`http://192.168.1.27:8081/lobby/${gameId}/host/start`, {
+    method: 'POST',
+    headers: {
+      'Authorization': jwtToken,
+      'Username': username
+    }
+  })
+};
 
 const addEventListener = () => {
   disconnectButton.addEventListener('click', disconnect);
