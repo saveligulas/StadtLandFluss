@@ -24,8 +24,6 @@ ws.onerror = function(event) {
   console.log('Websocket error:', event);
 };
 
-startButton.disabled = true;
-
 window.addEventListener('DOMContentLoaded', initializePage);
 
 function initializePage() {
