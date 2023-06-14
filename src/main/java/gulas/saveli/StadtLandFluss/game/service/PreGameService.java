@@ -251,6 +251,9 @@ public class PreGameService {
         if(game.getCategories().size() <= 1) {
             throw new ApiRequestException("game with id " + parseLong + " has not enough categories");
         }
+        if(game.getCharacters().size() <= 1) {
+            throw new ApiRequestException("game with id " + parseLong + " has not enough characters");
+        }
         game.setHasStarted(true);
         return true;
     }
