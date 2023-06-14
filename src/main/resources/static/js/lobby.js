@@ -213,6 +213,7 @@ function startGame() {
       'Username': username
     }
   })
+  
 };
 
 const addEventListener = () => {
