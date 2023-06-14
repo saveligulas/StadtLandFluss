@@ -245,6 +245,10 @@ public class PreGameService {
     @Transactional
     public Boolean startGame(Long parseLong, String host) {
         Game game = getGame(parseLong);
+        if(game.getPlayerCount() <= 1) {
+            throw new ApiRequestException("game with id " + parseLong + " has not enough players")
+        }
+        if()
         game.setHasStarted(true);
         return true;
     }
