@@ -218,12 +218,14 @@ function startGame() {
       return response.text();
     } else {
       return response.text().then(errorMessage => {
-        if (errorMessage.includes('Specific Error Message 1')) {
+        if (errorMessage.includes('players')) {
 
-        } else if (errorMessage.includes('Specific Error Message 2')) {
+        } else if (errorMessage.includes('categories')) {
+
+        } else if (errorMessage.includes('characters')) {
 
         } else {
-          
+
         }
     });
     }
