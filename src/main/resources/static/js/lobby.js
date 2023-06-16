@@ -219,9 +219,9 @@ function startGame() {
     } else {
       return response.text().then(errorMessage => {
         if (errorMessage.includes('players')) {
-
+          alert('There are not enough Players to start the game!');
         } else if (errorMessage.includes('categories')) {
-          alert('You need to add more Categories!');
+          alert('You can not have more than 15 Categories or less than 2!');
         } else if (errorMessage.includes('characters')) {
           alert('You need to select more Characters!');
         } else {
