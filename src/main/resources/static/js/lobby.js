@@ -225,9 +225,9 @@ function startGame() {
         } else if (errorMessage.includes('characters')) {
           alert('You need to select more Characters!');
         } else {
-          setTimeout(function {
-            window.location.href = 'http://192.168.1.27:8081/'
-          })
+          setTimeout(function() {
+            window.location.href = 'http://192.168.1.27:8081/game/' + gameId;
+          }, 2000)
         }
     });
     }
