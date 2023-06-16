@@ -223,7 +223,7 @@ function startGame() {
         } else if (errorMessage.includes('categories')) {
 
         } else if (errorMessage.includes('characters')) {
-
+          alert('You need to select more Characters!');
         } else {
 
         }
