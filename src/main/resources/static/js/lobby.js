@@ -221,7 +221,7 @@ function startGame() {
         if (errorMessage.includes('players')) {
 
         } else if (errorMessage.includes('categories')) {
-
+          alert('You need to add more Categories!');
         } else if (errorMessage.includes('characters')) {
           alert('You need to select more Characters!');
         } else {
