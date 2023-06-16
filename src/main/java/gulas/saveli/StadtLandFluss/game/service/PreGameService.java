@@ -248,7 +248,7 @@ public class PreGameService {
         if(game.getPlayerCount() <= 1) {
             throw new ApiRequestException("game with id " + parseLong + " has not enough players");
         }
-        if(game.getCategories().size() <= 1) {
+        if(game.getCategories().size() <= 1 || game.getCategories().size() > 15) {
             throw new ApiRequestException("game with id " + parseLong + " has not enough categories");
         }
         if(game.getCharacters().size() <= 1) {
