@@ -20,9 +20,6 @@ public class GameWebSocketHandler extends GameWebSocketViewModel implements WebS
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
         Long gameId = getGameIdFromSession(session);
         String username = getUsernameFromSession(session);
-        if(message.getPayload().toString().equals("START")) {
-
-        }
         if(message.getPayload().toString().equals("NEXT_ROUND")) {
 
         }
