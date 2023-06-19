@@ -93,7 +93,7 @@ public class LobbyController {
         return preGameService.isGameHost(Long.parseLong(gameId), host);
     }
 
-    @GetMapping("/{gameId}/host/start")
+    @PostMapping("/{gameId}/host/start")
     @CrossOrigin
     public Boolean startGame(@PathVariable("gameId") String gameId, @RequestHeader("HostUsername") String host) {
         return  preGameService.startGame(Long.parseLong(gameId), host);
