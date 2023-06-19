@@ -192,6 +192,14 @@ public class PreGameService {
     public GameInfoResponse buildGameInfo(Long gameId) {
         Game game = getGame(gameId);
 
+        if(game.getHasExpired()) {
+            throw new ApiRequestException("Game has expired");
+        }
+
+        if(game.getHasStarted()) {
+            throw new ApiRequestException("Game has started");
+        }
+
         List<String> playerNames = new ArrayList<>();
         for(User user : game.getPlayers()) {
             playerNames.add(user.getEmail());
