@@ -95,7 +95,7 @@ public class LobbyController {
 
     @PostMapping("/{gameId}/host/start")
     @CrossOrigin
-    public Boolean startGame(@PathVariable("gameId") String gameId, @RequestHeader("HostUsername") String host) {
+    public Boolean startGame(@PathVariable("gameId") String gameId, @RequestHeader("Username") String host) {
         return  preGameService.startGame(Long.parseLong(gameId), host);
     }
 }
