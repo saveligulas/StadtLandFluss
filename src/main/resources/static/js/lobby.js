@@ -214,6 +214,7 @@ function startGame() {
     }
   })
   .then(response => {
+    console.log(response);
     if(response.ok) {
       return response.text();
     } else {
