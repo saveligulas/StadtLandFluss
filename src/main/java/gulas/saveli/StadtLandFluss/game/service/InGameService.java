@@ -21,7 +21,7 @@ public class InGameService {
         return GameViewResponse.builder()
                 .categories(game.getCategories())
                 .rounds(game.getRounds())
-                .currentRound(1) //TODO fix this
+                .currentRound(1) //TODO fix this set correct round
                 .currentCharacter(game.getCurrentCharacter())
                 .build();
     }
