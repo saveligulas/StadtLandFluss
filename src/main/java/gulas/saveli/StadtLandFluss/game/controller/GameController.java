@@ -32,6 +32,9 @@ public class GameController {
         return result;
     }
 
-    @GetMapping
+    @GetMapping("/{gameId}/check")
+    public Boolean checkIfGameIsActive(@PathVariable("gameId") String gameId) {
+        return inGameService.
+    }
 
 }
