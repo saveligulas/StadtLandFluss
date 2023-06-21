@@ -23,6 +23,8 @@ public class InGameService {
                 .rounds(game.getRounds())
                 .currentRound(1) //TODO fix this set correct round
                 .currentCharacter(game.getCurrentCharacter())
+                .gameStarted(game.getHasStarted())
+                .gameFinished(game.getHasExpired())
                 .build();
     }
 }
