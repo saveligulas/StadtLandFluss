@@ -32,9 +32,14 @@ public class GameController {
         return result;
     }
 
-    @GetMapping("/{gameId}/check")
-    public Boolean checkIfGameIsActive(@PathVariable("gameId") String gameId) {
-        return inGameService.
+    @GetMapping("/{gameId}/started")
+    public Boolean checkIfGameHasStarted(@PathVariable("gameId") String gameId) {
+        return inGameService.getGameViewResponse(Long.parseLong(gameId)).getGameFinished();
+    }
+
+    @GetMapping("/{gameId}/expired")
+    public Boolean checkIfGameHasExpired(@PathVariable("gameId") String gameId) {
+        return inGameService.getGameViewResponse(Long.parseLong(gameId)).getGameFinished();
     }
 
 }
