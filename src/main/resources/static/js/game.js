@@ -5,8 +5,16 @@ const jwtToken = getCookie('Authorization');
 const username = getCookie('Username');
 const gameId = extractGameIdFromUrlAtEnd(window.location.href); 
 
-function checkIfGameHasExpired() {
-    fetch(`http://192.168.1.27:8081/game/${gameId}/`, {
+function checkIfGameHasExpiredOrStarted() {
+    fetch(`http://192.168.1.27:8081/game/${gameId}/started`, {
+        method: 'GET',
+        headers: {
+            'Authorization': jwtToken,
+            'Username': username
+        }
+    })
+
+    fetch(`http://192.168.1.27:8081/game/${gameId}/expired`, {
         method: 'GET',
         headers: {
             'Authorization': jwtToken,
