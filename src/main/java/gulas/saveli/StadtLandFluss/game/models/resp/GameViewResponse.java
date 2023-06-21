@@ -14,5 +14,7 @@ public class GameViewResponse {
     private Integer rounds;
     private Character currentCharacter;
     private List<Category> categories;
+    private Boolean gameStarted;
+    private Boolean gameFinished;
 
 }
