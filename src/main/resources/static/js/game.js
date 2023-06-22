@@ -13,6 +13,14 @@ function checkIfGameHasExpiredOrStarted() {
             'Username': username
         }
     })
+    .then(response => response.json) 
+    .then(data => {
+        console.log(data);
+        alert("Game has already started");
+        setTimeout(function() {
+            window.location.href = "http://192.168.1.27/home";
+        })
+    })
 
     fetch(`http://192.168.1.27:8081/game/${gameId}/expired`, {
         method: 'GET',
@@ -20,5 +28,11 @@ function checkIfGameHasExpiredOrStarted() {
             'Authorization': jwtToken,
             'Username': username
         }
+    })
+    .then(response => response.json) 
+    .then(data => {
+        console.log(data);
+        alert("Game has expired");
+        window.location.href = "http://192.168.1.27:8081/home";
     })
 }
