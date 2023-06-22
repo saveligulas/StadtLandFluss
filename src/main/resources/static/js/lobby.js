@@ -237,6 +237,10 @@ function startGame() {
   
 };
 
+function checkIfGameHasStarted() {
+  
+}
+
 const addEventListener = () => {
   disconnectButton.addEventListener('click', disconnect);
 };
