@@ -1,5 +1,6 @@
 import { getCookie } from './cookies.js';
 import { extractGameIdFromUrlAtEnd } from './cookies.js';
+import { checkIfGameHasExpired } from './game.js';
 console.log("loaded");
 const disconnectButton = document.querySelector('#disconnect');
 const jwtToken = getCookie('Authorization');
@@ -27,6 +28,8 @@ ws.onerror = function(event) {
 window.addEventListener('DOMContentLoaded', initializePage);
 
 function initializePage() {
+  checkIfGameHasExpired();
+  checkIfGameHasStarted();
   const checkHostAddress = `${window.location.href}/host/check`;
   console.log(checkHostAddress);
   fetch(checkHostAddress , {
