@@ -42,4 +42,6 @@ public class GameController {
         return inGameService.getGameViewResponse(Long.parseLong(gameId)).getGameFinished();
     }
 
+    @PostMapping("/{gameId}/submit")
+
 }
