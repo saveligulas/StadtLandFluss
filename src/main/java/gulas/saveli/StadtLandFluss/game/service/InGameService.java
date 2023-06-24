@@ -28,6 +28,6 @@ public class InGameService {
                 .build();
     }
 
-    public Boolean putAnswers(long parseLong, String username, String answersStringList) {
+    public Boolean putAnswers(Long parseLong, String username, String answersStringList) {
     }
 }
