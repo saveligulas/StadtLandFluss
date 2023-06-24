@@ -43,7 +43,7 @@ public class GameController {
     }
 
     @PostMapping("/{gameId}/submit")
-    public Boolean submitAnswers() {
+    public Boolean submitAnswers(@PathVariable("gameId") String gameId) {
 
     }
 
