@@ -27,4 +27,7 @@ public class InGameService {
                 .gameFinished(game.getHasExpired())
                 .build();
     }
+
+    public Boolean putAnswers(long parseLong, String username, String answersStringList) {
+    }
 }
