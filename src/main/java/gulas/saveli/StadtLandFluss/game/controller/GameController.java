@@ -43,5 +43,8 @@ public class GameController {
     }
 
     @PostMapping("/{gameId}/submit")
+    public Boolean submitAnswers() {
+
+    }
 
 }
