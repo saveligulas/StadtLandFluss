@@ -29,7 +29,7 @@ public class Game {
     @OrderColumn
     private List<Category> categories = new ArrayList<>();
 
-    private Map<String, AnswerList> usernameAnswerMap = new HashMap<>();//TODO redo
+    private Map<String, AnswerList> usernameAnswerMap = new HashMap<>();
     private Boolean hasStarted = false;
     private Boolean hasExpired = false;
     private Integer maxPlayers;
