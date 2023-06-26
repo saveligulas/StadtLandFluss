@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<Category, Long> {
+public interface CategoryRepository extends JpaRepository<Category, Long> { //TODO: remove this repository when removing category entity
     @Query("SELECT c FROM Category c WHERE c.name = ?1")
     public Optional<Category> findByName(String name);
 }
