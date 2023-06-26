@@ -15,6 +15,7 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "game")
 public class Game {
     @Id
     @GeneratedValue
@@ -28,8 +29,10 @@ public class Game {
     @ElementCollection
     @OrderColumn
     private List<Category> categories = new ArrayList<>();
-
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @MapKey(name = "username")
     private Map<String, AnswerList> usernameAnswerMap = new HashMap<>();
+
     private Boolean hasStarted = false;
     private Boolean hasExpired = false;
     private Integer maxPlayers;
