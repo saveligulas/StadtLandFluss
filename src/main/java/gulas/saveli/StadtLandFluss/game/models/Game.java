@@ -28,7 +28,7 @@ public class Game {
     @ElementCollection
     @OrderColumn
     private List<Category> categories = new ArrayList<>();
-    @ElementCollection
+
     private Map<String, AnswerList> usernameAnswerMap = new HashMap<>();//TODO redo
     private Boolean hasStarted = false;
     private Boolean hasExpired = false;
