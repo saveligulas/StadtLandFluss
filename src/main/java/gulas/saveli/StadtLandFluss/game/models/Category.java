@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category {
+public class Category { //TODO: remove this class and replace it with an embeddable class
 
     @Id
     @GeneratedValue
