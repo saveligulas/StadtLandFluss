@@ -26,7 +26,7 @@ public class PreGameService {
     @Autowired
     private final GameRepository gameRepository;
     @Autowired
-    private final CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository; //TODO: remove every instance of this object and replace it with embeddable class category
     @Autowired
     private final UserRepository userRepository;
     @Autowired
