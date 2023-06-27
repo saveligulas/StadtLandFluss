@@ -81,6 +81,6 @@ public class Game {
     }
 
     public Character getCurrentCharacter() {
-        return Character.toUpperCase(this.characters.get(this.currentRound));
+        return Character.toUpperCase(this.characters.get(this.currentRound-1));
     }
 }
