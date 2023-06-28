@@ -31,6 +31,9 @@ public class InGameService {
     public Boolean putAnswers(Long parseLong, String username, String answersStringList) {
         //TODO fill method
         String answerArray[] = answersStringList.split(",");
+        for(int i = 0; i<answerArray.length; i++) {
+
+        }
         return true;
     }
 }
