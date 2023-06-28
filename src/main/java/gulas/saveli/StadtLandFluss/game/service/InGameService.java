@@ -30,6 +30,7 @@ public class InGameService {
 
     public Boolean putAnswers(Long parseLong, String username, String answersStringList) {
         //TODO fill method
+        String answerArray[]
         return true;
     }
 }
