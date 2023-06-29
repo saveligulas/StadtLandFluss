@@ -35,6 +35,7 @@ public class InGameService {
             answerArray[i] = answerArray[i].trim();
         }
         Game game = gameRepository.findById(parseLong)
+                .orElseThrow()
         return true;
     }
 }
