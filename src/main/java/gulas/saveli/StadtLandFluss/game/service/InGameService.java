@@ -35,7 +35,7 @@ public class InGameService {
             answerArray[i] = answerArray[i].trim();
         }
         Game game = gameRepository.findById(parseLong)
-                .orElseThrow(() -> new ApiRequestException())
+                .orElseThrow(() -> new ApiRequestException("game with id " + parseLong + " does not exist"));
         return true;
     }
 }
