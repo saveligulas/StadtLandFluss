@@ -1,6 +1,7 @@
 package gulas.saveli.StadtLandFluss.game.service;
 
 import gulas.saveli.StadtLandFluss.errorHandler.handler.ApiRequestException;
+import gulas.saveli.StadtLandFluss.game.models.AnswerList;
 import gulas.saveli.StadtLandFluss.game.models.Game;
 import gulas.saveli.StadtLandFluss.game.models.resp.GameViewResponse;
 import gulas.saveli.StadtLandFluss.repo.AnswerListRepository;
@@ -43,6 +44,7 @@ public class InGameService {
 
         if(game.getUsernameAnswerMap().get(username) != null) {
             Long answerListId = game.getUsernameAnswerMap().get(username).getId();
+            AnswerList answerList = answerListRepository.findById(answerListId);
         }
         return true;
     }
