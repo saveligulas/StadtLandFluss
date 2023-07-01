@@ -49,6 +49,8 @@ public class InGameService {
                     .orElseThrow(() -> new ApiRequestException("answer_list with id " + answerListId + " does not exist"));
 
             Answer answer = new Answer();
+            answer.setCharacter(game.getCurrentCharacter());
+            ans
         }
         return true;
     }
