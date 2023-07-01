@@ -14,4 +14,5 @@ public class Answer {
     private Integer round;
     private Character character;
     private Map<Category, String> categoryTextMap;
+
 }
