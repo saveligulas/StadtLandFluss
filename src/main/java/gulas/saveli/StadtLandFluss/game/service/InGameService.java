@@ -44,7 +44,8 @@ public class InGameService {
 
         if(game.getUsernameAnswerMap().get(username) != null) {
             Long answerListId = game.getUsernameAnswerMap().get(username).getId();
-            AnswerList answerList = answerListRepository.findById(answerListId);
+            AnswerList answerList = answerListRepository.findById(answerListId)
+                    .orElseThrow(() -> new ApiRequestException("answer_list with id " + answerListId + " does not exist"));
         }
         return true;
     }
