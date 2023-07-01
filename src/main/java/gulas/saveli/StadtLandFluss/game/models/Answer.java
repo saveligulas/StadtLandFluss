@@ -1,7 +1,9 @@
 package gulas.saveli.StadtLandFluss.game.models;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Embeddable
 @Data
