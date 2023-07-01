@@ -34,8 +34,13 @@ public class InGameService {
         for(int i = 0; i<answerArray.length; i++) {
             answerArray[i] = answerArray[i].trim();
         }
+
         Game game = gameRepository.findById(parseLong)
                 .orElseThrow(() -> new ApiRequestException("game with id " + parseLong + " does not exist"));
+
+        if(game.getUsernameAnswerMap().get(username) != null) {
+            Long answerListId = game.getUsernameAnswerMap().get(username).getId();
+        }
         return true;
     }
 }
