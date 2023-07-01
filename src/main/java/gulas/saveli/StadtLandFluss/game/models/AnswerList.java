@@ -24,7 +24,7 @@ public class AnswerList {
     private List<Category> categories;
     @ElementCollection
     @OrderColumn
-    private List<Answer> list;
+    private List<Answer> list; //TODO change to map
 
     public AnswerList(List<Category> categories) {
         this.categories = categories;
