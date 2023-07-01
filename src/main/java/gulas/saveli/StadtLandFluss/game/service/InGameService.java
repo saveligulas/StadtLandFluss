@@ -3,6 +3,7 @@ package gulas.saveli.StadtLandFluss.game.service;
 import gulas.saveli.StadtLandFluss.errorHandler.handler.ApiRequestException;
 import gulas.saveli.StadtLandFluss.game.models.Game;
 import gulas.saveli.StadtLandFluss.game.models.resp.GameViewResponse;
+import gulas.saveli.StadtLandFluss.repo.AnswerListRepository;
 import gulas.saveli.StadtLandFluss.repo.GameRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ public class InGameService {
 
     @Autowired
     private final GameRepository gameRepository;
+    @Autowired
+    private final AnswerListRepository answerListRepository;
 
     public GameViewResponse getGameViewResponse(Long gameId) {
         Game game = gameRepository.findById(gameId)
