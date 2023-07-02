@@ -48,9 +48,10 @@ public class InGameService {
             AnswerList answerList = answerListRepository.findById(answerListId)
                     .orElseThrow(() -> new ApiRequestException("answer_list with id " + answerListId + " does not exist"));
 
-            Answer answer = new Answer();
             answer.setCharacter(game.getCurrentCharacter());
-            answer.addToCategoryTextMapping();
+            for(String answer : answerArray) {
+
+            }
         }
         return true;
     }
