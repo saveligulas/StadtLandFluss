@@ -50,7 +50,7 @@ public class InGameService {
 
             Answer answer = new Answer();
             answer.setCharacter(game.getCurrentCharacter());
-            answer.addToCategoryTextMap();
+            answer.addToCategoryTextMapping();
         }
         return true;
     }
