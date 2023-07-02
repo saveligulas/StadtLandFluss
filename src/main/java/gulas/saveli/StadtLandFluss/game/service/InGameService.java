@@ -48,6 +48,7 @@ public class InGameService {
             AnswerList answerList = answerListRepository.findById(answerListId)
                     .orElseThrow(() -> new ApiRequestException("answer_list with id " + answerListId + " does not exist"));
 
+            //TODO add answers to answerlist and update in game
             answer.setCharacter(game.getCurrentCharacter());
             for(String answer : answerArray) {
 
