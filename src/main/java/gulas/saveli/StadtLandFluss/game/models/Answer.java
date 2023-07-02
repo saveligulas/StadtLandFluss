@@ -15,6 +15,6 @@ public class Answer {
     private Character character;
     private Map<Category, String> categoryTextMap;
 
-    public void addToCategoryTextMap() {
+    public void addToCategoryTextMapping() {
     }
 }
