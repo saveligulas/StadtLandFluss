@@ -49,10 +49,7 @@ public class InGameService {
                     .orElseThrow(() -> new ApiRequestException("answer_list with id " + answerListId + " does not exist"));
 
             //TODO add answers to answerlist and update in game
-            answer.setCharacter(game.getCurrentCharacter());
-            for(String answer : answerArray) {
-
-            }
+            answerList
         }
         return true;
     }
