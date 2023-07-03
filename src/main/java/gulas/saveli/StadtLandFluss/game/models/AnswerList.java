@@ -28,7 +28,7 @@ public class AnswerList {
     @OrderColumn
     private Map<Integer, List<Answer>> roundAnswersMap = new HashMap<>();
 
-    public void addAnswer(Answer answer) {
+    //public void addAnswer(Answer answer) {
         this.list.add(answer);
     }
 
