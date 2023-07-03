@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Getter
@@ -21,17 +23,16 @@ public class AnswerList {
     private Long id;
     @ElementCollection
     @OrderColumn
-    private List<Category> categories;
+    private List<Category> categories = new ArrayList<>();
     @ElementCollection
     @OrderColumn
-    private List<Answer> list; //TODO change to map
-
-    public AnswerList(List<Category> categories) {
-        this.categories = categories;
-        this.list = new ArrayList<>();
-    }
+    private Map<Integer, List<Answer>> roundAnswersMap = new HashMap<>();
 
     public void addAnswer(Answer answer) {
         this.list.add(answer);
+    }
+
+    public void addCategory(Category category) {
+        this.categories.add(category);
     }
 }
