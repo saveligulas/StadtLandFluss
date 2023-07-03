@@ -28,9 +28,10 @@ public class AnswerList {
     @OrderColumn
     private Map<Integer, List<Answer>> roundAnswersMap = new HashMap<>();
 
+    //TODO fix method
     //public void addAnswer(Answer answer) {
-        this.list.add(answer);
-    }
+    //    this.list.add(answer);
+    //}
 
     public void addCategory(Category category) {
         this.categories.add(category);
