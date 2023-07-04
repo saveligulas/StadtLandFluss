@@ -34,7 +34,7 @@ public class InGameService {
     }
 
     @Transactional
-    public Boolean putAnswers(Long parseLong, String username, String answersStringList) {
+    public Boolean putRoundAnswers(Long parseLong, String username, String answersStringList) {
         //TODO fill method
         String answerArray[] = answersStringList.split(",");
         for(int i = 0; i<answerArray.length; i++) {
