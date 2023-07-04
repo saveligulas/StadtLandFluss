@@ -21,6 +21,7 @@ public class AnswerList {
     @Id
     @GeneratedValue
     private Long id;
+    private String username;
     @ElementCollection
     @OrderColumn
     private List<Category> categories = new ArrayList<>();
