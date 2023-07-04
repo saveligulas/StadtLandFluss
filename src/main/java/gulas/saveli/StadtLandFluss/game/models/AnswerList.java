@@ -28,10 +28,9 @@ public class AnswerList {
     @OrderColumn
     private List<RoundAnswer> roundAnswers = new ArrayList<>();
 
-    //TODO fix method
-    //public void addAnswer(Answer answer) {
-    //    this.list.add(answer);
-    //}
+    public void addRoundAnswer(RoundAnswer answer) {
+        this.roundAnswers.add(answer);
+    }
 
     public void addCategory(Category category) {
         this.categories.add(category);
