@@ -56,6 +56,8 @@ public class InGameService {
             answerList.setCategories(game.getCategories());
             RoundAnswer roundAnswer = new RoundAnswer();
             roundAnswer.setAnswers(List.of(answerArray));
+            roundAnswer.setRound(game.getCurrentRound());
+            roundAnswer.setCharacter(game.getCurrentCharacter());
             answerList.addRoundAnswer(roundAnswer);
         }
         return true;
