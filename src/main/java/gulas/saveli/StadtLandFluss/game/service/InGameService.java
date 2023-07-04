@@ -3,6 +3,7 @@ package gulas.saveli.StadtLandFluss.game.service;
 import gulas.saveli.StadtLandFluss.errorHandler.handler.ApiRequestException;
 import gulas.saveli.StadtLandFluss.game.models.AnswerList;
 import gulas.saveli.StadtLandFluss.game.models.Game;
+import gulas.saveli.StadtLandFluss.game.models.RoundAnswer;
 import gulas.saveli.StadtLandFluss.game.models.resp.GameViewResponse;
 import gulas.saveli.StadtLandFluss.repo.AnswerListRepository;
 import gulas.saveli.StadtLandFluss.repo.GameRepository;
@@ -10,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -51,7 +54,9 @@ public class InGameService {
 
             //TODO add answers to answerlist and update in game
             answerList.setCategories(game.getCategories());
-            answerList
+            RoundAnswer roundAnswer = new RoundAnswer();
+            roundAnswer.setAnswers(List.of(answerArray));
+            answerList.addRoundAnswer(roundAnswer);
         }
         return true;
     }
