@@ -26,7 +26,7 @@ public class AnswerList {
     private List<Category> categories = new ArrayList<>();
     @ElementCollection
     @OrderColumn
-    private Map<Integer, List<Answer>> roundAnswersMap = new HashMap<>();
+    private List<RoundAnswer> roundAnswers = new ArrayList<>();
 
     //TODO fix method
     //public void addAnswer(Answer answer) {
