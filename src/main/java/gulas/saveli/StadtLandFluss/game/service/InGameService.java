@@ -59,7 +59,15 @@ public class InGameService {
             roundAnswer.setRound(game.getCurrentRound());
             roundAnswer.setCharacter(game.getCurrentCharacter());
             answerList.addRoundAnswer(roundAnswer);
+        } else {
+            AnswerList answerList = new AnswerList();
+            answerList.setUsername(username);
+            answerListRepository.save(answerList);
+
+
+            game.getUsernameAnswerMap().put(username, answerList);
         }
+
         return true;
     }
 }
