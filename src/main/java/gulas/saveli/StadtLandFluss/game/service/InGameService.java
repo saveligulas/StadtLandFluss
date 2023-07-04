@@ -1,7 +1,6 @@
 package gulas.saveli.StadtLandFluss.game.service;
 
 import gulas.saveli.StadtLandFluss.errorHandler.handler.ApiRequestException;
-import gulas.saveli.StadtLandFluss.game.models.Answer;
 import gulas.saveli.StadtLandFluss.game.models.AnswerList;
 import gulas.saveli.StadtLandFluss.game.models.Game;
 import gulas.saveli.StadtLandFluss.game.models.resp.GameViewResponse;
@@ -49,7 +48,7 @@ public class InGameService {
                     .orElseThrow(() -> new ApiRequestException("answer_list with id " + answerListId + " does not exist"));
 
             //TODO add answers to answerlist and update in game
-            answerList
+            answerList.setCategories(game.getCategories());
         }
         return true;
     }
