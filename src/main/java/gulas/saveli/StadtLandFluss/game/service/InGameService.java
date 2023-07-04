@@ -60,10 +60,12 @@ public class InGameService {
             roundAnswer.setCharacter(game.getCurrentCharacter());
             answerList.addRoundAnswer(roundAnswer);
         } else {
-            AnswerList answerList = new AnswerList();
-            answerList.setUsername(username);
-            answerListRepository.save(answerList);
+            AnswerList answerListProxy = new AnswerList();
+            answerListProxy.setUsername(username);
+            answerListRepository.save(answerListProxy);
 
+            AnswerList answerList = answerListRepository.findByName(username)
+                            .orElseThrow(() -> new ApiRequestException("Couldn't find answerList for username " + username));
 
             game.getUsernameAnswerMap().put(username, answerList);
         }
