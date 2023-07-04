@@ -1,15 +1,13 @@
 package gulas.saveli.StadtLandFluss.game.models;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Map;
 
 @Embeddable
 @Data
-public class Answer {
+public class RoundAnswer {
 
     private Integer round;
     private Character character;
