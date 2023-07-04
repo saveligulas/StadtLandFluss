@@ -9,6 +9,7 @@ import gulas.saveli.StadtLandFluss.repo.GameRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +33,7 @@ public class InGameService {
                 .build();
     }
 
+    @Transactional
     public Boolean putAnswers(Long parseLong, String username, String answersStringList) {
         //TODO fill method
         String answerArray[] = answersStringList.split(",");
@@ -49,6 +51,7 @@ public class InGameService {
 
             //TODO add answers to answerlist and update in game
             answerList.setCategories(game.getCategories());
+            answerList
         }
         return true;
     }
