@@ -68,6 +68,7 @@ public class InGameService {
                             .orElseThrow(() -> new ApiRequestException("Couldn't find answerList for username " + username));
 
             answerList.setCategories(game.getCategories());
+            answerList.setUsername(username);
 
             game.getUsernameAnswerMap().put(username, answerList);
 
