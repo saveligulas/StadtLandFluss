@@ -69,6 +69,8 @@ public class InGameService {
 
             answerList.setCategories(game.getCategories());
             answerList.setUsername(username);
+            RoundAnswer roundAnswer = new RoundAnswer();
+            roundAnswer.setAnswers(List.of(answerArray));
 
             game.getUsernameAnswerMap().put(username, answerList);
 
