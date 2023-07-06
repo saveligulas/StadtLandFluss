@@ -73,6 +73,7 @@ public class InGameService {
             roundAnswer.setAnswers(List.of(answerArray));
             roundAnswer.setRound(game.getCurrentRound());
             roundAnswer.setCharacter(game.getCurrentCharacter());
+            answerList.addRoundAnswer(roundAnswer);
 
             game.getUsernameAnswerMap().put(username, answerList);
 
