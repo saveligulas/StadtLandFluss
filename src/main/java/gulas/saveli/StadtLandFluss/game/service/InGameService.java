@@ -67,6 +67,8 @@ public class InGameService {
             AnswerList answerList = answerListRepository.findByName(username)
                             .orElseThrow(() -> new ApiRequestException("Couldn't find answerList for username " + username));
 
+            answerList.setCategories(game.getCategories());
+
             game.getUsernameAnswerMap().put(username, answerList);
 
             //TODO save answers
