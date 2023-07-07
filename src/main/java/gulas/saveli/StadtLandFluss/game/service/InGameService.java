@@ -75,8 +75,6 @@ public class InGameService {
             answerList.addRoundAnswer(roundAnswer);
 
             game.getUsernameAnswerMap().put(username, answerList);
-
-            //TODO save answers
         }
 
         return true;
