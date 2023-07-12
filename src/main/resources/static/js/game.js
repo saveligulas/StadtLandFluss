@@ -22,3 +22,7 @@ function checkIfGameHasExpired() { //TODO implement
         window.location.href = "http://192.168.1.27:8081/home";
     })
 }
+
+submitButton.addEventListener('click', function(event) {
+    
+})
