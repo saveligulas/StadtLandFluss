@@ -5,7 +5,7 @@ const jwtToken = getCookie('Authorization');
 const username = getCookie('Username');
 const gameId = extractGameIdFromUrlAtEnd(window.location.href); 
 
-function checkIfGameHasExpired() {
+function checkIfGameHasExpired() { //TODO implement
     fetch(`http://192.168.1.27:8081/game/${gameId}/expired`, {
         method: 'GET',
         headers: {
