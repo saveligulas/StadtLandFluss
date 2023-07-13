@@ -2,6 +2,7 @@ package gulas.saveli.StadtLandFluss.game.service;
 
 import gulas.saveli.StadtLandFluss.errorHandler.handler.ApiRequestException;
 import gulas.saveli.StadtLandFluss.game.models.AnswerList;
+import gulas.saveli.StadtLandFluss.game.models.Category;
 import gulas.saveli.StadtLandFluss.game.models.Game;
 import gulas.saveli.StadtLandFluss.game.models.RoundAnswer;
 import gulas.saveli.StadtLandFluss.game.models.resp.GameViewResponse;
@@ -79,4 +80,6 @@ public class InGameService {
 
         return true;
     }
+
+    private Map<Category,> checkAnswerWithOfficalChecker()
 }
