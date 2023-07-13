@@ -82,5 +82,7 @@ public class InGameService {
         return true;
     }
 
-    private Map<Category, Boolean> checkAnswerWithOfficalChecker()
+    private Map<Category, Boolean> checkAnswerWithOfficialChecker() {
+
+    }
 }
