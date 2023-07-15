@@ -83,7 +83,8 @@ public class InGameService {
         return true;
     }
 
-    private Map<Category, Boolean> checkAnswerWithOfficialChecker() {
+    private Map<Category, Boolean> checkAnswerWithOfficialChecker(List<Category> categories) {
+
         return new HashMap<>();
     }
 }
