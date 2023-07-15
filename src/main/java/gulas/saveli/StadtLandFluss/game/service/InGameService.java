@@ -86,7 +86,7 @@ public class InGameService {
     private Map<Category, Boolean> checkAnswerWithOfficialChecker(List<Category> categories) {
         for(Category category : categories) {
             if(category.getHasOfficialChecker()) {
-
+                //TODO add Database with for official checker
             }
         }
         return new HashMap<>();
