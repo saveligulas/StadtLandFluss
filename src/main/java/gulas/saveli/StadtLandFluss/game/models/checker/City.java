@@ -1,6 +1,7 @@
 package gulas.saveli.StadtLandFluss.game.models.checker;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.*;
 
@@ -11,4 +12,6 @@ import lombok.*;
 @RequiredArgsConstructor
 @Table(name = "city_checker")
 public class City {
+    @Id
+    private Long id;
 }
