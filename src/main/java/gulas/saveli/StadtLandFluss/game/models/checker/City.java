@@ -16,4 +16,6 @@ public class City {
     @Id
     @GeneratedValue
     private Long id;
+
+    private String cityName;
 }
