@@ -32,7 +32,7 @@ public class InGameService {
         return GameViewResponse.builder()
                 .categories(game.getCategories())
                 .rounds(game.getRounds())
-                .currentRound(1) //TODO fix this set correct round
+                .currentRound(game.getCurrentRound()) //TODO fix this set correct round
                 .currentCharacter(game.getCurrentCharacter())
                 .gameStarted(game.getHasStarted())
                 .gameFinished(game.getHasExpired())
@@ -81,6 +81,11 @@ public class InGameService {
         }
 
         return true;
+    }
+
+    protected Game updateGameRound(Game game) {
+        game.setCurrentRound(game.getCurrentRound()+1);
+        return game;
     }
 
     private Map<Category, Boolean> checkAnswerWithOfficialChecker(List<Category> categories) {
