@@ -20,7 +20,8 @@ public class AnswerListService {
     public List<AnswerList> setupEmptyAnswerLists(int amount, List<Category> categories) {
         List<AnswerList> answerLists = new ArrayList<>();
         for(int i = 0; i < amount; i++) {
-            AnswerList answerList = new AnswerList(categories);
+            AnswerList answerList = new AnswerList();
+            answerList.setCategories(categories);
             answerListRepository.save(answerList);
             answerLists.add(answerList);
         }
