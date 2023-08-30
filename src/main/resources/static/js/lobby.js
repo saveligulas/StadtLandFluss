@@ -243,11 +243,13 @@ function checkIfGameHasStarted() {
             'Username': username
         }
     })
-    .then(response => response.json) 
+    .then(response => response.json()) 
     .then(data => {
         console.log(data);
-        alert("Game has already started");
-        window.location.href = "http://192.168.1.27:8081/home";
+        if(data == true) {
+          alert("Game has already started");
+          window.location.href = "http://192.168.1.27:8081/home";
+        }
     })
 };
 
