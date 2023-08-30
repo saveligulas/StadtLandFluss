@@ -62,7 +62,6 @@ function initializePage() {
         addCategoryButton.addEventListener('click', function(event) {
           const categoryName = document.getElementById('newCategoryName').value;
           sendAddCategoryRequest(categoryName);
-          initializePage();
         });
     
         // Create the container and add the input field and the "Add" button to it
@@ -79,8 +78,6 @@ function initializePage() {
     loadInfo(showAddCategory);
   })
 }
-
-window.addEventListener('DOMContentLoaded', initializePage);
 
 function loadInfo(showRemoveButtons) {
   const infoAddress = `${window.location.href}/info`;
@@ -157,8 +154,6 @@ function fillCategoriesTable(categoryStrings, showRemoveButton) {
         console.log(`Category: ${category}`);
 
         sendCategoryRemoveRequest(category);
-
-        initializePage();
       });
       actionsCell.appendChild(removeButton);
       row.appendChild(actionsCell);
