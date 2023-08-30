@@ -34,7 +34,7 @@ public class GameController {
 
     @GetMapping("/{gameId}/started")
     public Boolean checkIfGameHasStarted(@PathVariable("gameId") String gameId) {
-        return inGameService.getGameViewResponse(Long.parseLong(gameId)).getGameFinished();
+        return inGameService.getGameViewResponse(Long.parseLong(gameId)).getGameStarted();
     }
 
     @GetMapping("/{gameId}/expired")
