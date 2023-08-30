@@ -70,9 +70,15 @@ public class PreGameService {
         }
         Integer rounds = 3;
         List<Character> characters = Arrays.asList(STANDARD_CHARACTER_SET);
-        Game game = new Game(username, rounds, characters, categoryList);
+        Game game = new Game();
+        game.setHostUsername(username);
+        game.setRounds(rounds);
+        game.setCharacters(characters);
+        game.setCategories(categoryList);
         game.setPlayers(new ArrayList<>(Arrays.asList(optionalUser.get())));
         game.setMaxPlayers(10);
+        game.setHasExpired(false);
+        game.setHasStarted(false);
         gameRepository.save(game);
         Game createdGame = gameRepository.findByHostUsername(username)
                 .orElseThrow(() -> new ApiRequestException("Error creating and loading game"));
