@@ -15,7 +15,7 @@ export function checkIfGameHasExpired() { //TODO implement
             'Username': username
         }
     })
-    .then(response => response.json) 
+    .then(response => response.json()) 
     .then(data => {
         console.log(data);
         if(data == true) {
