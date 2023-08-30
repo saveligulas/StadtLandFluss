@@ -26,8 +26,12 @@ public class Game {
     private Integer rounds;
     @OrderColumn
     private List<Character> characters = new ArrayList<>();
-    @ElementCollection
-    @OrderColumn
+    @ManyToMany
+    @JoinTable(
+            name = "game_categories_updated",
+            joinColumns = @JoinColumn(name = "game_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
     private List<Category> categories = new ArrayList<>();
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @MapKey(name = "username")
