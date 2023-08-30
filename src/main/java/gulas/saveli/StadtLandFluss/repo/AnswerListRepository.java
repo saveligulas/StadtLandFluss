@@ -11,6 +11,6 @@ import java.util.Optional;
 @Repository
 public interface AnswerListRepository extends JpaRepository<AnswerList, Long> {
 
-    @Query("SELECT a FROM AnswerList a WHERE a.name = ?1")
-    public Optional<AnswerList> findByName(String name);
+    @Query("SELECT a FROM AnswerList a WHERE a.username = ?1")
+    public Optional<AnswerList> findByName(String username);
 }
