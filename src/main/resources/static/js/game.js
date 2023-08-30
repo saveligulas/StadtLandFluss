@@ -7,7 +7,7 @@ const gameId = extractGameIdFromUrlAtEnd(window.location.href);
 
 const submitButton = document.querySelector('#submit');
 
-function checkIfGameHasExpired() { //TODO implement
+export function checkIfGameHasExpired() { //TODO implement
     fetch(`http://192.168.1.27:8081/game/${gameId}/expired`, {
         method: 'GET',
         headers: {
@@ -18,11 +18,14 @@ function checkIfGameHasExpired() { //TODO implement
     .then(response => response.json) 
     .then(data => {
         console.log(data);
-        alert("Game has expired");
+        if(data == true) {
+            alert("Game has expired");
         window.location.href = "http://192.168.1.27:8081/home";
+        }
+        
     })
 }
 
-submitButton.addEventListener('click', function(event) {
+// submitButton.addEventListener('click', function(event) {
     
-})
+// })
