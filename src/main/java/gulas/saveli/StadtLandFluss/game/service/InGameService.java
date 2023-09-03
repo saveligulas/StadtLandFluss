@@ -32,7 +32,7 @@ public class InGameService {
         return GameViewResponse.builder()
                 .categories(game.getCategories())
                 .rounds(game.getRounds())
-                .currentRound(game.getCurrentRound()) //TODO fix this set correct round
+                .currentRound(game.getCurrentRound())
                 .currentCharacter(game.getCurrentCharacter()) //fix index out of bounds
                 .gameStarted(game.getHasStarted())
                 .gameFinished(game.getHasExpired())
