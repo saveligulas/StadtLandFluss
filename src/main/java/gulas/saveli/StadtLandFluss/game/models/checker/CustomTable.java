@@ -27,7 +27,4 @@ public class CustomTable {
     @ToString.Exclude
     private List<DynamicCategory> dynamicCategories = new ArrayList<>();
 
-    public void addDynamicCategory(DynamicCategory category) {
-        this.dynamicCategories.add(category);
-    }
 }
