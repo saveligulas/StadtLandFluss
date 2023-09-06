@@ -1,4 +1,4 @@
-package gulas.saveli.StadtLandFluss.repo;
+package gulas.saveli.StadtLandFluss.repo.imp;
 
 import gulas.saveli.CSV2PostgreSQL.model.DynamicField;
 import org.springframework.data.jpa.repository.JpaRepository;
